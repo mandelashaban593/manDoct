@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+<script src="{% static "js/jquery.js" %}"></script>
+</head>
+<body>
+<div id="authorize-div" style="">
+   <span>Authorize access to Gmail API</span>
+   <button id="authorize-button" onclick="handleAuthClick(event)">
+   Authorize
+   </button>
+</div>
+<pre id="output"></pre>
+</body>
+
+</html>

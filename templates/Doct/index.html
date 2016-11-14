@@ -1,0 +1,176 @@
+{% extends 'Doct/base.html' %}
+{% load staticfiles %}
+<!-- 
+link for the popup
+
+http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
+
+{% block navbar %}
+<div id = "navigation">
+
+<nav class="cf">
+  <ul class="topmenu">
+    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
+    -->
+    <li><a href="/Doct/about/">About Us</a>
+        <ul class="submenu">
+              <!-- <a href="/Doct/diogform/">Diognise</a> -->
+          <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>           
+                    </ul>
+    </li>
+    <li><a href="/Doct/contact/">Contact Us</a>
+      <ul class="submenu">
+              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
+                    </ul>
+    </li>
+ 
+     <li><a href="/Doct/receipt/">Print reciept</a>
+          <ul class="submenu">
+              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+                    
+                    </ul>
+         </li>
+    
+                    
+    <li> <li><a href="/Doct/" title="Logout">Logout</a>
+    </li>
+      </ul>
+</nav>
+
+</div>
+
+{% endblock %}
+
+
+{% block body_block %}
+Welcome to Online Doctor Consultation System
+
+{% if msg %}
+{{msg}}
+{% endif %}
+
+{% if registered %}
+		<strong>
+		<script>alert("You have successfully registered")</script>
+		</strong>
+		<br />
+{% endif %}
+
+<div id="content">
+<div id="formWrapper">
+<form action="/Doct/login/" method="post" id="changeloginform_form">
+{% csrf_token %}
+{% if response %}
+<script type="text/javascript">alert("Incorrect Username or Password");</script>
+{% endif %}
+<fieldset class="first">
+<h3>Enter Your Log In details</h3>
+
+<label class="labelone" for="username" required>Username:</label>
+<input name="username" type="user"/>
+
+<label for="telno">Password:</label>
+<input name="password" type="password"  />
+
+
+ 
+
+<table>
+<tr><td><input class="btn" name="submit" type="submit" value="Log In" /></td><td><input class="btn" name="submit" type="reset" value="Clear Form" /></td></tr>
+</table>
+
+</form>
+<p>Click
+<button id="popup" onclick="div_show()">Sign Up</button>
+
+</p>
+</fieldset>
+</div>
+
+
+</div>
+
+<script type='text/javascript'>
+
+//F
+//form validation
+  $(document).ready(function(){
+    $("#changeloginform_form").validate({
+    rules:{
+
+          username:
+            {
+            required:true,
+            minlength:3,
+            maxlength:20,
+            },
+            password:
+            {
+            required:true,
+            minlength:5,
+            maxlength:30,
+            },
+        
+    },
+          messages: {
+      username: {
+        required: "Please provide a username",
+        minlength: "Please provide a Valid username",
+        maxlength:"Please provide a Valid username",
+      },
+      password: {
+        required: "Please provide a password",
+         minlength: "Please provide a Valid password",
+         maxlength:"Please provide a Valid password",
+      },
+    },
+
+    });
+    });
+
+
+
+</script>
+<div>
+
+
+{% include "Doct/signup.html" %}
+
+
+
+
+
+<h4 style="font-size:20px;">How It Works</h4>
+<aside>
+<strong style="font-size:18px;">1. Register into the system with the right information and confirmation message will be sent either to your Email or via the web immediately after you have registered</strong>.<br /><br />
+<strong style="font-size:18px;">2. Use your username and password  for you to access the home page</strong>.<br /><br />
+
+<strong style="font-size:18px;">3. Note that you can only submit your Diognosis details after you have paid consultation fee of ugx 20,000 to the specified mobile money number 256754307471 </strong>.
+
+
+</aside>
+
+</div>
+
+
+{% if user.is_authenticated %}
+			
+				<!-- <li><a href="/rango/send_at/" id="onclick">Send Airtime</a></li>
+
+				<li><a href="/rango/profile/" id="onclick">Git hub api Profile </a></li> -->
+				{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+<p>Posted by Mandela Shaban<br/>Contact Information:<a href="mailto:mandelashaban593@gmail.com">mandelashaban593@gmail.com</a><br/>
+&copy; Consult Doctor : Fast and Cheap Response 2016</p>
+{% endblock %}
+		
+
+
+
+
+	

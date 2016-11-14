@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<h3>Diognise: <strong>Patient  here!</strong><br /></h3>
+<br/>
+
+<div>
+<fieldset width:60%>
+<form action="/rango/edited_diog/" id="changeeditdiogform_form" method="post" >
+{% csrf_token %}
+<table style=" border:0px solid black; width:300px; height:300px">
+<tr><td>Diog Id</td><td> <input type="text" name="id"  id="dname"  value="{{ediog.id}}"/></td></tr>
+<tr><td>Doctor Name </td><td> <input type="text" name="dname"  id="dname" /></td></tr>
+<tr><td>Patient's Telno</td><td> <input type="text" name="telno" id="telno" value="{{ediog.telno}}"/></td></tr>
+<tr><td>Payment Id</td><td><input type="text" name="gender" id="gender" /></td></tr>
+<tr><td>Diognosis Description</td> <td><input name="diognosis" id="diognosis" value="{{ediog.diognosis}}"></textarea></td></tr>
+
+
+<tr><td>Patient Age</td> <td><input type="text" name="page" id="page" value="{{ediog.page}}"/></td> </tr> 
+
+<tr><td>Email</td> <td><input type="text" name="email" id="page" value="{{ediog.email}}"/></td> </tr> 
+<tr><td>Ambulance</td> <td><input type="text" name="amb" id="page" value="{{ediog.amb}}"/></td> </tr> 
+<tr><td><input type="reset" name="reset" style="width:100px" /></td> <td><input type="submit" name="submit" value="Submit" style="width:100px"/></td></tr>
+</table> 
+</form>
+<div id="secure_area_message" align="center"></div>
+</fieldset>
+
+
+
+</div>
+
+

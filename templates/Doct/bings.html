@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<script>
+function search(){
+var search="&query="+document.getElementById("searchText").value;
+var fullUri=serviceURI+ AppId+ search;
+var head=document.getElementsByTagName('head');
+var script=document.createElement('script');
+script.type="text/javascript";
+script.src=fullUri;
+head[0].appendChild(script);
+
+}
+
+function searchDone(results){
+	var result=null;
+	var parent=document.getElementById('resultList');
+	parent.innerHTML='';
+	var child=null;
+	for(var i=0; i<results.SearchResponse.Image.Results.length; i++)
+	{
+		result=results.SearchResponse.Image.Results[i];
+		child=document.createElement('li');
+		child.className="resultlistitem";
+		child.innerHTML='<a href="'+result.Url+'"><img src="'+
+		result.Thumbnail.Url+'" alt="'+result.Title+'" /></a>';
+		parent.appendChild(child);
+	}
+}
+
+var AppId="&Appid=86F7F70727A6D88CCE422ED44905A378E9780D81";
+var serviceURI="http://api.bing.net/json.aspx?JsonType=callback&JsonCallback=searchDone&sources=image";
+
+search();
+</script>  </head>
+
+<body>
+<div id="resultList"></div>
+<input type="text" id="searchText" value="James Hill" />
+
+</body>
+</html>
+

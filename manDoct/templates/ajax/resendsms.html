@@ -1,0 +1,14 @@
+
+
+{%if sent%}
+<div class="alert alert-success notification" >
+The confirmation sms was successfully re-sent to {{number}}
+</div>
+{%endif%}
+
+
+{%if sent == False%}
+<div class="alert alert alert-error notification" >
+An error occured , please refresh the page and try again later
+</div>
+{%endif%}

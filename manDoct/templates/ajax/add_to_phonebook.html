@@ -1,0 +1,23 @@
+{% if response %}
+<div class="alert alert-success notification" >
+The Phonenumber was successfully added
+<script type="text/javascript">
+	toggleAddToPhoneBookForm();
+	clearForm('#phonebook_area_form');
+	window.location.reload();
+</script>
+</div>
+{% else %}
+<div class="alert alert alert-error notification" >
+{% if data.duplicate %}
+You already have this number in your Phonebook
+{% else %}
+There was an error adding the Phonenumber , please refresh and try again later
+{% endif%}
+</div>
+
+<script type="text/javascript">
+	clearForm('#phonebook_area_form');
+	//toggleAddToPhoneBookForm();
+</script>
+{% endif %}

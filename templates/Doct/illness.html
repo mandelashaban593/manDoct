@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+<h1 align="left"><b >Sickness Details</b></h1>
+<fieldset width:60%>
+{% if enterpay %}
+
+<h2>Your payment Id is {{pay_id}}, please don't forget it</h2>
+{% endif %}
+<form action="/rango/illness/" id="changesicknessform_form" method="post">
+{% csrf_token %}
+<table>
+<tr><td>Payment Id</td><td><input type="text" name="gender" id="gender"/></td></tr>
+<tr><td>Email </td><td> <input type="email" name="email"  id="email"/></td></tr>
+<tr><td>Patient Name</td><td> <input type="text" name="pname" id="pname"/></td></tr>
+<tr><td>Illness Description</td> <td><textarea name="illness" id="illness" ></textarea></td></tr>
+<tr><td>Next of Kin</td><td> <input type="text" name="kin" id="kin"/></td></tr> 
+<tr><td>Kin Telephone No</td> <td><input type="text" name="kintelno" id="kintelno"/></td> </tr> 
+<tr><td>Username</td><td> <input type="text" name="username" id="username"/></td></tr>
+<tr><td>Patient Age</td><td> <input type="text" name="page" id="page"/></td></tr>
+
+<tr><td><input type="reset" name="reset" style="width:100px"/></td> <td><input type="submit" name="submit" value="Submit"  style="width:100px"/></td></td></tr>  
+</table> 
+</form>
+
+
+
+
+</fieldset>
+
+
+ {% endif %}

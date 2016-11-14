@@ -1,0 +1,48 @@
+{% extends 'rango/base.html' %}
+
+
+
+{% block body_block %}
+
+		<h1>Send Airtime with this Portal</h1>
+
+		{% if sent_airtime %}
+		Airtime  Portal  says: <strong>thank you for Sending!</strong>
+		
+		<a href="/rango/">Return to the homepage.</a><br />
+		{% else %}
+		Airtime  Portal says: <strong>Send Airtime  here!</strong><br />
+
+		<div id="contentdiv">
+
+		<form id="user_form" method="post" action="/rango/send_at/" >
+
+		{% csrf_token %}
+
+		<!-- Display each form. The as_p method wraps each element in a paragraph
+				(<p>) elements. This ensures each element appears on a new line,
+				making everything look neater. -->
+
+
+		<table id="table1">
+
+			<tr><th>Receiver First Name</th><td>{{topup_form.receiver_fname }}</td></tr>
+			<tr><th>Receiver Last Name</th><td>{{topup_form.receiver_lname  }}</td></tr>
+			<tr><th>Sender Full Name</th><td>{{topup_form.sender_fullname  }}</td></tr>
+			<tr><th>Receiver Country Code</th><td>{{topup_form.receiver_country_code }}</td></tr>
+			<tr><th>Receiver Number</th><td>{{topup_form.receiver_number}}</td></tr>
+			<tr><th>Amount </th><td>{{topup_form.amount_sent }}</td></tr>
+			
+			
+			<!-- Provide a button to click to submit the form -->
+			<tr><td><td><input type="submit" name="submit" value="Register" /></td></td></tr>
+			</table>
+		</form>
+
+		</div>
+
+		{% endif %}
+	
+{% endblock %}
+
+</html>

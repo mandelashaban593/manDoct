@@ -1,0 +1,114 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+
+	
+
+	<!-- <header>
+<table id="navb">
+<div id="navb2">
+<tr>
+<td><a href="home.php"> Home</a></td>
+<td><a href="about.php">About Us</a></td>
+<td><a href="contact.php">Contact Us</a></td>
+<td><a href="patient.php">Patient Detail</a></td>
+<td><a href="patient_view_doctor_detail.php">Doctor Detail</a></td>
+</tr>
+
+</div>
+</table> -->
+<a href="/rango/doctorH/">Back</a>
+
+
+
+<p>&nbsp;</p>
+<div class="heder"><h1>A patient Sickness Detail</h1></div>
+<p>&nbsp;</p>
+
+
+<img src="doct.jpg"  alt=""/><img src="doct2.jpg" alt=" "doct2"  width="220px" height="150px" style="/><img src="pat.jpg" alt="pat" width="250px" height="150px"/>
+
+<h2>Patients'  Illness</h2>
+ <table width="300" border="0" cellpadding="30" style="text-align: center">
+
+  <tr> 
+  <th width="75"><strong> Email</strong></th> 
+  <th><span style="font-weight: bold;">Patient Name</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th> 
+  <th width="75"><strong>Gender</strong></th> 
+  <th><span style="font-weight: bold;">Illness</span></th>
+  <th><span style="font-weight: bold;">Staff pic</span></th>  
+  <th><span style="font-weight: bold;">Kin</span></th>
+  <th><span style="font-weight: bold;">Kintelno</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th> 
+  <th width="75"><strong> Username</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>Patient age</strong></th> 
+  </tr> 
+{% if ind_ill %}
+
+{% for ill in ill %}
+  <tr> 
+  <td>{{ill.email}}</td>
+   <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
+   <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
+   <td>{{ill.gender}}</td> 
+   <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
+   <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+   <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
+   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
+       <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="tel:0123456785">{{ill.page}}</a></td>
+ 
+   </tr>
+
+   {% endfor %}
+
+{% elif ind_illrecs %}
+
+ <tr> 
+  <td>{{ill.email}}</td>
+   <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
+   <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
+   <td>{{ill.gender}}</td> 
+   <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
+   <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+   <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
+   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
+       <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="tel:0123456785">{{ill.page}}</a></td>
+ 
+   </tr>
+
+  {% else %}
+  
+
+   {% endif %}
+
+   </table>
+
+
+
+</div>
+
+
+
+		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
+
+		{% csrf_token %}
+
+		Display each form. The as_p method wraps each element in a paragraph
+				(<p>) elements. This ensures each element appears on a new line,
+				making everything look neater.
+			{{ user_form.as_p }}
+			{{ profile_form.as_p }}
+
+			Provide a button to click to submit the form 
+			<input type="submit" name="submit" value="Register" />
+		</form> -->
+	
+	
+{% endblock %}
+

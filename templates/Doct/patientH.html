@@ -1,0 +1,319 @@
+{% extends 'Doct/base.html' %}
+
+{% load staticfiles %}
+
+{% block navbar %}
+<div id = "navigation">
+
+<nav class="cf">
+  <ul class="topmenu">
+    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
+    -->
+    <li><a href="/Doct/" title=" Home">Home</a></li>
+    <li><a href="/Doct/about/">About Us</a>
+        <ul class="submenu">
+              <!-- <a href="/Doct/diogform/">Diognise</a> -->
+          <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>           
+                    </ul>
+    </li>
+    <li><a href="/Doct/contact/">Contact Us</a>
+      <ul class="submenu">
+              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
+                    </ul>
+    </li>
+ 
+    <li><a href="/Doct/illness/">Explain Sickness</a>
+      <ul class="submenu">
+              <li><a href="view_login.php" title="View Taxi Details">View Login</a></li>
+          <li><a href="edit_login.php" title="Update Taxi Details">Update Login</a></li>                <li><a href="delete_login.php" title="Delete Taxi Details">Delete Login</a></li>           
+                    </ul>
+
+        </li>
+    <li><a href="/Doct/enterpay/">Enter Consultation Payment Details</a>
+      <ul class="submenu">
+              <li><a href="view_payments.php" title="View Taxi Details">View Payments</a></li>
+          <li><a href="edit_payments.php" title="Update Taxi Details">Update Payments</a></li>                <li><a href="delete_payments.php" title="Delete Taxi Details">Delete Payments</a></li>           
+                    </ul>
+
+        </li>
+    <li><a href="/Doct/authdiog/">View Your Diognosis</a>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+        
+    </li>
+ 
+     <li><a href="/Doct/receipt/">Print reciept</a>
+          <ul class="submenu">
+              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+                    
+                    </ul>
+         </li>
+    }
+                    
+    <li> <li><a href="/Doct/" title="Logout">Logout</a>
+    </li>
+      </ul>
+</nav>
+
+</div>
+{% endblock %}
+
+{% block body_block %}
+
+
+{% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
+<p>&nbsp;</p>
+</div>
+
+ {% if illness %} <script type="text/javascript">alert("You have successfully submitted your Illness details, Please view Your diognosis");
+ return false;
+ </script>
+ {% endif %}
+{% if pay_id %}
+<h2>Your payment Id is {{pay_id}}, please don't forget it</h2>
+<script type="text/javascript">alert('You have successfully submitted payment Details'); 
+
+return false;
+</script>
+ {% endif %}
+
+
+ <p>&nbsp;</p>
+
+	    <div id="content">
+
+      <h2>Consult Doctor Here!</h2>
+
+{% if entp %}
+{% include "Doct/view_receipt.html" %}
+
+{% elif diog %}
+
+{% include "Doct/view_diog.html" %}
+<!-- 
+{% elif exill %}
+
+{% include "Doct/expillness.html" %} -->
+
+{% elif ill_success %}
+<h3> <strong style="align:center"><a href="/Doct/authdiog/" style="color: black; text-align: center;">View Diognosis</strong></a><br /></h3>
+
+<!-- {% elif pay %}
+
+{% include "Doct/payconsult.html" %} -->
+
+<!-- {% elif authd %}
+
+{% include "Doct/authdiog.html" %} -->
+
+{% else  %}
+
+
+
+<h3>Enter Consultation Payment : <strong>Details  below!</strong><br /></h3>
+<br/>
+
+{% if enterpay %}
+
+<h2>Your payment Id is {{pay_id}}, please don't forget it</h2>
+{% endif %}
+
+<fieldset width:60%>
+<form action="/Doct/enterpay/" id="changepayform_form" method="post" >
+{% csrf_token %}
+<table style=" border:0px solid black; width:300px; height:300px">
+<tr><td>From Telephone Number </td><td> <input type="text" name="telno"  id="dname"/></td></tr>
+<tr><td> To Telephone Number: </td><th>0754307471</th></tr>
+<tr><td>Amount</td><td> <input type="text" name="amount" id="telno"/></td></tr>
+
+<tr><td><input type="reset" name="reset" style="width:100px" /></td> <td><input type="submit" name="submit" value="Submit" style="width:100px"/></td></tr>
+</table> 
+</form>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
+
+<script type="text/javascript">
+   
+
+$(document).ready(function(){
+    $("#changepayform_form").validate({
+    rules:{
+
+            telno:
+            {
+            required:true,
+            digits: true,
+            maxlength:20,
+            },
+            amount:
+            {
+            required:true,
+            digits: true,
+            maxlength:10,
+            },
+    },
+          messages: {
+       
+        telno: {
+        required: "Telephone number is required",
+        digits: "Enter the valid Telephone number",
+        maxlength:"Please provide valid phone number",
+      },
+      amount: {
+      required: "Please provide Consultation amount",
+      digits: "Enter the valid Consultation amount",
+      maxlength:"Please provide valid Consultation amount",
+      },
+    
+    
+    },
+
+  
+
+    });
+    });
+
+</script>
+</fieldset>
+	   
+{% endif %}
+
+</div>
+
+<div id="imgs"><table><tr><td><img src="{% static 'doct.jpg' %}" alt="pat" width="100px" height="100px" align="left"/></td><td>
+<img src="{% static 'pat.jpg' %}" alt="pat" width="100px" height="100px" align="right"/></td></tr></table></div>
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+<script>
+ $(document).ready(function() {
+  $('#navigation a').click(function(e) {
+   e.preventDefault();
+  /* $("div#my-container").load("/url/to/content/ #content-id")*/
+   $('#content').load($(this).attr('href'));
+
+   return false
+  });
+ });
+</script>
+
+
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
+
+<script type="text/javascript">
+ 
+
+$(document).ready(function(){
+    $("#changesicknessform_form").validate({
+    rules:{
+
+          email:
+            {
+            required:true,
+            email: true,
+            maxlength:40,
+            },
+             gender:
+            {
+            required:true,
+            digits: true,
+            maxlength:40,
+            },
+             pname:
+            {
+            required:true,
+            maxlength:50,
+            },
+            illness:
+            {
+            required:true,
+            maxlength:700,
+            },
+             kin:
+            {
+            required:true,
+            maxlength:30,
+            },
+            kintelno:
+            {
+            required:true,
+            digits: true,
+            maxlength:20,
+            },
+            username:
+            {
+            required:true,
+            maxlength:20,
+            },
+            page:
+            {
+            required:true,
+            digits: true,
+            maxlength:3,
+            },
+    },
+          messages: {
+        email: {
+        required: "Email is required",
+        digits: "Enter the valid email address",
+        maxlength:"Please provide a Valid email address",
+      },
+       gender: {
+        required: "Please provide a valid Payment Id",
+        digits: "Please provide a Valid Payment Id",
+        maxlength:"Please provide a Valid Payment Id",
+      },
+        pname: {
+        required: "Please provide your names",
+        maxlength:"Please provide valid names",
+      },
+        illness: {
+        required: "Please provide sickness details",
+        maxlength:"Please briefly explain sickness",
+      },
+        kin: {
+        required: "Please provide next of kin names",
+        maxlength:"Please provide valid names",
+      },
+        kintelno: {
+        required: "Telephone number is required",
+        digits: "Enter the valid Telephone number",
+        maxlength:"Please provide valid phone number",
+      },
+      username: {
+      required: "Please provide username",
+      maxlength:"Please provide valid username",
+      },
+      page: {
+      required: "Please provide your age",
+      digits: "Enter the valid age",
+      maxlength:"Please provide a valid age",
+      },
+    
+    
+    },
+
+  
+
+    });
+    });
+
+
+
+
+
+</script>
+
+{% endblock %}
+
+{% block footer %}
+<p>Posted by Mandela Shaban<br/>Contact Information:<a href="mailto:mandelashaban593@gmail.com">mandelashaban593@gmail.com</a><br/>
+&copy; Consult Doctor : Fast and Cheap Response 2016</p>
+{% endblock %}

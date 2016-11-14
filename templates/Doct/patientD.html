@@ -1,0 +1,96 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+
+{% if illness %}You have successfully sent your Sickness detail And Check Your Diagnosis after 5 minutes {% endif %}
+<p>&nbsp;</p>
+<div id="header">
+
+    <div id="content">
+   <label>AN ONLINE SYSTEM FOR DOCTOR CONSULTION</label>
+    </div>
+</div>
+<p>&nbsp;</p>
+
+
+<img src="doct.jpg"  alt=""/><img src="doct2.jpg" alt=" "doct2"  width="220px" height="150px" style="/><img src="pat.jpg" alt="pat" width="250px" height="150px"/>
+
+<h2>Phone numbers</h2>
+ <table width="300" border="0" cellpadding="30" style="text-align: center">
+
+  <tr> 
+  <th width="75"><strong> First Name</strong></th> 
+  <th><span style="font-weight: bold;">Second Name</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th> 
+  <th width="75"><strong> Patient Age</strong></th> 
+  <th><span style="font-weight: bold;">Gender</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th><span style="font-weight: bold;">Telephone Number</span></th> 
+  <th width="75"><strong> Username</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th><span style="font-weight: bold;">Password</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong> Email</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th><span style="font-weight: bold;">Street</span></th> 
+  <th width="75"><strong> City </strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th><span style="font-weight: bold;">State</span></th> 
+  <th><span style="font-weight: bold;">Zip Code</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong> specialty</strong></th> 
+  <th><span style="font-weight: bold;">Role</span></th> 
+ <th><span style="font-weight: bold;">Staff pic</span></th>
+  </tr> 
+{% for p in p %}
+  <tr> 
+  <td>{{p.fname}}</td>
+   <td><a href="tel:0123456785">{{p.sname}}</a></td> 
+   <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
+   <td>{{p.page}}</td> 
+   <td><a href="tel:0123456785">{{p.gender}}</a></td> 
+   <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+   <td>{{p.telno }}</td> <td><a href="tel:0123456785">{{p.username}}</a></td> 
+   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{p.password}}</td>
+       <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="tel:0123456785">{{p.email}}</a></td>
+    <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td>{{p.street}}</td>
+    <td><a href="tel:0123456785">{{p.city}}</a></td>
+    <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td>{{p.state}}</td> 
+    <td><a href="tel:0123456785">{{p.zip_code}}</a></td>
+    <td><img src="{% static 'pat.jpg' %}" alt="checked" width="50px" height="50px"/></td>
+    <td>{{p.specialty}}</td>
+    <td><a href="tel:0123456785">{{p.role}}</a></td>
+    <td>   <img src="{% static 'doct.jpg' %}" alt="checked"  width="50px" height="50px" /></td>
+    </tr>
+{% endfor %}
+
+   </table>
+
+
+</table>
+
+
+
+
+		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
+
+		{% csrf_token %}
+
+		Display each form. The as_p method wraps each element in a paragraph
+				(<p>) elements. This ensures each element appears on a new line,
+				making everything look neater.
+			{{ user_form.as_p }}
+			{{ profile_form.as_p }}
+
+			Provide a button to click to submit the form 
+			<input type="submit" name="submit" value="Register" />
+		</form> -->
+	
+	
+{% endblock %}
+

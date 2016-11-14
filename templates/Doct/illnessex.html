@@ -1,0 +1,33 @@
+
+
+<h1 align="left"><b >Sickness Details</b></h1>
+
+<fieldset width:60%>
+
+<form action="/Doct/illness/" id="changesicknessform_form" method="post">
+{% csrf_token %}
+<table>
+<tr><td>Payment Id</td><td><input type="text" name="gender" id="gender"/></td></tr>
+<tr><td>Email </td><td> <input type="email" name="email"  id="email"/></td></tr>
+<tr><td>Patient Name</td><td> <input type="text" name="pname" id="pname"/></td></tr>
+<tr><td>Sickness Description</td> <td><select name="illness"  required="True">{% include "rango/cond_options.html" %}
+</select></td></tr>
+<tr><td>Do you need an ambulance ?</td> <td><select name="amb"  required="True">
+<option value="">Select option</option>
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+
+</select></td></tr>
+<tr><td>Next of Kin</td><td> <input type="text" name="kin" id="kin"/></td></tr> 
+<tr><td>Kin Telephone No</td> <td><input type="text" name="kintelno" id="kintelno"/></td> </tr> 
+<tr><td>Username</td><td> <input type="text" name="username" id="username"/></td></tr>
+<tr><td>Patient Age</td><td> <input type="text" name="page" id="page"/></td></tr>
+
+<tr><td><input type="reset" name="reset" style="width:100px"/></td> <td><input type="submit" name="submit" value="Submit"  style="width:100px"/></td></td></tr>  
+</table> 
+</form>
+
+</fieldset>
+<div id="secure_area_message" align="center"></div>
+
+

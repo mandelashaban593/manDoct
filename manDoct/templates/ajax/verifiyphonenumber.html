@@ -1,0 +1,17 @@
+
+
+{%if verified%}
+<div class="alert alert-success notification">
+Your Phonenumber was successfully verified
+<script type="text/javascript">
+window.location.href="{{BASE_URL}}home"
+</script>
+</div>
+{%endif%}
+
+
+{%if verified == False%}
+<div class="alert alert alert-error notification" >
+You an entered an Invalid verification code, please check the code and try again
+</div>
+{%endif%}

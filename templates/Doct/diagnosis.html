@@ -1,0 +1,49 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+
+
+		<h1>Consult Doctor with this Portal</h1>
+
+		
+
+<h3>Doctor consultation  Portal says: <strong>Register  here!</strong><br /></h3>
+<br/>
+<p style="color:#FF0000; font-weight:bold; font-family:Helvetica,Arial,sans-serif" align="right"><a href="/rango/" >Back</a></p>
+
+
+<fieldset width:60%>
+<form action="/rango/diognosis/" method="post" >
+{% csrf_token %}
+<table style=" border:0px solid black; width:300px; height:300px">
+<tr><td>Doctor Name </td><td> <input type="text" name="dname"  id="dname"/></td></tr>
+<tr><td>Telephone No</td><td> <input type="text" name="telno" id="telno"/></td></tr>
+<tr><td>Gender</td><td><input type="text" name="gender" id="gender"/></td></tr>
+<tr><td>Diognosis Description</td> <td><textarea name="diognosis" id="diognosis"></textarea></td></tr>
+<tr><td>Patient Age</td> <td><input type="text" name="page" id="page"/></td> </tr> 
+<tr><td>Payment Id</td> <td><input type="text" name="payid" id="page"/></td> </tr> 
+<tr><td>Email</td> <td><input type="text" name="email" id="page"/></td> </tr> 
+<tr><td><input type="reset" name="reset" style="width:100px" /></td> <td><input type="submit" name="submit" value="Submit" style="width:100px"/></td></tr>
+</table> 
+</form>
+</fieldset>
+
+		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
+
+		{% csrf_token %}
+
+		Display each form. The as_p method wraps each element in a paragraph
+				(<p>) elements. This ensures each element appears on a new line,
+				making everything look neater.
+			{{ user_form.as_p }}
+			{{ profile_form.as_p }}
+
+			Provide a button to click to submit the form 
+			<input type="submit" name="submit" value="Register" />
+		</form> -->
+		
+	
+{% endblock %}
+

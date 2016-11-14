@@ -1,0 +1,15 @@
+
+
+{%if response%}
+
+<div class="alert alert-success notification" >
+A verification email  was successfully re-sent to {{email}}
+</div>
+
+{% else %}
+
+<div class="alert alert alert-error notification" >
+An error occured , please refresh the page and try again later
+</div>
+
+{%endif%}

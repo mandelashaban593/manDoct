@@ -1,0 +1,39 @@
+
+
+{% load staticfiles %}
+
+
+
+	
+
+<a href="/rango/patientH/">Back</a>
+
+
+<p>&nbsp;</p>
+<div class="heder"><h1>Consult Doctor with this Portal</h1></div>
+<p>&nbsp;</p>
+
+
+<p>&nbsp;</p>
+
+<h2 align="center"><b >Payment Details</b></h2>
+<fieldset style="width:60%; margin-right:20px; margin-left:17px">
+<form action="/rango/authConsult/" method="post" style=" border:0px solid black; width:900px; height:300px;margin:30px">
+
+<table >
+{% csrf_token %}
+<tr><td>Telephone Number of payment</td><td><input type="text" name="telno"/></td></tr>
+<tr><td>Day of payment</td><td><input type="text" name="tdy" value="1" readonly="True" /></td></tr>
+<tr><td><input type="submit" name="submit" value="submit"/></td></tr> 
+</table>
+</form>
+</fieldset>
+
+
+
+
+
+
+
+	
+	

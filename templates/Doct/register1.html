@@ -1,0 +1,49 @@
+{% load staticfiles %}
+
+
+		{% if registered %}
+		Doctor consultation  Portal  says: <strong>thank you for Registering!</strong>
+		<a href="/rango/doctorH/">Return to  Doctor  homepage.</a><br />
+		{% else %}
+		
+
+<h3>Register: <strong>a doctor!</strong><br /></h3>
+<br/>
+<fieldset width="60%">
+<form action="/rango/register/" method="post" onsubmit="validateReg()">
+{% csrf_token %}
+<table style="border:0px solid black; width:300px; height:300px">
+<tr><td>First Name</td><td> <input type="text" name="fname" id="fname"  required="True"/></td></tr>
+<tr><td>Second Name</td><td><input type="text" name="sname" id="sname"  required="True"/></td></tr>
+<tr><td>Patient Age</td> <td><input type="text" name="page" id="page" /></td></tr>
+<tr><td>Gender</td><td> <select name="gender"  required="True"><option value="Male" >Male</option><option value="Female">Female</option></select></td></tr> 
+<tr><td>Telephon No</td><td> <input type="text" name="telno" id="telno"  required="True"/></td></tr>
+<tr><td>Password</td> <td><input type="password" name="password" id="pwd"  required="True"/></td> </tr> 
+<tr><td>Email</td> <td> <input type="email" name="email" id="email"  required="True"/></td></tr>
+<tr><td>Username</td><td><input type="text" name="username"  required="True"/></td></tr>
+
+<tr><td>street</td><td> <input type="text" name="street" id="telno"  required="True"/></td></tr>
+<tr><td> city</td> <td><input type="text" name="city" id="pwd"  required="True"/></td> </tr> 
+<tr><td>state</td> <td> <input type="text" name="state" id="email"  required="True"/></td></tr>
+<tr><td>zip code</td><td><input type="text" name="zip_code"  required="True"/></td></tr>
+<tr><td>Role</td><td><input type="hidden" name="role" value="patient"  required="True" /></td></tr>
+<tr> <td><input type="submit" name="submit" value="register" /></td></tr>  
+</table> 
+</form>
+</fieldset>
+
+		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
+
+		{% csrf_token %}
+
+		Display each form. The as_p method wraps each element in a paragraph
+				(<p>) elements. This ensures each element appears on a new line,
+				making everything look neater.
+			{{ user_form.as_p }}
+			{{ profile_form.as_p }}
+
+			Provide a button to click to submit the form 
+			<input type="submit" name="submit" value="Register" />
+		</form> -->
+		{% endif %}
+	

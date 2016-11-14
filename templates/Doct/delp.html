@@ -1,0 +1,72 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block body_block %}
+
+	
+
+	<!-- <header>
+<table id="navb">
+<div id="navb2">
+<tr>
+<td><a href="home.php"> Home</a></td>
+<td><a href="about.php">About Us</a></td>
+<td><a href="contact.php">Contact Us</a></td>
+<td><a href="patient.php">Patient Detail</a></td>
+<td><a href="patient_view_doctor_detail.php">Doctor Detail</a></td>
+</tr>
+
+</div>
+</table> -->
+
+
+
+<p>&nbsp;</p>
+<div class="heder"><h1>Consult Doctor with this Portal</h1></div>
+
+
+<!-- </header>
+<div>
+<h5 align="right"><a href="index.php">Log out</a></h5>
+</div> -->
+{% if delete %} User successfully deleted {% endif %}
+<h2 align="center"><b>Delete Details</b></h2>
+<p style="color:#FF0000; font-weight:bold; font-family:Helvetica,Arial,sans-serif" align="right"><a href="/rango/adminH/" >Back</a></p>
+<fieldset style="60%">
+<form action='/rango/delP/' method='post'>
+{% csrf_token %}
+<table style=" border:0px solid black; width:300px; height:300px">
+<tr ><td>Username</td><td><input name="username" type="text" /></td></tr>
+<p></p>
+<tr><td><input type="submit" name="submit" value="Delete Record" style="width:100px"/></td><td><input type="reset" name="reset" style="width:100px"/></td></tr>
+<p></p>
+</table>
+</form>
+</fieldset>
+<p style="left:900px; text-decoration:none"><a href="/rango/adminH/">Back To Home Page</a></p>
+
+<div id="foot" align="center" style="top:300px">
+<p>Posted by Mandela Shaban</p>
+<p>Contact Information:<a href="mailto:mandelashaban593@gmail.com">mandelashaban593@gmail.com</a></p>
+
+</div>
+
+
+		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
+
+		{% csrf_token %}
+
+		Display each form. The as_p method wraps each element in a paragraph
+				(<p>) elements. This ensures each element appears on a new line,
+				making everything look neater.
+			{{ user_form.as_p }}
+			{{ profile_form.as_p }}
+
+			Provide a button to click to submit the form 
+			<input type="submit" name="submit" value="Register" />
+		</form> -->
+	
+	
+{% endblock %}
+

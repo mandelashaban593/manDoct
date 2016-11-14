@@ -1,0 +1,76 @@
+<div id="abc">
+<!-- Popup Div Starts Here -->
+<div id="popupContact">
+<!-- Contact Us Form -->
+<form action="/Doct/register/" id="form" method="post" name="form">
+{% csrf_token %}
+<a id="close"  onclick ="div_hide()"><strong><bold>Close</bold></strong></a>
+<h2>Sign Up</h2>
+<hr>
+<table><tr><td>
+<input id="name" name="fname" placeholder="First Name" type="text"></td><td>
+<input id="name" name="sname" placeholder="Second Name" type="text"></td></tr>
+<tr><td>
+<input id="name" name="page" placeholder="Patient age" type="text"></td><td><input id="name" name="telno" placeholder="Telephone Number" type="text">
+</td></tr>
+<tr><td>
+<input id="name" name="gender" placeholder="Gender" type="text"></td><td>
+
+<input id="name" name="password" placeholder="password" type="text">
+</td></tr>
+
+<tr><td>
+<input id="email" name="username" placeholder="username" type="text"></td><td>
+<input id="email" name="street" placeholder="street" type="text"></td></tr>
+<tr><td>
+<input id="email" name="city" placeholder="city" type="text"></td><td>
+<input id="email" name="state" placeholder="state" type="text"></td></tr><tr><td>
+<input id="email" name="email" placeholder="Email" type="text"></td><td>
+<input id="email" name="zip_code" placeholder="zip code" type="text"></td><td>
+<input id="email" name="role"  type="hidden" value="patient"></td></tr><tr><td>
+<input id="email" name="specialty" placeholder="specialty" type="text"></td></tr>
+<tr> <td><input type="submit" name="submit" value="register"   id="submit"/></td></tr> 
+</table>
+</form>
+</div>
+<!-- Popup Div Ends Here -->
+<script type='text/javascript' src='{{STATIC_URL}}js/jquery.form-validation.js'></script>
+<script type='text/javascript'>
+//form validation
+$(document).ready(function(){
+
+	$.validator.addMethod('alphanumeric', function(value, element) {
+		return this.optional(element) && value.match(/[0-9]/
+			));
+},
+'Password must contain at least one numeric and one alphabetic character.');
+
+
+$(document).ready(function(){
+    $("#form").validate({
+    rules:{
+    	 fname:
+            {
+            required:true,
+            maxlength:20,
+            },
+         
+            
+    },
+          messages: {
+          fname: {
+        required: "Please provide your first name",
+        maxlength:"Please provide valid first name",
+      },
+     
+
+    },
+
+  
+
+    });
+    });
+
+
+</script>
+</div>

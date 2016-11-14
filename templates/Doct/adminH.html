@@ -1,0 +1,215 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+<p> <li class="current-menu-item"><a class="brand" href="/rango/">Home</a></li></p>
+{% block navbar %}
+<nav id="primary_nav_wrap">
+<ul>
+   
+  <li><a href="#"><a href="/rango/about/">About Us</a></a>
+    <ul>
+     <!--  <li><a href="#">Sub Menu 1</a></li>
+      <li><a href="#">Sub Menu 2</a></li>
+      <li><a href="#">Sub Menu 3</a></li>
+      <li><a href="#">Sub Menu 4</a> -->
+        <ul>
+          <li><a href="#">Deep Menu 1</a>
+            <ul>
+            <!--   <li><a href="#">Sub Deep 1</a></li>
+              <li><a href="#">Sub Deep 2</a></li>
+              <li><a href="#">Sub Deep 3</a></li>
+                <li><a href="#">Sub Deep 4</a></li> -->
+            </ul>
+          </li>
+          <!-- <li><a href="#">Deep Menu 2</a></li> -->
+        </ul>
+      </li>
+     <!--  <li><a href="#">Sub Menu 5</a></li> -->
+    </ul>
+  </li>
+  <li>
+<a href="/rango/contact/">Contact Us</a>
+    <ul>
+     <!--  <li><a href="#">Sub Menu 1</a></li>
+      <li><a href="#">Sub Menu 2</a></li>
+      <li><a href="#">Sub Menu 3</a></li> -->
+    </ul>
+  </li>
+  <li><a href="/rango/regdoctor/" >Register a Doctor</a>
+    <ul>
+     <!--  <li class="dir"><a href="#">Sub Menu 1</a></li>
+      <li class="dir"><a href="#">Sub Menu 2 THIS IS SO LONG IT MIGHT CAUSE AN ISSEUE BUT MAYBE NOT?</a> -->
+        <ul>
+        <!--   <li><a href="#">Category 1</a></li>
+          <li><a href="#">Category 2</a></li>
+          <li><a href="#">Category 3</a></li>
+          <li><a href="#">Category 4</a></li>
+          <li><a href="#">Category 5</a></li> -->
+        </ul>
+      </li>
+     <!--  <li><a href="#">Sub Menu 3</a></li>
+      <li><a href="#">Sub Menu 4</a></li>
+      <li><a href="#">Sub Menu 5</a></li> -->
+    </ul>
+  </li>
+  <li><a href='/rango/delP/'>Delete Record</a></li>
+  <li><a href="/rango/admin_pat/">Patient's Registration Records</a></li>
+  <li><a href="/rango/doctorD/">Doctor's Registration Records</a></li>
+ 
+</ul>
+</nav>
+{% endblock %}
+
+
+
+{% block body_block %}
+<h2 style="width: 100px;font-weight: bold; text-decoration: none;font-size:25px;"> <li class="current-menu-item"><a class="brand" href="/rango/">Log out</a></li></h2>
+
+	<div class="imgs">
+
+<img src="{% static 'doct2.jpg' %}" alt="pat" width="100px" height="100px" align="left" />
+<img src="{% static 'pat.jpg' %}" alt="pat" width="100px" height="100px" align="right" />
+</div>
+
+	<!-- <header>
+<table id="navb">
+<div id="navb2">
+<tr>
+<td><a href="home.php"> Home</a></td>
+<td><a href="about.php">About Us</a></td>
+<td><a href="contact.php">Contact Us</a></td>
+<td><a href="patient.php">Patient Detail</a></td>
+<td><a href="patient_view_doctor_detail.php">Doctor Detail</a></td>
+</tr>
+
+</div>
+</table> -->
+<!-- <div class="navb2"><a href="/rango/"> Home</a>
+<a href="/rango/about/">About Us</a>
+<a href="/rango/contact/">Contact Us</a>
+<a href="/rango/search/">Search</a> -->
+
+
+
+{% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
+<p>&nbsp;</p>
+<h2>Consult Doctor Here!</h2>
+
+
+</div>
+<p>&nbsp;</p>
+
+<!-- </header>
+<div>
+<h5 align="right"><a href="index.php">Log out</a></h5>
+</div> -->
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+	    <div id="content">
+      {% if ill %}
+<h2>Patients'  Illness</h2>
+ <table width="300" border="0" cellpadding="30" style="text-align: center">
+
+  <tr> 
+  <th width="75"><strong> Email</strong></th> 
+  <th><span style="font-weight: bold;">Patient Name</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th> 
+  <th width="75"><strong>Gender</strong></th> 
+  <th><span style="font-weight: bold;">Illness</span></th>
+  <th><span style="font-weight: bold;">Staff pic</span></th>  
+  <th><span style="font-weight: bold;">Kin</span></th>
+  <th><span style="font-weight: bold;">Kintelno</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th> 
+  <th width="75"><strong> Username</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>Patient age</strong></th> 
+  </tr> 
+{% for ill in ill %}
+  <tr> 
+  <td>{{ill.email}}</td>
+   <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
+   <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
+   <td>{{ill.gender}}</td> 
+   <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
+   <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+   <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
+   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
+       <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="tel:0123456785">{{ill.page}}</a></td>
+ 
+   
+    </tr>
+{% endfor %}
+
+   </table>
+   {% endif %}
+</div>	   
+
+<div id="other_links">
+<nav id="primary_nav_wrap">
+<ul>
+<ul  id="drop-nav primary_nav_wrap">
+
+<li><a href="/rango/regdoctor/" >Register a Doctor</a></li><br/><br/>
+<li><a href='/rango/delP/'>Delete Record</a></li><br/><br/>
+<!-- <li><a href="/rango/view_diognosis/">View You Diognosis</a></li><br/><br/> -->
+<li><a href="/rango/admin_pat/">Patient's Registration Records</a></li><br/><br/>
+
+<!--<li><a href="patientAccess.php">Access Patient Details</a></li><br/><br/>-->
+
+<li><a href="/rango/doctorD/">Doctor's Registration Records</a></li><br/><br/>
+</ul>
+</nav>
+
+</div>
+</table>
+
+
+
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+<script>
+ $(document).ready(function() {
+  $('#primary_nav_wrap a').click(function(e) {
+   e.preventDefault();
+  /* $("div#my-container").load("/url/to/content/ #content-id")*/
+   $('#content').load('/media/mandela/mydocs/sites/tango_with_django_project/templates/rango/illness.html');
+   $('#content').load($(this).attr('href'));
+   return false
+  });
+ });
+</script>
+
+
+
+
+
+		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
+
+		{% csrf_token %}
+
+		Display each form. The as_p method wraps each element in a paragraph
+				(<p>) elements. This ensures each element appears on a new line,
+				making everything look neater.
+			{{ user_form.as_p }}
+			{{ profile_form.as_p }}
+
+			Provide a button to click to submit the form 
+			<input type="submit" name="submit" value="Register" />
+		</form> -->
+	
+	
+{% endblock %}
+
+{% block footer %}
+<p>Posted by Mandela Shaban<br/>Contact Information:<a href="mailto:mandelashaban593@gmail.com">mandelashaban593@gmail.com</a><br/>
+&copy; Consult Doctor : Fast and Cheap Response 2016</p>
+{% endblock %}

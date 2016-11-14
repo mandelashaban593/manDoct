@@ -1,0 +1,17 @@
+{% extends 'rango/base.html' %}
+
+{% block body_block %}
+
+		<h1>Transaction Detail Director</h1>
+
+		<form id="login_form" method="post" action="/rango/airtime_sent_details/">
+		{% csrf_token %}
+		Your Phone Number: <input type="tel" name="receiver_number" value="" size="50" />
+		<br />
+	
+		<input type="submit" value="submit" />
+	</form>
+
+{% endblock %}
+
+</html>
