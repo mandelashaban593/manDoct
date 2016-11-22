@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from Doct.models import Page, UserProfile, Topup,Register, Enterpay,Illness, Diognosis,Conddrugs
 
 from Doct.forms import CategoryForm, UserForm,DiognosisForm
-from Doct.forms import PageForm, TopupForm, PatientForm, IllnessForm,DoctorForm
+from Doct.forms import PageForm, TopupForm, PatientForm, IllnessForm,DoctorForm,AddIllDetForm
 from django.contrib.auth.models import  User
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
@@ -23,6 +23,7 @@ from django.core.urlresolvers import reverse
 from  manDoct.settings import *
 from django.template.loader import render_to_string
 from Doct.utils import check_illness
+
 def index(request):
 
 
@@ -158,6 +159,7 @@ def p_reg(request):
 	context = RequestContext(request)
 
 	registered = False
+	signup = False
 
 
 	# If it's a HTTP POST, we're interested in processing form data.
@@ -177,6 +179,12 @@ def p_reg(request):
 			profile = profile_form.save()
 			
 			registered = True
+			return render_to_response(
+			'Doct/index.html',
+			{'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'signup':signup},
+			context)
+
+
 
 		
 		else:
@@ -187,12 +195,14 @@ def p_reg(request):
 	else:
 		user_form = UserForm()
 		profile_form = PatientForm()
+		signup=True
 
 
 # Render the template depending on the context.
+
 	return render_to_response(
-	'Doct/index.html',
-	{'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
+	'Doct/register.html',
+	{'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'signup':signup},
 	context)
 
 
@@ -366,6 +376,7 @@ def user_login(request):
 	context = RequestContext(request)
 	msg = ''
 	response = None
+	log = False
 
 
 	# If the request is a HTTP POST, try to pull out the relevant information.
@@ -374,11 +385,14 @@ def user_login(request):
 		# This information is obtained from the login form.
 		password = request.POST['password']
 		username = request.POST['username']
+		r = None	
 
 		
 
-
-		r = Register.objects.get(password=password)
+		try:
+			r = Register.objects.get(password=password)
+		except Exception, e:
+			print "Invalid Username Or Password", e
 
 		if r:
 			if r.role=='patient':
@@ -386,7 +400,7 @@ def user_login(request):
 				return render_to_response('Doct/patientH.html', {'patlog':patlog}, context)
 			elif r.role =='doctor':
 				doctlog=True
-				diog = Diognosis.objects.all()
+				diog = Diognosis.objects.all().order_by('-id')
 				return render_to_response('Doct/doctorH.html', {'diog':diog, 'doctlog':doctlog}, context)
 			elif r.role =='admin':
 				adlog = True
@@ -405,10 +419,15 @@ def user_login(request):
 	else:
 	# No context variables to pass to the template system, hence the
 	# blank dictionary object ...
-		return render_to_response('Doct/index.html', {}, context)
+		log = True
+		return render_to_response('Doct/index.html', {'log':log}, context)
 
 
 
+def user_log(request):
+		context = RequestContext(request)
+		u_log = True
+		return render_to_response('Doct/login_user.html', {'u_log':u_log}, context)
 
 
 
@@ -470,14 +489,15 @@ def authdiog(request):
 
 		diogs = Diognosis.objects.filter(gender=payi)
 		
-		if len(diogs) > 1:
+		if len(diogs) >= 1:
 			diog = True
 			return render_to_response('Doct/patientH.html', {'diogs':diogs, 'diog':diog}, context)
 		else:
 				# An inactive account was used - no logging in!
-			msg = "Wrong number or day"
-			msg2 = "You can call us at 0754307471"
-			return render_to_response('Doct/patientH.html', {'diogs':diogs, 'msg2': msg2}, context)
+			msg = "You can call us at 0754307471"
+			msg2 = " Send 3,000 to Mobile Number 0754307471"
+			authd = True
+			return render_to_response('Doct/patientH.html', {'authd':authd, 'msg2': msg2, 'msg': msg}, context)
 		
 
 	# The request is not a HTTP POST, so display the login form.
@@ -486,37 +506,96 @@ def authdiog(request):
 	# No context variables to pass to the template system, hence the
 	# blank dictionary object ...
 		authd=True
-		return render_to_response('Doct/authdiog.html', {'authd':authd}, context)
+		return render_to_response('Doct/patientH.html', {'authd':authd}, context)
 
 def illness(request):
-    template = 'rango/add_illness.html'
+    
     context = RequestContext(request)
     response = False
+    illmsg  = False
+    illmsg = ''
+    exill = False
+    ill_success = False
     post_values = {}
     if request.POST:
+
         post_values = request.POST.copy()
         illness = request.POST['illness']
         gender = request.POST['gender']
         page = request.POST['page']
-        kintelno = request.POST['kintelno']
+        ill_det=Illness(gender=gender, illness=illness, page=page)
+        ill_det.save()
+        gender = ill_det.gender
         cdrugs=Conddrugs.objects.get(cond=illness)
+	  	
         amb = request.POST['amb']
         drugs=cdrugs.drugs
-        diog=Diognosis(telno=kintelno,gender=gender,page=page,diognosis=drugs,amb=amb)
+        diog=Diognosis(gender=gender,page=page,diognosis=drugs,amb=amb)
         diog.save()
-        form = IllnessForm(post_values)
+      	return render_to_response('Doct/addill.html', {'ill_success':ill_success, 'gender':gender}, context)
+		
+	
+	exill=True
+
+    	
+    return render_to_response('Doct/patientH.html', {'exill':exill}, context)
+
+
+# def AddIllDet(request):
+    
+#     context = RequestContext(request)
+#     response = False
+#     post_values = {}
+#     if request.POST:
+#         post_values = request.POST.copy()
+#         gender = request.POST['gender']
+#         kin = request.POST['kin']
+#         kintelno = request.POST['kintelno']
+#         username = request.POST['username']
+#         ill_edit=Illness.objects.get(gender=gender)
+#         ill_edit.gender=gender
+#         ill_edit.kin  =  kin
+#         ill_edit.kintelno = kintelno
+#         ill_edit.username = username
+#         ill_edit.save()
+       
+	       
+#         ill_et = True
+#         return render_to_response('Doct/patientH.html', {'ill_success':ill_success, 'ill_et':ill_et}, context)
+
+   	
+    
+#     return render_to_response('Doct/patientH.html', { }, context)
+
+
+
+def AddIllDet(request):
+	context = RequestContext(request)
+	gender = request.POST['gender']
+	kin = request.POST['kin']
+	kintelno = request.POST['kintelno']
+	username = request.POST['username']
+	ill_success = False
+	ill_et = False
+	email = request.POST['email']
+	ill_edit = get_object_or_404(Illness.objects.filter(gender=gender))
+
+	form = AddIllDetForm()
+	if request.POST:
+		form = AddIllDetForm(request.POST, instance=ill_edit)
         if form.is_valid():
+        	form.save()
+        	ill_et = True
+        	
+			
+            
+         	return render_to_response('Doct/patientH.html', {'ill_et':ill_et}, context)
+
+	return render_to_response('Doct/patientH.html', { }, context)
+
            
-	        form.save()
-	        
-	        ill_success = True
-	        return render_to_response('Doct/patientH.html', {'ill_success':ill_success}, context)
 
-        else:
-            print form.errors
-    exill=True
-    return render_to_response('Doct/expillness.html', {'exill':exill}, context)
-
+    
 def view_illness(request):
 	# Like before, obtain the context for the user's hrequest.
 	context = RequestContext(request)
@@ -537,14 +616,33 @@ def doct_view_illness(request):
 	# Like before, obtain the context for the user's hrequest.
 	context = RequestContext(request)
 	msg = ''
+	doct_ill = False
 	ill = Illness.objects.all()
 	if ill:
 		msg = "Illness records"
 		doctview_ill = True
-		return render_to_response('Doct/view_illness.html', {}, context)
+		return render_to_response('Doct/doctorH.html', {'doctview_ill':doctview_ill}, context)
 	else:
 		msg = "No Illness record"
-		return render_to_response('Doct/doctorH.html', {}, context)
+		doct_ill = True
+		return render_to_response('Doct/doctorH.html', {'doct_ill':doct_ill, 'ill':ill}, context)
+
+
+
+def view_illness2(request):
+	# Like before, obtain the context for the user's hrequest.
+	context = RequestContext(request)
+	msg = ''
+	doct_ill = False
+	ill = Illness.objects.all()
+	if ill:
+		msg = "Illness records"
+		doctview_ill = True
+		return render_to_response('Doct/doctorH.html', {'doctview_ill':doctview_ill, 'ill':ill}, context)
+	else:
+		msg = "No Illness record"
+		doct_ill = True
+		return render_to_response('Doct/doctorH.html', {'doct_ill':doct_ill, 'ill':ill}, context)
 
 
 def ind_illness(request):
@@ -552,6 +650,8 @@ def ind_illness(request):
 	context = RequestContext(request)
 	msg = ''
 	ind_ill = False
+	ill = Illness.objects.all().order_by('-id')
+	indill_auth = False
 	if request.POST:
 		username = request.POST['username']
 		ill = Illness.objects.filter(username=username)
@@ -566,7 +666,8 @@ def ind_illness(request):
 		
 	else:
 		msg = "No Illness record"
-		return render_to_response('Doct/ind_ill.html', {'msg':msg}, context)
+		indill_auth = True
+		return render_to_response('Doct/doctorH.html', {'msg':msg, 'indill_auth':indill_auth, 'ill':ill}, context)
 
 # def Expillness(request):
 # 	# Like before, obtain the context for the user's hrequest.
@@ -595,7 +696,7 @@ def diogform(request):
 	context = RequestContext(request)
 	
 	dform = True
-	return render_to_response('Doct/diog.html', {'dform':dform}, context)
+	return render_to_response('Doct/doctorH.html', {'dform':dform}, context)
 
 
 # def diognosis(request):
@@ -679,6 +780,7 @@ def receipt(request):
 	context = RequestContext(request)
 	msg = ''
 	msg2 = ''
+	rec = False
 
 	# If the request is a HTTP POST, try to pull out the relevant information.
 	if request.method == 'POST':
@@ -707,7 +809,46 @@ def receipt(request):
 	else:
 	# No context variables to pass to the template system, hence the
 	# blank dictionary object ...
-		return render_to_response('Doct/receiptform.html', {}, context)
+
+		return render_to_response('Doct/receiptform.html', {'rec':rec}, context)
+
+
+def index_receipt(request):
+	# Like before, obtain the context for the user's hrequest.
+	context = RequestContext(request)
+	msg = ''
+	msg2 = ''
+	recfm = False
+
+	# If the request is a HTTP POST, try to pull out the relevant information.
+	if request.method == 'POST':
+		# Gather the username and password provided by the user.
+		# This information is obtained from the login form.
+		id = request.POST['id']
+		id = int(id)
+		
+
+		p = Enterpay.objects.get(id=id)
+		
+		entp = True
+
+		if p:
+		
+			return render_to_response('Doct/patientH.html', {'p':p, 'entp':entp}, context)
+		else:
+				# An inactive account was used - no logging in!
+			msg = "Wrong number or or no receipt"
+			msg2 = "You can call us at 0754307471"
+			return render_to_response('Doct/receiptform.html', {'msg':msg, 'msg2': msg2}, context)
+		
+
+	# The request is not a HTTP POST, so display the login form.
+	# This scenario would most likey be a HTTP GET.
+	else:
+	# No context variables to pass to the template system, hence the
+	# blank dictionary object ...
+		recfm = True
+		return render_to_response('Doct/index_base.html', {'recfm':recfm}, context)
 
 
 def doctor_receipt(request):
@@ -715,19 +856,20 @@ def doctor_receipt(request):
 	context = RequestContext(request)
 	msg = ''
 	msg2 = ''
+	dot_rec = False
 
 	# If the request is a HTTP POST, try to pull out the relevant information.
 	if request.method == 'POST':
 		id = request.POST['id']
 		id = int(id)
 		
-		p = Enterpay.objects.filter(id=id)
+		p = Enterpay.objects.get(id=id)
 		
 		entp = True
 
 		if p:
 		
-			return render_to_response('Doct/doctorH.html', {'p':p, 'entp ':entp}, context)
+			return render_to_response('Doct/view_receipt.html', {'p':p, 'entp ':entp}, context)
 		else:
 				# An inactive account was used - no logging in!
 			msg = "Wrong number or or no receipt"
@@ -740,7 +882,8 @@ def doctor_receipt(request):
 	else:
 	# No context variables to pass to the template system, hence the
 	# blank dictionary object ...
-		return render_to_response('Doct/doctor_authreceipt.html', {}, context)
+		dot_rec = True
+		return render_to_response('Doct/doctorH.html', {'dot_rec':dot_rec}, context)
 
 
 def delP(request):
@@ -810,7 +953,7 @@ def admin_pat(request):
 	p = Register.objects.filter(role=role)
 	if p:
 		msg = "Patient records"
-		return render_to_response('Doct/admin_patientD.html', {'p':p, 'msg':msg}, context)
+		return render_to_response('Doct/adminH.html', {'p':p, 'msg':msg}, context)
 	else:
 		msg = "No patient record"
 		return render_to_response('Doct/adminH.html', {'msg':msg}, context)
@@ -820,14 +963,15 @@ def admin_doct(request):
 	# Like before, obtain the context for the user's hrequest.
 	context = RequestContext(request)
 	msg = ''
+	msg1 = ''
 	role='doctor'
 	d = Register.objects.filter(role=role)
 	if d:
 		msg = "Doctor records"
 		return render_to_response('Doct/admin_doctorD.html', {'d':d, 'msg':msg}, context)
 	else:
-		msg = "No Doctor record"
-		return render_to_response('Doct/adminH.html', {'msg':msg}, context)
+		msg1 = "No Doctor record"
+		return render_to_response('Doct/adminH.html', {'msg1':msg1}, context)
 
 def adminH(request):
 	# Like before, obtain the context for the user's hrequest.
@@ -841,15 +985,16 @@ def doctorD(request):
 	# Like before, obtain the context for the user's hrequest.
 	context = RequestContext(request)
 	msg = ''
+	msg1 = ''
 	role='doctor'
 
 	d = Register.objects.filter(role=role)
 	if d:
 		msg = "Doctor Details"
-		return render_to_response('Doct/doctorD.html', {'d':d, 'msg':msg}, context)
+		return render_to_response('Doct/adminH.html', {'d':d, 'msg':msg}, context)
 	else:
-		msg = "No Doctor record"
-		return render_to_response('Doct/doctorD.html', {'msg':msg}, context)
+		msg1 = "No Doctor record"
+		return render_to_response('Doct/adminH.html', {'msg1':msg1}, context)
 
 
 def patientH(request):
@@ -959,7 +1104,8 @@ def edited_diog(request):
 	        diognosis.amb=amb
 	        diognosis.save()
 	        editd_response = True
-	        return render_to_response('Doct/doctorH.html', {'editd_response': editd_response}, context)
+	        diog = Diognosis.objects.all().order_by('-id')
+	        return render_to_response('Doct/doctorH.html', {'editd_response': editd_response, 'diog': diog}, context)
 
     else:
     	pass
@@ -976,7 +1122,6 @@ def restricted(request):
 
 
 
-@login_required
 def user_logout(request):
 	# Since we know the user is logged in, we can now just log them out.
 	logout(request)

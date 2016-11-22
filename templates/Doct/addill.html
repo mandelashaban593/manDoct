@@ -23,13 +23,20 @@
                     </ul>
     </li>
  
+    <li><a href="/Doct/illness/">Explain Sickness</a>
       <ul class="submenu">
               <li><a href="view_login.php" title="View Taxi Details">View Login</a></li>
           <li><a href="edit_login.php" title="Update Taxi Details">Update Login</a></li>                <li><a href="delete_login.php" title="Delete Taxi Details">Delete Login</a></li>           
                     </ul>
 
         </li>
-   
+    <li><a href="/Doct/enterpay/">Enter Consultation Payment Details</a>
+      <ul class="submenu">
+              <li><a href="view_payments.php" title="View Taxi Details">View Payments</a></li>
+          <li><a href="edit_payments.php" title="Update Taxi Details">Update Payments</a></li>                <li><a href="delete_payments.php" title="Delete Taxi Details">Delete Payments</a></li>           
+                    </ul>
+
+        </li>
    
  
      <li><a href="/Doct/receipt/">Print reciept</a>
@@ -94,21 +101,11 @@ padding: 0px 1.5em; text-decoration: none;display: block; ">
 
 {% include "Doct/view_diog.html" %}
 
-{% elif expill or ill_more  %}
+{% elif expill or ill_more %}
 
 {% include "Doct/expillness.html" %} 
 
-
-{% elif pay %}
-
-{% include "Doct/enterpay.html" %} 
-
-{% elif rec %}
-
-{% include "Doct/receiptform.html" %} 
-
 {% elif ill_et %}
-
 
 <h1  style="width:60%; height:20%; font-size:17px; ""><a href="/Doct/authdiog/" style="color: white; text-align: center;">View Prescription</a><br /></h1>
 
@@ -133,66 +130,29 @@ padding: 0px 1.5em; text-decoration: none;display: block; ">
 
 
 
-     
+ <h1  style="width:60%; height:20%; font-size:17px; ""><a href="/Doct/authdiog/" style="color: white; text-align: center;">View Prescription</a><br /></h1>
+
+<h1 align="center" style="width:60%; height:20%; font-size:17px"><b >Fill in the remaining fields bellow to finish Sickness Details</b></h1>
+
+<fieldset width:60%>
+
+<form action="/Doct/AddIllDet/" id="changesicknessform_form" method="post">
+{% csrf_token %}
+<table>
+<tr><td>Payment Id</td><td><input type="text" name="gender" id="gender" value="{{gender}}"/></td></tr>
+<tr><td>Next of Kin</td><td> <input type="text" name="kin" id="kin"/></td></tr> 
+<tr><td>Kin Telephone No</td> <td><input type="text" name="kintelno" id="kintelno"/></td> </tr> 
+<tr><td>Username</td><td> <input type="text" name="username" id="username"/></td></tr>
+<tr><td>Email </td><td> <input type="email" name="email"  id="email"/></td></tr>
+<tr><td><input type="reset" name="reset" style="width:100px"/></td> <td><input type="submit" name="submit" value="Submit"  style="width:100px"/></td></td></tr>  
+</table> 
+</form>
+
+</fieldset>
+<div id="secure_area_message" align="center"></div>
 
 
-<h3>Enter Consultation Payment : <strong>Details  below!</strong><br /></h3>
-<br/>
-
-{% if enterpay %}
-
-<h2>Your payment Id is {{pay_id}}, please don't forget it</h2>
 {% endif %}
-
-<!-- <fieldset width:60%>
-
-{% endif %}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
-<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
-
-<script type="text/javascript">
-   
-
-$(document).ready(function(){
-    $("#changepayform_form").validate({
-    rules:{
-
-            telno:
-            {
-            required:true,
-            digits: true,
-            maxlength:20,
-            },
-            amount:
-            {
-            required:true,
-            digits: true,
-            maxlength:10,
-            },
-    },
-          messages: {
-       
-        telno: {
-        required: "Telephone number is required",
-        digits: "Enter the valid Telephone number",
-        maxlength:"Please provide valid phone number",
-      },
-      amount: {
-      required: "Please provide Consultation amount",
-      digits: "Enter the valid Consultation amount",
-      maxlength:"Please provide valid Consultation amount",
-      },
-    
-    
-    },
-
-  
-
-    });
-    });
-
-</script>
-</fieldset> -->
 </div>
 
 

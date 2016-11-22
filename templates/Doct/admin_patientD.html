@@ -1,37 +1,10 @@
-{% extends 'rango/base.html' %}
 
 {% load staticfiles %}
 
-{% block body_block %}
-
-	
-
-	<!-- <header>
-<table id="navb">
-<div id="navb2">
-<tr>
-<td><a href="home.php"> Home</a></td>
-<td><a href="about.php">About Us</a></td>
-<td><a href="contact.php">Contact Us</a></td>
-<td><a href="patient.php">Patient Detail</a></td>
-<td><a href="patient_view_doctor_detail.php">Doctor Detail</a></td>
-</tr>
-
-</div>
-</table> -->
-<a href="/rango/adminH/">Back</a>
-
-
-
 {% if illness %}You have successfully sent your Sickness detail And Check Your Diagnosis after 5 minutes {% endif %}
+
+<h2>Patient Registration Records </h2>
 <p>&nbsp;</p>
-<div class="heder"><h1>Consult Doctor with this Portal</h1></div>
-<p>&nbsp;</p>
-
-
-<img src="doct.jpg"  alt=""/><img src="doct2.jpg" alt=" "doct2"  width="220px" height="150px" style="/><img src="pat.jpg" alt="pat" width="250px" height="150px"/>
-
-<h2>Phone numbers</h2>
  <table width="300" border="0" cellpadding="30" style="text-align: center">
 
   <tr> 
@@ -86,31 +59,7 @@
    </table>
 
 
-</table>
-
-
-<div id="foot" align="center" style="top:300px">
-<p>Posted by Mandela Shaban</p>
-<p>Contact Information:<a href="mailto:mandelashaban593@gmail.com">mandelashaban593@gmail.com</a></p>
-
-</div>
 
 
 
-		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
-
-		{% csrf_token %}
-
-		Display each form. The as_p method wraps each element in a paragraph
-				(<p>) elements. This ensures each element appears on a new line,
-				making everything look neater.
-			{{ user_form.as_p }}
-			{{ profile_form.as_p }}
-
-			Provide a button to click to submit the form 
-			<input type="submit" name="submit" value="Register" />
-		</form> -->
-	
-	
-{% endblock %}
 

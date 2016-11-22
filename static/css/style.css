@@ -925,5 +925,33 @@ ul.submenu li a:hover{
 	padding-top:.2em;
 	top:0;
 	border-radius:0;
-	}
-/*******************************************************************************
+	}/*
+/********************************************************************************/
+
+/*.header-logo{
+	margin-top:0px;
+	margin-bottom: 0%;
+	height:50px;
+
+}
+*/
+
+
+.col-md-7{
+	margin-top:0px;
+	margin-bottom: 10%;
+	padding-top: 10px;
+
+}
+
+.container{
+margin-top:0px;
+padding-bottom: 10px;
+width:40px;
+
+}
+
+#home{
+width:20%;	
+height:30%;
+}

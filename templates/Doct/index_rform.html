@@ -1,14 +1,9 @@
 
-
 {% load staticfiles %}
-
-
-
-
-<h3> <strong>View Receipt  !</strong><br /></h3>
+<h3> <strong>View Receipt  here!</strong><br /></h3>
 
 <fieldset width:60%>
-<form action="/Doct/doctor_receipt/" method="post" id="changereceiptform_form">
+<form action="/Doct/index_receipt/" method="post" id="changereceiptform_form">
 {% csrf_token %}
 <table style=" border:0px solid black; width:300px; height:300px">
 <tr><td>Transaction Id </td><td> <input type="text" name="id"  id="dname" required="True" /></td></tr>
@@ -16,7 +11,4 @@
 </table> 
 </form>
 </fieldset>
-
-	
-	
 

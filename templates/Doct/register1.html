@@ -3,14 +3,14 @@
 
 		{% if registered %}
 		Doctor consultation  Portal  says: <strong>thank you for Registering!</strong>
-		<a href="/rango/doctorH/">Return to  Doctor  homepage.</a><br />
+		<a href="/Doct/adminH/">Return to  Doctor  homepage.</a><br />
 		{% else %}
 		
 
 <h3>Register: <strong>a doctor!</strong><br /></h3>
 <br/>
 <fieldset width="60%">
-<form action="/rango/register/" method="post" onsubmit="validateReg()">
+<form action="/Doct/regdoctor/" method="post" onsubmit="validateReg()">
 {% csrf_token %}
 <table style="border:0px solid black; width:300px; height:300px">
 <tr><td>First Name</td><td> <input type="text" name="fname" id="fname"  required="True"/></td></tr>
@@ -26,7 +26,9 @@
 <tr><td> city</td> <td><input type="text" name="city" id="pwd"  required="True"/></td> </tr> 
 <tr><td>state</td> <td> <input type="text" name="state" id="email"  required="True"/></td></tr>
 <tr><td>zip code</td><td><input type="text" name="zip_code"  required="True"/></td></tr>
-<tr><td>Role</td><td><input type="hidden" name="role" value="patient"  required="True" /></td></tr>
+<tr><td>specialty</td><td><input type="text" name="specialty"  required="True"/></td></tr>
+
+<tr><td></td><td><input type="hidden" name="role" value="doctor"  required="True" /></td></tr>
 <tr> <td><input type="submit" name="submit" value="register" /></td></tr>  
 </table> 
 </form>

@@ -1,36 +1,9 @@
-{% extends 'rango/base.html' %}
+
 
 {% load staticfiles %}
 
-{% block body_block %}
-
-	
-
-	<!-- <header>
-<table id="navb">
-<div id="navb2">
-<tr>
-<td><a href="home.php"> Home</a></td>
-<td><a href="about.php">About Us</a></td>
-<td><a href="contact.php">Contact Us</a></td>
-<td><a href="patient.php">Patient Detail</a></td>
-<td><a href="patient_view_doctor_detail.php">Doctor Detail</a></td>
-</tr>
-
-</div>
-</table> -->
-<a href="/rango/doctorH/">Back</a>
-
-
-
-<p>&nbsp;</p>
 <div class="heder"><h1>A patient Sickness Detail</h1></div>
-<p>&nbsp;</p>
-
-
-<img src="doct.jpg"  alt=""/><img src="doct2.jpg" alt=" "doct2"  width="220px" height="150px" style="/><img src="pat.jpg" alt="pat" width="250px" height="150px"/>
-
-<h2>Patients'  Illness</h2>
+<div>
  <table width="300" border="0" cellpadding="30" style="text-align: center">
 
   <tr> 
@@ -92,23 +65,3 @@
 
 
 </div>
-
-
-
-		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
-
-		{% csrf_token %}
-
-		Display each form. The as_p method wraps each element in a paragraph
-				(<p>) elements. This ensures each element appears on a new line,
-				making everything look neater.
-			{{ user_form.as_p }}
-			{{ profile_form.as_p }}
-
-			Provide a button to click to submit the form 
-			<input type="submit" name="submit" value="Register" />
-		</form> -->
-	
-	
-{% endblock %}
-

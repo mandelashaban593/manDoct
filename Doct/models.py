@@ -98,7 +98,7 @@ class Illness(models.Model):
     email = models.CharField(blank=False, max_length=40)
     pname = models.CharField(blank=False, max_length=50)
     sname = models.CharField(blank=False, max_length=50)
-    gender = models.CharField(blank=False, max_length=30)
+    gender = models.CharField(blank=False, max_length=30, unique=True)
     illness = models.CharField(blank=False, max_length=700)
     kin = models.CharField(blank=False, max_length=30)
     kintelno = models.CharField(blank=False, max_length=20)

@@ -1,3 +1,137 @@
+{% extends 'Doct/base.html' %}
+
+{% load staticfiles %}
+
+{% block navbar %}
+
+<div id = "navigation">
+
+<nav class="cf">
+  <ul class="topmenu">
+    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
+    -->
+    <li><a href="/Doct/about/">About Us</a>
+        <ul class="submenu">
+              <!-- <a href="/Doct/diogform/">Diognise</a> -->
+          <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>           
+                    </ul>
+    </li>
+    <li><a href="/Doct/contact/">Contact Us</a>
+      <ul class="submenu">
+              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
+                    </ul>
+    </li>
+ 
+      <ul class="submenu">
+              <li><a href="view_login.php" title="View Taxi Details">View Login</a></li>
+          <li><a href="edit_login.php" title="Update Taxi Details">Update Login</a></li>                <li><a href="delete_login.php" title="Delete Taxi Details">Delete Login</a></li>           
+                    </ul>
+
+        </li>
+   
+   
+ 
+     <li><a href="/Doct/receipt/">Print reciept</a>
+          <ul class="submenu">
+              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+                    
+                    </ul>
+         </li>
+
+
+          <li><a href="/Doct/authdiog/">View Your Diognosis</a>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+        
+    </li>
+
+   
+                    
+   </ul>
+</nav>
+
+</div>
+
+
+<div id = "navig" style="width: 10%; align:left;line-height: 2em;
+padding: 0px 1.5em; text-decoration: none;display: block; ">
+
+<nav class="">
+  <ul class="topmenu">
+
+  <li> <li><a href="/Doct/" title="Logout">Logout</a>
+    </li>
+      </ul>
+</nav>
+<!--  <h2>Consult Doctor Here!</h2> -->
+</div>
+{% endblock %}
+
+{% block body_block %}
+
+      <div id="content">
+     {% if illness %} <script type="text/javascript">alert("You have successfully submitted your Illness details, Please view Your diognosis");
+ return false;
+ </script>
+ {% endif %}
+{% if pay_id %}
+<h2>Your payment Id is {{pay_id}}, please don't forget it</h2>
+
+{% elif ill_success %}
+<h2>Your have Successfully sent your illness detail</h2>
+{% endif %}
+
+
+{% if entp %}
+{% include "Doct/view_receipt.html" %}
+
+{% elif diog %}
+
+{% include "Doct/view_diog.html" %}
+
+{% elif expill or ill_more %}
+
+{% include "Doct/expillness.html" %} 
+
+
+{% elif pay %}
+
+{% include "Doct/enterpay.html" %} 
+
+{% elif rec %}
+
+{% include "Doct/receiptform.html" %} 
+
+{% elif ill_et %}
+
+
+<h1  style="width:60%; height:20%; font-size:17px; ""><a href="/Doct/authdiog/" style="color: white; text-align: center;">View Prescription</a><br /></h1>
+
+
+{% elif ill_success %}
+<h1  style="width:60%; height:20%; font-size:17px; ""><a href="/Doct/authdiog/" style="color: white; text-align: center;">View Prescription</a><br /></h1>
+
+{% include "Doct/ill_det.html" %} 
+
+{% elif authd %}
+{% if msg and msg2 %}
+<h2 style="color:green"> {{ msg2 }} {{ msg }} </h2>
+
+{% endif %}
+
+{% include "Doct/authdiog.html" %}
+
+
+
+{% else  %}
+
+
+
 
 {% load staticfiles %}
 <h3> <strong>View Receipt  here!</strong><br /></h3>
@@ -12,3 +146,86 @@
 </form>
 </fieldset>
 
+<!-- <div id="signup">Click
+<a href="/Doct/register/"><strong style="font-size:28px;font-weight:20px;">Sign Up</strong></a>
+
+</div> -->
+
+</div>
+
+{% endif %}
+</div>
+
+<script type='text/javascript'>
+
+//F
+//form validation
+  $(document).ready(function(){
+    $("#changeloginform_form").validate({
+    rules:{
+
+          username:
+            {
+            required:true,
+            minlength:3,
+            maxlength:20,
+            },
+            password:
+            {
+            required:true,
+            minlength:5,
+            maxlength:30,
+            },
+        
+    },
+          messages: {
+      username: {
+        required: "Please provide a username",
+        minlength: "Please provide a Valid username",
+        maxlength:"Please provide a Valid username",
+      },
+      password: {
+        required: "Please provide a password",
+         minlength: "Please provide a Valid password",
+         maxlength:"Please provide a Valid password",
+      },
+    },
+
+    });
+    });
+
+
+
+</script>
+<div>
+
+
+
+
+
+
+
+
+<h4 style="font-size:20px;">How It Works</h4>
+<aside>
+<strong style="font-size:18px;">1. Register into the system with the right information and confirmation message will be sent either to your Email or via the web immediately after you have registered</strong>.<br /><br />
+<strong style="font-size:18px;">2. Use your username and password  for you to access the home page</strong>.<br /><br />
+
+<strong style="font-size:18px;">3. Note that you can only submit your Diognosis details after you have paid consultation fee of ugx 20,000 to the specified mobile money number 256754307471 </strong>.
+
+
+</aside>
+
+</div>
+
+
+
+{% endblock %}
+
+
+		
+
+
+
+
+	

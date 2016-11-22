@@ -1,19 +1,25 @@
-{% extends 'rango/base.html' %}
+<div id="formWrapper">
+<form action="/Doct/login/" method="post" id="changeloginform_form">
+{% csrf_token %}
+{% if response %}
+<script type="text/javascript">alert("Incorrect Username or Password");</script>
+{% endif %}
+<fieldset class="first">
+<h3>Enter Your Log In details</h3>
 
-{% block body_block %}
+<label class="labelone" for="username" required>Username:</label>
+<input name="username" type="user"/>
 
-		<h1>Login to Rango</h1>
+<label for="telno">Password:</label>
+<input name="password" type="password"  />
 
-		<form id="login_form" method="post" action="/rango/login/">
-		{% csrf_token %}
-		Username: <input type="text" name="username" value="" size="50" />
-		<br />
-		Password: <input type="password" name="password" value="" size="50" />
-		<br />
 
-		<input type="submit" value="submit" />
-	</form>
+ 
 
-{% endblock %}
+<table>
+<tr><td><input class="btn" name="submit" type="submit" value="Log In" /></td><td><input class="btn" name="submit" type="reset" value="Clear Form" /></td></tr>
+</table>
 
-</html>
+</form>
+
+</fieldset>

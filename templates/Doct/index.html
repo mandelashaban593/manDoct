@@ -24,22 +24,36 @@ http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
           <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
                     </ul>
     </li>
- 
-     <li><a href="/Doct/receipt/">Print reciept</a>
+
+    <li><a href="/Doct/user_log/"> Log In</a>
           <ul class="submenu">
               <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
               <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
                     
                     </ul>
          </li>
-    
+
+
+
+    <li><a href="/Doct/login/">Doctor/Admin Log In</a>
+          <ul class="submenu">
+              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
                     
-    <li> <li><a href="/Doct/" title="Logout">Logout</a>
-    </li>
-      </ul>
+                    </ul>
+         </li>
+
+
+ 
+     
+  
 </nav>
 
 </div>
+
+
+
+
 
 {% endblock %}
 
@@ -59,37 +73,94 @@ Welcome to Online Doctor Consultation System
 {% endif %}
 
 <div id="content">
-<div id="formWrapper">
-<form action="/Doct/login/" method="post" id="changeloginform_form">
+
+{% if signup %}
+
+{% include "Doct/signup.html" %}
+
+{% elif log  %}
+
+{% include "Doct/login.html" %}
+
+{% elif u_log  %}
+
+{% include "Doct/u_log.html" %}
+
+
+{% elif recfm  %}
+
+{% include "index_rform.html" %}
+
+{%  else %}
+
+<fieldset width:60%>
+<form action="/Doct/enterpay/" id="changepayform_form" method="post" >
 {% csrf_token %}
-{% if response %}
-<script type="text/javascript">alert("Incorrect Username or Password");</script>
-{% endif %}
-<fieldset class="first">
-<h3>Enter Your Log In details</h3>
+<table style=" border:0px solid black; width:300px; height:300px">
+<tr><td>From Telephone Number </td><td> <input type="text" name="telno"  id="dname"/></td></tr>
+<tr><td> To Telephone Number: </td><th>0754307471</th></tr>
+<tr><td>Amount</td><td> <input type="text" name="amount" id="telno"/></td></tr>
 
-<label class="labelone" for="username" required>Username:</label>
-<input name="username" type="user"/>
-
-<label for="telno">Password:</label>
-<input name="password" type="password"  />
-
-
- 
-
-<table>
-<tr><td><input class="btn" name="submit" type="submit" value="Log In" /></td><td><input class="btn" name="submit" type="reset" value="Clear Form" /></td></tr>
+<tr><td><input type="reset" name="reset" style="width:100px" /></td> <td><input type="submit" name="submit" value="Submit" style="width:100px"/></td></tr>
 </table>
-
+ 
 </form>
-<p>Click
-<button id="popup" onclick="div_show()">Sign Up</button>
 
-</p>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
+
+<script type="text/javascript">
+   
+
+$(document).ready(function(){
+    $("#changepayform_form").validate({
+    rules:{
+
+            telno:
+            {
+            required:true,
+            digits: true,
+            maxlength:20,
+            },
+            amount:
+            {
+            required:true,
+            digits: true,
+            maxlength:10,
+            },
+    },
+          messages: {
+       
+        telno: {
+        required: "Telephone number is required",
+        digits: "Enter the valid Telephone number",
+        maxlength:"Please provide valid phone number",
+      },
+      amount: {
+      required: "Please provide Consultation amount",
+      digits: "Enter the valid Consultation amount",
+      maxlength:"Please provide valid Consultation amount",
+      },
+    
+    
+    },
+
+  
+
+    });
+    });
+
+</script>
 </fieldset>
+<!-- <div id="signup">Click
+<a href="/Doct/register/"><strong style="font-size:28px;font-weight:20px;">Sign Up</strong></a>
+
+</div> -->
+
 </div>
 
-
+{% endif %}
 </div>
 
 <script type='text/javascript'>
@@ -136,7 +207,7 @@ Welcome to Online Doctor Consultation System
 <div>
 
 
-{% include "Doct/signup.html" %}
+
 
 
 
@@ -155,19 +226,10 @@ Welcome to Online Doctor Consultation System
 </div>
 
 
-{% if user.is_authenticated %}
-			
-				<!-- <li><a href="/rango/send_at/" id="onclick">Send Airtime</a></li>
-
-				<li><a href="/rango/profile/" id="onclick">Git hub api Profile </a></li> -->
-				{% endif %}
 
 {% endblock %}
 
-{% block footer %}
-<p>Posted by Mandela Shaban<br/>Contact Information:<a href="mailto:mandelashaban593@gmail.com">mandelashaban593@gmail.com</a><br/>
-&copy; Consult Doctor : Fast and Cheap Response 2016</p>
-{% endblock %}
+
 		
 
 

@@ -1,0 +1,18 @@
+<h1 align="center" style="width:60%; height:20%; font-size:17px"><b >Fill in the remaining fields bellow to finish Sickness Details</b></h1>
+
+<fieldset width:60%>
+
+<form action="/Doct/AddIllDet/" id="changesicknessform_form" method="post">
+{% csrf_token %}
+<table>
+<tr><td>Payment Id</td><td><input type="text" name="gender" id="gender" value="{{gender}}"/></td></tr>
+<tr><td>Next of Kin</td><td> <input type="text" name="kin" id="kin"/></td></tr> 
+<tr><td>Kin Telephone No</td> <td><input type="text" name="kintelno" id="kintelno"/></td> </tr> 
+<tr><td>Username</td><td> <input type="text" name="username" id="username"/></td></tr>
+<tr><td>Email </td><td> <input type="email" name="email"  id="email"/></td></tr>
+<tr><td><input type="reset" name="reset" style="width:100px"/></td> <td><input type="submit" name="submit" value="Submit"  style="width:100px"/></td></td></tr>  
+</table> 
+</form>
+
+</fieldset>
+<div id="secure_area_message" align="center"></div>

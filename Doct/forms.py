@@ -80,8 +80,7 @@ class DoctorForm(forms.ModelForm):
 class IllnessForm(forms.ModelForm):
 	class Meta:
 		model = Illness
-		fields = ('email', 'pname','gender', 'illness','kin','kintelno','username', 'page', 'amb')
-
+		fields = ('gender', 'pname','illness','amb','username', 'page')
 
 
 class DiognosisForm(forms.ModelForm):
@@ -103,3 +102,13 @@ class TopupForm(forms.ModelForm):
 
 
 
+
+
+class AddIllDetForm(forms.ModelForm):
+
+    """
+    Form for adding  Illness details
+    """
+    class Meta:
+        model = Illness
+        fields = ['gender','kin','kintelno','username','email']

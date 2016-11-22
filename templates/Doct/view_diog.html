@@ -1,71 +1,40 @@
 
-
 {% load staticfiles %}
 
-<div class="heder"><h1>Diognosis'  Details</h1></div>
-<p>&nbsp;</p>
+<h2>Patients'  Diognosis</h2>
  <table width="300" border="0" cellpadding="30" style="text-align: center">
 
   <tr> 
-  <th width="75"><strong>Doctor Name </strong></th> 
+  <th width="75"><strong> Doctor Name</strong></th> 
   <th><span style="font-weight: bold;">Telephone Number</span></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong>Payment Id</strong></th> 
+  <th width="75"><strong>Gender</strong></th> 
   <th><span style="font-weight: bold;">Diognosis</span></th>
   <th><span style="font-weight: bold;">Staff pic</span></th>  
-  <th width="75"><strong>Patient age</strong></th> 
-  <th><span style="font-weight: bold;">When</span></th> 
+  <th><span style="font-weight: bold;">Added</span></th>
+  <th><span style="font-weight: bold;">Patient age</span></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th> 
- 
-  
+  <th width="75"><strong> Email</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>Ambulance</strong></th> 
+   <th width="75"><strong>Edit</strong></th>
   </tr> 
-
-{% if diogs %}
-
-{% for diogs in diogs %}
-
+{% for diog in diogs %}
   <tr> 
-  <td>{{diogs.dname}}</td>
-   <td>{{diogs.telno}}</td> 
+  <td>{{diog.dname}}</td>
+   <td><a href="tel:0123456785">{{diog.telno}}</a></td> 
    <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
-   <td>{{diogs.gender}}</td> 
-   <td>{{diogs.diognosis}}</td> 
+   <td>{{diog.gender}}</td> 
+   <td><a href="tel:0123456785">{{diog.diognosis}}</a></td> 
    <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{diogs.page }}</td> <td>{{diogs.added }}</td> 
-   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td>
+   <td>{{diog.added }}</td> <td><a href="tel:0123456785">{{diog.page}}</a></td> 
+   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{diog.email}}</td>
+       <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="tel:0123456785">{{diog.amb}}</a></td>
+    <td><a href="/Doct/editdiog/{{diog.id}}/">Edit</a></td>
  
    
     </tr>
 {% endfor %}
 
-  {% else %}
-
-  <tr> 
-  <td>{{diogs.dname}}</td>
-   <td>{{diogs.telno}}</td> 
-   <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
-   <td>{{diogs.gender}}</td> 
-   <td>{{diogs.diognosis}}</td> 
-   <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{diogs.page }}</td> <td>{{diogs.added }}</td> 
-   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td>
- 
-   
-    </tr>
-
-   {% endif %}
-
-
-    
-
    </table>
-
-
-
-
-
-
-
-		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
-
-		

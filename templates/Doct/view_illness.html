@@ -1,7 +1,5 @@
-
+{% load staticfiles %}
 {% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
-<div class="heder"><h1>Consult Doctor with this Portal</h1></div>
-<img src="doct.jpg"  alt=""/><img src="doct2.jpg" alt=" "doct2"  width="220px" height="150px" style="/><img src="pat.jpg" alt="pat" width="250px" height="150px"/>
 
 <h2>Patients'  Illness</h2>
  <table width="300" border="0" cellpadding="30" style="text-align: center">
@@ -24,13 +22,13 @@
   <tr> 
   <td>{{ill.email}}</td>
    <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
-   <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
+   <td><img src="{% static 'img/doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
    <td>{{ill.gender}}</td> 
    <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
-   <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+   <td><img src="{% static 'img/pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
    <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
-   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
-       <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+   <td><img src="{% static 'img/doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
+       <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
     <td><a href="tel:0123456785">{{ill.page}}</a></td>
  
    
@@ -38,4 +36,4 @@
 {% endfor %}
 
    </table>
-</table>
+

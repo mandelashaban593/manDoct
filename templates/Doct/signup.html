@@ -1,7 +1,4 @@
-<div id="abc">
-<!-- Popup Div Starts Here -->
-<div id="popupContact">
-<!-- Contact Us Form -->
+
 <form action="/Doct/register/" id="form" method="post" name="form">
 {% csrf_token %}
 <a id="close"  onclick ="div_hide()"><strong><bold>Close</bold></strong></a>
@@ -32,7 +29,7 @@
 <tr> <td><input type="submit" name="submit" value="register"   id="submit"/></td></tr> 
 </table>
 </form>
-</div>
+
 <!-- Popup Div Ends Here -->
 <script type='text/javascript' src='{{STATIC_URL}}js/jquery.form-validation.js'></script>
 <script type='text/javascript'>
@@ -73,4 +70,3 @@ $(document).ready(function(){
 
 
 </script>
-</div>

@@ -2,13 +2,9 @@
 
 {% load staticfiles %}
 
-<div class="heder"><h1 align="center">View Diognosis</h1></div>
-<div id="imgs"><table><tr><td><img src="{% static 'doct.jpg' %}" alt="pat" width="100px" height="100px" align="left"/></td><td>
-<img src="{% static 'pat.jpg' %}" alt="pat" width="100px" height="100px" align="right"/></td></tr></table></div>
-
-<h2 align="center"><b > Enter Payment Id</b></h2>
+<h2 align="center"><b >View Medicines </b></h2>
 <fieldset style="width:60%; margin-right:20px; margin-left:17px">
-<form action="/rango/authdiog/" method="post" style=" border:0px solid black; width:900px; height:300px;margin:30px">
+<form action="/Doct/authdiog/" method="post" style=" border:0px solid black; width:900px; height:300px;margin:30px">
 
 <table >
 {% csrf_token %}
