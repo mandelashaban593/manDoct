@@ -47,6 +47,10 @@ urlpatterns = patterns('',
 		url(r'^edited_diog/$', views.edited_diog, name='edited_diog'),
 		url(r'^user_log/$', views.user_log, name='user_log'),
 		url(r'^AddIllDet/$', views.AddIllDet, name='AddIllDet'),
+		url(r'^how_it_works/$', views.how_it_works, name='how_it_works'),
+		url(r'^team/$', views.our_team, name='team'),
+		
+	
 		
 	
 	

@@ -2,13 +2,13 @@
 
 {% load staticfiles %}
 
-<h2 align="center"><b >View Medicines </b></h2>
+<h2 align="center"><b >View Prescription(Medicines) </b></h2>
 <fieldset style="width:60%; margin-right:20px; margin-left:17px">
 <form action="/Doct/authdiog/" method="post" style=" border:0px solid black; width:900px; height:300px;margin:30px">
 
 <table >
 {% csrf_token %}
-<tr><td>Payment Id</td><td><input type="text" name="payi"/></td></tr>
+<tr><td>Payment Id</td><td><input type="text" name="payi" value="{{gender}}"/></td></tr>
 <tr><td><input type="submit" name="submit" value="submit"/></td></tr> 
 </table>
 </form>

@@ -20,7 +20,7 @@
    
 
 
-          <li><a href="/Doct/regdoctor/" >Register a Doctor</a>
+          <li><a href="/Doct/regdoctor/" >Register a Doctor
         <ul class="submenu">
               <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
                     <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
@@ -48,16 +48,7 @@
         
     </li>
       
-      <li><a href="/Doct/admin_doct/">View Doctors </a></li>
-        <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
-                    
-                    </ul>
-        
-    </li>
-
-     <li><a href="/Doct/" title="Logout">Logout</a>
+      <li><a href="/Doct/admin_doct/">View Doctors</a></li>
         <ul class="submenu">
               <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
                     <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
@@ -67,9 +58,6 @@
     </li>
 
    </ul>
-
-
-
 </nav>
 
 </div>
@@ -77,6 +65,14 @@
 
 <div id = "navig" style="width: 10%; align:left;line-height: 2em;
 padding: 0px 1.5em; text-decoration: none;display: block; ">
+
+<nav class="">
+  <ul class="topmenu">
+
+  <li> <li><a href="/Doct/" title="Logout">Logout</a>
+    </li>
+      </ul>
+</nav>
 
 </div>
 {% endblock %}
@@ -114,49 +110,70 @@ padding: 0px 1.5em; text-decoration: none;display: block; ">
        
        <h2 style="color:green"> {{msg1}} </h2>
 
-      {% elif ill %}
-
-<h2>Patients'  Illness</h2>
+      {% endif %}
+<h2>Patient Records </h2>
+<p>&nbsp;</p>
  <table width="300" border="0" cellpadding="30" style="text-align: center">
 
   <tr> 
-  <th width="75"><strong> Email</strong></th> 
-  <th><span style="font-weight: bold;">Patient Name</span></th> 
+  <th width="75"><strong> First Name</strong></th> 
+  <th><span style="font-weight: bold;">Second Name</span></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong>Gender</strong></th> 
-  <th><span style="font-weight: bold;">Illness</span></th>
-  <th><span style="font-weight: bold;">Staff pic</span></th>  
-  <th><span style="font-weight: bold;">Kin</span></th>
-  <th><span style="font-weight: bold;">Kintelno</span></th> 
-  <th><span style="font-weight: bold;">Staff pic</span></th> 
+  <th width="75"><strong> Patient Age</strong></th> 
+  <th><span style="font-weight: bold;">Gender</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th><span style="font-weight: bold;">Telephone Number</span></th> 
   <th width="75"><strong> Username</strong></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th>
-  <th width="75"><strong>Patient age</strong></th> 
+  <th><span style="font-weight: bold;">Password</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong> Email</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th><span style="font-weight: bold;">Street</span></th> 
+  <th width="75"><strong> City </strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th><span style="font-weight: bold;">State</span></th> 
+  <th><span style="font-weight: bold;">Zip Code</span></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong> specialty</strong></th> 
+  <th><span style="font-weight: bold;">Role</span></th> 
+ <th><span style="font-weight: bold;">Staff pic</span></th>
   </tr> 
-{% for ill in ill %}
+{% for p in p %}
   <tr> 
-  <td>{{ill.email}}</td>
-   <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
+  <td>{{p.fname}}</td>
+   <td><a href="tel:0123456785">{{p.sname}}</a></td> 
    <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
-   <td>{{ill.gender}}</td> 
-   <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
+   <td>{{p.page}}</td> 
+   <td><a href="tel:0123456785">{{p.gender}}</a></td> 
    <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
-   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
+   <td>{{p.telno }}</td> <td><a href="tel:0123456785">{{p.username}}</a></td> 
+   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{p.password}}</td>
        <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{ill.page}}</a></td>
- 
-   
+    <td><a href="tel:0123456785">{{p.email}}</a></td>
+    <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td>{{p.street}}</td>
+    <td><a href="tel:0123456785">{{p.city}}</a></td>
+    <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td>{{p.state}}</td> 
+    <td><a href="tel:0123456785">{{p.zip_code}}</a></td>
+    <td><img src="{% static 'pat.jpg' %}" alt="checked" width="50px" height="50px"/></td>
+    <td>{{p.specialty}}</td>
+    <td><a href="tel:0123456785">{{p.role}}</a></td>
+    <td>   <img src="{% static 'doct.jpg' %}" alt="checked"  width="50px" height="50px" /></td>
     </tr>
 {% endfor %}
 
    </table>
-   {% endif %}
-</div>	   
 
 
 
+</div>
 
 	
 {% endblock %}
 
+{% block footer %}
+<p>Posted by Mandela Shaban<br/>Contact Information:<a href="mailto:mandelashaban593@gmail.com">mandelashaban593@gmail.com</a><br/>
+&copy; Consult Doctor : Fast and Cheap Response 2016</p>
+{% endblock %}

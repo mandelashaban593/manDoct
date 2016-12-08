@@ -1,5 +1,122 @@
+{% extends 'Doct/base.html' %}
+
 {% load staticfiles %}
 
+{% block navbar %}
+
+<div id = "navigation">
+
+<nav class="cf">
+  <ul class="topmenu">
+          <li><a href="#">Manage Users</a>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+        
+    </li>
+
+   
+
+
+          <li><a href="/Doct/regdoctor/" >Register a Doctor</a>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+        
+    </li>
+
+
+          <li><a href="/Doct/delP/">Delete Record</a></li>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+         </li>
+
+       
+         <li><a href="/Doct/admin_pat/">View Patients</a></li>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+        
+    </li>
+      
+      <li><a href="/Doct/admin_doct/">View Doctors </a></li>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+        
+    </li>
+
+     <li><a href="/Doct/" title="Logout">Logout</a>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+        
+    </li>
+
+   </ul>
+
+
+
+</nav>
+
+</div>
+
+
+<div id = "navig" style="width: 10%; align:left;line-height: 2em;
+padding: 0px 1.5em; text-decoration: none;display: block; ">
+
+</div>
+{% endblock %}
+
+
+
+{% block body_block %}
+
+	<div class="imgs">
+
+{% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
+<p>&nbsp;</p>
+
+
+
+</div>
+
+
+	    <div id="content">
+      {% if p %}
+   
+      {% include "Doct/admin_patientD.html" %}
+
+      {% elif not p %}
+
+       <h2 style="color:green"> {{msg1}}</h2>
+
+       {% elif d %}
+
+        {{msg}} 
+
+      {% include "Doct/admin_doctorD.html" %}
+
+       {% elif not d %}
+       
+       <h2 style="color:green"> {{msg1}} </h2>
+
+      {% else%}
+
+      {% endif %}
 
 		{% if registered %}
 		Doctor consultation  Portal  says: <strong>thank you for Registering!</strong>
@@ -49,3 +166,11 @@
 		</form> -->
 		{% endif %}
 	
+
+	
+
+
+
+	
+{% endblock %}
+

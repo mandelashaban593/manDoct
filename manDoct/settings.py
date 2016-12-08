@@ -178,3 +178,6 @@ LOGGING = {
         },
     }
 }
+
+TWI_ACCOUNT_SID = ""
+TWI_AUTH_TOKEN=""

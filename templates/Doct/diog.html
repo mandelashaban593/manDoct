@@ -10,7 +10,7 @@
 <form action="/Doct/edited_diog/" id="changediognosisform_form" method="post" >
 {% csrf_token %}
 <table style=" border:0px solid black; width:300px; height:300px">
-<tr><td>Doctor Name </td><td> <input type="text" name="dname"  id="dname" /></td></tr>
+<tr><td>Doctor Name </td><td><select name="dname"  required="True"><option value="" >Select Name</option><option value="Peter">Peter</option></select></td></tr>
 <tr><td>Patient's Telno</td><td> <input type="text" name="telno" id="telno" value="{{ediog.telno}}"/></td></tr>
 <tr><td>Payment Id</td><td><input type="text" name="gender" id="gender" /></td></tr>
 <tr><td>Diognosis Description</td> <td><input name="diognosis" id="diognosis" value="{{ediog.diognosis}}"></textarea></td></tr>

@@ -18,7 +18,7 @@ h1, h2{
 /*header area*/
 .top-header{
 	background: #fff !important;
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	z-index: 99999;
 }
@@ -47,12 +47,9 @@ h1, h2{
   -moz-transition:all .5s ease 0s;
   -o-transition:all .5s ease 0s;
   -ms-transition:all .5s ease 0s;
-  width: 100%;
 }
 .nav-bar{
 	margin-top: 27px;
-	width: 100%;
-
 }
 .navbar-toggle span{
 	color: #fff;
@@ -60,7 +57,6 @@ h1, h2{
 ul.nav{
 	margin: 0;
 	padding: 0;
-	width: 100%;
 }
 .navbar-default .navbar-nav>li>a {
  	font-size: 24px;
@@ -73,16 +69,12 @@ ul.nav{
 	-ms-transition: all .7s ease 0s;
 	padding: 14px 15px;
 	font-weight: bold;
-	width:100%;
 }
 .navbar-default .navbar-nav>li>a:hover{
 	color: #999;
-	width:100%;
-
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #000;
-  width:100%;
 }
 li a.active{
 	color: #42b3e5 !important;
@@ -90,7 +82,6 @@ li a.active{
 .navbar-default .navbar-toggle {
   border-color: #fff;
   margin-top: 4px;
-  width:100%;
 }
 
 
@@ -403,7 +394,7 @@ li a.active{
 	background: #3a9dca;
 }
 .contact-heading h2{
-	
+	color: #fff;
 	font-size: 90px;
 }
 .contact-info{

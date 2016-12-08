@@ -23,6 +23,7 @@ from django.core.urlresolvers import reverse
 from  manDoct.settings import *
 from django.template.loader import render_to_string
 from Doct.utils import check_illness
+from Doct.sms import send_illness_sms_notification
 
 def index(request):
 
@@ -244,6 +245,13 @@ def regdoctor(request):
 	context)
 
 
+def  how_it_works(request):
+	context = RequestContext(request)
+
+	return render_to_response(
+	'Doct/how_it_works.html',
+	{},
+	context)
 
 
 
@@ -400,7 +408,7 @@ def user_login(request):
 				return render_to_response('Doct/patientH.html', {'patlog':patlog}, context)
 			elif r.role =='doctor':
 				doctlog=True
-				diog = Diognosis.objects.all().order_by('-id')
+				diog = Diognosis.objects.all()
 				return render_to_response('Doct/doctorH.html', {'diog':diog, 'doctlog':doctlog}, context)
 			elif r.role =='admin':
 				adlog = True
@@ -487,7 +495,7 @@ def authdiog(request):
 		payi = request.POST['payi']
 		
 
-		diogs = Diognosis.objects.filter(gender=payi)
+		diogs = Diognosis.objects.filter(gender=payi, is_prescribed=True)
 		
 		if len(diogs) >= 1:
 			diog = True
@@ -516,14 +524,26 @@ def illness(request):
     illmsg = ''
     exill = False
     ill_success = False
+    authd = False
+    payid_success = False
+
     post_values = {}
     if request.POST:
-
+        
         post_values = request.POST.copy()
         illness = request.POST['illness']
         gender = request.POST['gender']
         page = request.POST['page']
-        ill_det=Illness(gender=gender, illness=illness, page=page)
+        ptelno = request.POST['ptelno']
+        try:
+        	payid=Illness.objects.get(gender=gender)
+
+       	except Exception as e:
+       				payid_success = True
+       				return render_to_response('Doct/patientH.html', {'payid_success':payid_success, 'gender':gender}, context)
+		    
+        
+        ill_det=Illness(gender=gender, illness=illness, page=page,kintelno=ptelno)
         ill_det.save()
         gender = ill_det.gender
         cdrugs=Conddrugs.objects.get(cond=illness)
@@ -532,9 +552,20 @@ def illness(request):
         drugs=cdrugs.drugs
         diog=Diognosis(gender=gender,page=page,diognosis=drugs,amb=amb)
         diog.save()
-      	return render_to_response('Doct/addill.html', {'ill_success':ill_success, 'gender':gender}, context)
+	
+    	
+        try:
+        	msg = "A patient Has submitted his Illness Detail"
+	        send_illness_sms_notification(
+	             msg)
+
+       	except Exception as e:
+                    print 'Failes to send sms: ',str(e)
+        authd = True
+      	return render_to_response('Doct/patientH.html', {'authd':authd, 'ill_success':ill_success, 'gender':gender}, context)
 		
 	
+
 	exill=True
 
     	
@@ -796,7 +827,7 @@ def receipt(request):
 
 		if p:
 		
-			return render_to_response('Doct/patientH.html', {'p':p, 'entp':entp}, context)
+			return render_to_response('Doct/vp_receipt.html', {'p':p, 'entp':entp}, context)
 		else:
 				# An inactive account was used - no logging in!
 			msg = "Wrong number or or no receipt"
@@ -810,7 +841,7 @@ def receipt(request):
 	# No context variables to pass to the template system, hence the
 	# blank dictionary object ...
 
-		return render_to_response('Doct/receiptform.html', {'rec':rec}, context)
+		return render_to_response('Doct/receipt1.html', {}, context)
 
 
 def index_receipt(request):
@@ -953,7 +984,7 @@ def admin_pat(request):
 	p = Register.objects.filter(role=role)
 	if p:
 		msg = "Patient records"
-		return render_to_response('Doct/adminH.html', {'p':p, 'msg':msg}, context)
+		return render_to_response('Doct/view_pat.html', {'p':p, 'msg':msg}, context)
 	else:
 		msg = "No patient record"
 		return render_to_response('Doct/adminH.html', {'msg':msg}, context)
@@ -968,7 +999,7 @@ def admin_doct(request):
 	d = Register.objects.filter(role=role)
 	if d:
 		msg = "Doctor records"
-		return render_to_response('Doct/admin_doctorD.html', {'d':d, 'msg':msg}, context)
+		return render_to_response('Doct/view_doct.html', {'d':d, 'msg':msg}, context)
 	else:
 		msg1 = "No Doctor record"
 		return render_to_response('Doct/adminH.html', {'msg1':msg1}, context)
@@ -1022,6 +1053,14 @@ def contact(request):
 	
 	return render_to_response('Doct/contactus.html', {}, context)
 
+def our_team(request):
+	# Like before, obtain the context for the user's hrequest.
+	context = RequestContext(request)
+	
+	return render_to_response('Doct/ourteam.html', {}, context)
+
+
+
 def enterpay(request):
 	# Like before, obtain the context for the user's hrequest.
 	context = RequestContext(request)
@@ -1042,7 +1081,7 @@ def enterpay(request):
 		expill = True
 		msg1="You have successfully submitted payment Details, Print Receipt"
 
-		return render_to_response('Doct/patientH.html', {'enterpay':enterpay, 'msg1':msg1, 'pay_id':pay_id, 'expill':expill}, context)
+		return render_to_response('Doct/patientH.html', {'enterpay':enterpay, 'msg1':msg1, 'pay_id':pay_id, 'expill':expill,'telno':telno}, context)
 		#return HttpResponseRedirect(reverse('authConsult'))
 
 	
@@ -1102,6 +1141,7 @@ def edited_diog(request):
 	        diognosis.page=page
 	        diognosis.email=email
 	        diognosis.amb=amb
+	        diognosis.is_prescribed=True
 	        diognosis.save()
 	        editd_response = True
 	        diog = Diognosis.objects.all().order_by('-id')

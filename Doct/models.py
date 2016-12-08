@@ -86,6 +86,7 @@ class Diognosis(models.Model):
     page = models.IntegerField(blank=False)
     email = models.CharField(blank=False,max_length=50,  default=False)
     amb =  models.CharField(blank=False,max_length=5,  default=False)
+    is_prescribed = models.BooleanField(default=False)
 class Enterpay(models.Model):
     telno = models.CharField(blank=False, max_length=20)
     amount = models.DecimalField(
@@ -98,8 +99,8 @@ class Illness(models.Model):
     email = models.CharField(blank=False, max_length=40)
     pname = models.CharField(blank=False, max_length=50)
     sname = models.CharField(blank=False, max_length=50)
-    gender = models.CharField(blank=False, max_length=30, unique=True)
-    illness = models.CharField(blank=False, max_length=700)
+    gender = models.CharField(blank=False, max_length=30)
+    illness = models.CharField(blank=False, max_length=700, unique=True)
     kin = models.CharField(blank=False, max_length=30)
     kintelno = models.CharField(blank=False, max_length=20)
     username = models.CharField(blank=False, max_length=20)

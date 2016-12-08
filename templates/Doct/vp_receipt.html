@@ -74,18 +74,11 @@
 {% endif %}
 
 
-{% if entp %}
-{% include "Doct/vp_receipt.html" %}
-
-{% elif diog %}
+{% if diog %}
 
 {% include "Doct/view_diog.html" %}
 
-{% elif expill or ill_more  or payid_success %}
-
-{% if payid_success %}
-<h1>The payment Id {{gender}} already exists, try another id</h1>
-{% endif %}
+{% elif expill or ill_more  %}
 
 {% include "Doct/expillness.html" %} 
 
@@ -94,6 +87,9 @@
 
 {% include "Doct/enterpay.html" %} 
 
+{% elif rec %}
+
+{% include "Doct/receiptform.html" %} 
 
 {% elif ill_et %}
 
@@ -120,67 +116,54 @@
 
 
 
-
-     
-
-
-<h3>Enter Consultation Payment : <strong>Details  below!</strong><br /></h3>
-<br/>
-
-{% if enterpay %}
-
-<h2>Your payment Id is {{pay_id}}, please don't forget it</h2>
-{% endif %}
-
-<!-- <fieldset width:60%>
-
-{% endif %}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
-<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
-
-<script type="text/javascript">
-   
-
-$(document).ready(function(){
-    $("#changepayform_form").validate({
-    rules:{
-
-            telno:
-            {
-            required:true,
-            digits: true,
-            maxlength:20,
-            },
-            amount:
-            {
-            required:true,
-            digits: true,
-            maxlength:10,
-            },
-    },
-          messages: {
-       
-        telno: {
-        required: "Telephone number is required",
-        digits: "Enter the valid Telephone number",
-        maxlength:"Please provide valid phone number",
-      },
-      amount: {
-      required: "Please provide Consultation amount",
-      digits: "Enter the valid Consultation amount",
-      maxlength:"Please provide valid Consultation amount",
-      },
-    
-    
-    },
-
-  
-
-    });
-    });
-
+<script language="javascript">
+function printPage(id) {
+    var html="<html>";
+    html+= document.getElementById(id).innerHTML;
+    html+="</html>";
+    var printWin = window.open('','','left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status =0');
+    printWin.document.write(html);
+    printWin.document.close();
+    printWin.focus();
+    printWin.print();
+    printWin.close();
+}
 </script>
-</fieldset> -->
+
+{% if illness %}You have successfully sent your Sickness detail And Check Your Diagnosis after 5 minutes {% endif %}
+<p>&nbsp;</p>
+<div class="heder"><h1>Patients'  Payment Receipt</h1></div>
+<p>&nbsp;</p>
+
+
+
+ <table width="300" border="0" cellpadding="30" style="text-align: center">
+
+  <tr><th><span style="font-weight: bold;">Transaction Id</span></th>  <td><a href="tel:0123456785">{{p.id}}</a></td> </tr>
+
+  <tr> 
+    <th width="75"><strong> Telephone Number</strong></th> <td>{{p.telno}}</td></tr>
+  
+   <tr><th><span style="font-weight: bold;">Amount</span></th>  <td><a href="tel:0123456785">{{p.amount}}</a></td> </tr>
+   <tr><th><span style="font-weight: bold;">Staff pic</span></th><td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td></tr>
+   <tr><th width="75"><strong>Gender</strong></th><td>{{p.gender}}</td> </tr>
+   <tr><th width="75"><strong>When</strong></th><td><a href="tel:0123456785">{{p.added}}</a></td> </tr>
+   <tr><th width="75"><strong>Staff Pic</strong></th><td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td></tr>
+ 
+    </tr>
+
+
+   </table>
+
+
+<center><input type="button" value="print" onclick="printPage('content');"/> </center>
+
+
+
+
+
+
+   {% endif %}
 </div>
 
 
@@ -205,24 +188,6 @@ return false;
 
 
 </div>
-<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
-<script>
- $(document).ready(function() {
-  $('#navigation a').click(function(e) {
-   e.preventDefault();
-  /* $("div#my-container").load("/url/to/content/ #content-id")*/
-   $('#content').load($(this).attr('href'));
-
-   return false
-  });
- });
-</script> -->
-
-
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
 <script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
 
 <script type="text/javascript">

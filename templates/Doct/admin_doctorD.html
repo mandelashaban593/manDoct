@@ -1,36 +1,52 @@
 {% load staticfiles %}
 {% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
 
-<h2>Patients'  Illness</h2>
+<h2>Doctors</h2>
  <table width="300" border="0" cellpadding="30" style="text-align: center">
 
   <tr> 
-  <th width="75"><strong> Email</strong></th> 
-  <th><span style="font-weight: bold;">Patient Name</span></th> 
+  <th width="75"><strong> First Name</strong></th> 
+  <th><span style="font-weight: bold;">Second Name</span></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong>Gender</strong></th> 
-  <th><span style="font-weight: bold;">Illness</span></th>
+  <th width="75"><strong>Doctor Age</strong></th> 
+  <th><span style="font-weight: bold;">Gender</span></th>
   <th><span style="font-weight: bold;">Staff pic</span></th>  
-  <th><span style="font-weight: bold;">Kin</span></th>
-  <th><span style="font-weight: bold;">Kintelno</span></th> 
+  <th><span style="font-weight: bold;">Telephone No</span></th>
+  <th><span style="font-weight: bold;">Username</span></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong> Username</strong></th> 
+  <th width="75"><strong> Password</strong></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th>
-  <th width="75"><strong>Patient age</strong></th> 
+  <th width="75"><strong>Email</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>Street</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>City</strong></th> 
+   <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>State</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>Zip Code</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>Speciality</strong></th>
   </tr> 
-{% for ill in ill %}
+{% for d in d %}
   <tr> 
-  <td>{{ill.email}}</td>
-   <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
+  <td>{{d.fname}}</td>
+   <td><a href="tel:0123456785">{{d.sname}}</a></td> 
    <td><img src="{% static 'img/doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
-   <td>{{ill.gender}}</td> 
-   <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
+   <td>{{d.page}}</td> 
+   <td><a href="tel:0123456785">{{d.gender}}</a></td> 
    <td><img src="{% static 'img/pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
-   <td><img src="{% static 'img/doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
+   <td>{{d.telno}}</td> <td><a href="tel:0123456785">{{d.username}}</a></td> 
+   <td><img src="{% static 'img/doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{d.password}}</td>
        <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{ill.page}}</a></td>
- 
+    <td><a href="tel:0123456785">{{d.email}}</a></td>
+    <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="tel:0123456785">{{d.street}}</a></td>
+    <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="tel:0123456785">{{d.city}}</a></td>
+    <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="tel:0123456785">{{d.zip_code}}</a></td>
+
    
     </tr>
 {% endfor %}

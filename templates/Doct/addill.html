@@ -57,6 +57,15 @@
         
     </li>
 
+
+
+          <li><a href="/Doct/" title="Logout">Logout</a>
+        <ul class="submenu">
+                    
+                    </ul>
+        
+    </li>
+
    
                     
    </ul>
@@ -65,18 +74,6 @@
 </div>
 
 
-<div id = "navig" style="width: 10%; align:left;line-height: 2em;
-padding: 0px 1.5em; text-decoration: none;display: block; ">
-
-<nav class="">
-  <ul class="topmenu">
-
-  <li> <li><a href="/Doct/" title="Logout">Logout</a>
-    </li>
-      </ul>
-</nav>
-<!--  <h2>Consult Doctor Here!</h2> -->
-</div>
 {% endblock %}
 
 {% block body_block %}
@@ -130,26 +127,8 @@ padding: 0px 1.5em; text-decoration: none;display: block; ">
 
 
 
- <h1  style="width:60%; height:20%; font-size:17px; ""><a href="/Doct/authdiog/" style="color: white; text-align: center;">View Prescription</a><br /></h1>
-
-<h1 align="center" style="width:60%; height:20%; font-size:17px"><b >Fill in the remaining fields bellow to finish Sickness Details</b></h1>
-
-<fieldset width:60%>
-
-<form action="/Doct/AddIllDet/" id="changesicknessform_form" method="post">
-{% csrf_token %}
-<table>
-<tr><td>Payment Id</td><td><input type="text" name="gender" id="gender" value="{{gender}}"/></td></tr>
-<tr><td>Next of Kin</td><td> <input type="text" name="kin" id="kin"/></td></tr> 
-<tr><td>Kin Telephone No</td> <td><input type="text" name="kintelno" id="kintelno"/></td> </tr> 
-<tr><td>Username</td><td> <input type="text" name="username" id="username"/></td></tr>
-<tr><td>Email </td><td> <input type="email" name="email"  id="email"/></td></tr>
-<tr><td><input type="reset" name="reset" style="width:100px"/></td> <td><input type="submit" name="submit" value="Submit"  style="width:100px"/></td></td></tr>  
-</table> 
-</form>
-
-</fieldset>
-<div id="secure_area_message" align="center"></div>
+<p>&nbsp;</p>
+<h1 align="center" style="width:60%; height:20%; font-size:17px"><b><a href="/Doct/authdiog/">View Prescription</a></b></h1>
 
 
 {% endif %}

@@ -11,18 +11,6 @@
     <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
     -->
     <li><!-- <a href="/Doct/" title=" Home">Home</a> --></li>
-    <li><a href="/Doct/about/">About Us</a>
-        <ul class="submenu">
-              <!-- <a href="/Doct/diogform/">Diognise</a> -->
-          <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>           
-                    </ul>
-    </li>
-    <li><a href="/Doct/contact/">Contact Us</a>
-      <ul class="submenu">
-              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
-          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
-                    </ul>
-    </li>
     
     <li><a href="/Doct/diogform/">Diognise</a>
       <ul class="submenu">
@@ -45,6 +33,7 @@
                     </ul>
         
     </li>
+
      <li><a href="/Doct/doctor_receipt/">Print reciept</a>
           <ul class="submenu">
               <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
@@ -54,8 +43,15 @@
          </li>
     
                     
-    <li> <li><a href="/Doct/" title="Logout">Logout</a>
+    <li><a href="/Doct/" title="Logout">Logout</a>
+        <ul class="submenu">
+              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+                    
+                    </ul>
+        
     </li>
+
       </ul>
 </nav>
 
@@ -114,6 +110,10 @@ return false;
 
 {% include "Doct/view_illness.html" %}
 
+{% elif dot_rec %}
+
+{% include "Doct/doctor_authreceipt.html" %}
+
 {% elif dform %}
 
 {% include "Doct/diog.html" %}
@@ -154,7 +154,7 @@ return false;
    <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{diog.email}}</td>
        <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
     <td><a href="tel:0123456785">{{diog.amb}}</a></td>
-    <td><a href="/Doct/editdiog/{{diog.id}}/">Edit</a></td>
+    <td><a href="/Doct/editdiog/{{diog.id}}/">Precribe</a></td>
  
    
     </tr>

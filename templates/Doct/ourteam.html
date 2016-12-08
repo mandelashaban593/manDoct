@@ -30,6 +30,7 @@ http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
               <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
           <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
                     </ul>
+    </li>
 
     <li><a href="/Doct/user_log/"> Log In</a>
           <ul class="submenu">
@@ -115,37 +116,90 @@ Welcome to Online Doctor Consultation System
 {% include "index_rform.html" %}
 
 {%  else %}
+{% load staticfiles %}
 
-<h2 style="color: #42B3E5;">contact us</h2>
+<section class="team" id="team" style="width:100%; align: center">
+<div class="container" style="width:100%; align:center;height:15%;">
+<div class="row" style="width:100%; align:center;height:15%;">
+<div class="team-heading text-center" >
+<h2 style="width:100%; align:center">our team</h2>
 
-
-<div class="col-md-5 contact-info text-left">
-<h3>contact information</h3>
-<div class="info-detail">
-<ul><li><i class="fa fa-calendar"></i><span>Monday - Friday:</span> 9:30 AM to 6:30 PM</li></ul>
-<ul><li><i class="fa fa-map-marker"></i><span>Address:</span> 123 Some Street , California, US, CP 123</li></ul>
-<ul><li><i class="fa fa-phone"></i><span>Phone:</span> (01) 999-1235</li></ul>
-<ul><li><i class="fa fa-fax"></i><span>Fax:</span> (01) 999-1234</li></ul>
-<ul><li><i class="fa fa-envelope"></i><span>Email:</span> info@domain.com</li></ul>
-  </div>
+<h4 style="width:100%; align:center">The below people are our team Members</h4>
 </div>
 
-
-<div class="col-md-6 col-md-offset-1 contact-form">
-<h3>leave us a message</h3>
-
-<form class="form">
-<input class="name" type="text" placeholder="Name">
-<input class="email" type="email" placeholder="Email">
-<input class="phone" type="text" placeholder="Phone No:">
-<textarea class="message" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-<input class="submit-btn" type="submit" value="SUBMIT">
-</form>
+<div class="col-md-2 single-member col-sm-4" style="width:100%; height:15%; align:center">
+<div class="person" style="width:100%; height:15%; align:center">
+<img class="img-responsive" src="{% static 'img/ima5.jpg' %}" alt="member-1" style="width:1250px;height:300px; align:center">
 </div>
 
-</section><!-- end of contact section -->
+<div class="person-detail" style="width:100%; align:center">
 
+<h3 style="width:100%; align:center">Dr. Graham</h3>
+<p style="width:100%; align:center">This is our general doctor who attends to patients illness details submitted via the website </p>
+							</div>
+						
+</div>
 
+<div class="col-md-2 single-member col-sm-4" style="width:100%;height:15%; align:center">
+
+<div class="person-detail" style="width:100%; height:15%; align:center">
+
+<h3 style="width:100%; align:center">Mr. Mandela</h3>
+<p>This is the CEO/CTO  and the Software Developer of the site  : Contact: +256754307471, Email: mandelashaban593@gmail.com</p>
+</div>
+<div class="person" style="width:100%; height:15%; align:center">
+<img class="img-responsive" src="{% static 'img/ima5.jpg' %}" alt="member-2" style="width:1250px;height:300px;  align:center">
+</div>
+</div>
+<div class="col-md-2 single-member col-sm-4" style="width:100%;height:15%; align:center">
+<div class="person" style="width:1250px;height:500px;align:center">
+<img class="img-responsive" src="{% static 'img/images4.jpg' %}" alt="member-3" style="width:1250px;height:300px;  align:center">
+</div>
+<div class="person-detail" style="width:100%;height:15%; align:center">
+
+<h3 style="width:100%; align:center">Mr. Hannington</h3>
+<p>This is the Software Developer Of the Site </p>
+</div>
+</div>
+
+<div class="col-md-2 single-member col-sm-4" style="width:100%;height:15%; align:center">
+<div class="person-detail" style="width:100%;height:15%; align:center">
+
+<h3 style="width:100%; align:center">Mr Jasak</h3>
+<p style="width:100%; height:15%; align:center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+</div>
+<div class="person" style="width:100%;height:15%; align:center">
+<img class="img-responsive" src="{% static 'img/pat.jpg' %}" alt="member-4" style="width:1250px;height:300px; align:center">
+</div>
+</div>
+
+<div class="col-md-2 single-member col-sm-4" style="width:100%; height:15%; align:center">
+<div class="person" style="width:100%; height:15%; align:center">
+<img class="img-responsive" src="{% static 'img/images2.jpg' %}" alt="member-5" style="width:1250px;height:300px;align:center">
+</div>
+
+<div class="person-detail" style="width:100%;height:15%; align:center">
+
+<h3 style="width:100%;height:15%; align:center">Mr. Joy Ka</h3>
+<p style="width:100%; align:center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+</div>
+</div>
+
+<div class="col-md-2 single-member col-sm-4" style="width:100%;height:15%; align:center">
+
+<div class="person-detail" style="width:100%;height:15%; align:center">
+	
+	<h3 style="width:100%; align:center">Mr. Mikari</h3>
+	<p style="width:100%; align:center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+</div>
+<div class="person" style="width:100%; height:15%;align:center">
+<img class="img-responsive" src="{% static 'img/item6.jpg' %}" alt="member-5" style="width:1250px;height:300px; align:center">
+</div>
+
+</div>
+</div>
+</div>
+</section><!-- end of team section -->
 
 
 {% endif %}

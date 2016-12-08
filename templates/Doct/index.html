@@ -18,12 +18,19 @@ http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
           <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>           
                     </ul>
     </li>
-    <li><a href="/Doct/contact/">Contact Us</a>
+    <li><a href="/Doct/about/">Contact Us</a>
       <ul class="submenu">
               <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
           <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
                     </ul>
     </li>
+
+    <li><a href="/Doct/team/">Our Team</a>
+      <ul class="submenu">
+              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
+                    </ul>
+                    
 
     <li><a href="/Doct/user_log/"> Log In</a>
           <ul class="submenu">
@@ -36,6 +43,15 @@ http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
 
 
     <li><a href="/Doct/login/">Doctor/Admin Log In</a>
+          <ul class="submenu">
+              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+                    
+                    </ul>
+         </li>
+
+
+     <li><a href="/Doct/how_it_works/">How it works</a>
           <ul class="submenu">
               <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
               <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
@@ -97,10 +113,11 @@ Welcome to Online Doctor Consultation System
 <form action="/Doct/enterpay/" id="changepayform_form" method="post" >
 {% csrf_token %}
 <table style=" border:0px solid black; width:300px; height:300px">
-<tr><td>From Telephone Number </td><td> <input type="text" name="telno"  id="dname"/></td></tr>
-<tr><td> To Telephone Number: </td><th>0754307471</th></tr>
-<tr><td>Amount</td><td> <input type="text" name="amount" id="telno"/></td></tr>
+<tr><td>Mobile Tel Number </td><td> <input type="text" name="telno"  id="dname"/></td></tr>
+<tr><td> Receiver's Tel Number: </td><th>0754307471</th></tr>
 
+<tr><td>Amount</td><th>ugx.3,000</th></tr>
+<tr><td> <input type="hidden" name="amount" id="telno" value="3000"/></td></tr> 
 <tr><td><input type="reset" name="reset" style="width:100px" /></td> <td><input type="submit" name="submit" value="Submit" style="width:100px"/></td></tr>
 </table>
  
@@ -212,16 +229,6 @@ $(document).ready(function(){
 
 
 
-
-<h4 style="font-size:20px;">How It Works</h4>
-<aside>
-<strong style="font-size:18px;">1. Register into the system with the right information and confirmation message will be sent either to your Email or via the web immediately after you have registered</strong>.<br /><br />
-<strong style="font-size:18px;">2. Use your username and password  for you to access the home page</strong>.<br /><br />
-
-<strong style="font-size:18px;">3. Note that you can only submit your Diognosis details after you have paid consultation fee of ugx 20,000 to the specified mobile money number 256754307471 </strong>.
-
-
-</aside>
 
 </div>
 
