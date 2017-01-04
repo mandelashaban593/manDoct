@@ -114,7 +114,7 @@
       {% endif %}
 
 <h2>Doctors Records</h2>
- <table width="300" border="0" cellpadding="30" style="text-align: center">
+ <table width="300" border="0" cellpadding="30" id="example" class="table table-striped table-bordered" style="text-align: center">
 
   <tr> 
   <th width="75"><strong> First Name</strong></th> 
@@ -143,27 +143,53 @@
 {% for d in d %}
   <tr> 
   <td>{{d.fname}}</td>
-   <td><a href="tel:0123456785">{{d.sname}}</a></td> 
+   <td><a href="#">{{d.sname}}</a></td> 
    <td><img src="{% static 'img/doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
    <td>{{d.page}}</td> 
-   <td><a href="tel:0123456785">{{d.gender}}</a></td> 
+   <td><a href="#">{{d.gender}}</a></td> 
    <td><img src="{% static 'img/pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{d.telno}}</td> <td><a href="tel:0123456785">{{d.username}}</a></td> 
+   <td>{{d.telno}}</td> <td><a href="#">{{d.username}}</a></td> 
    <td><img src="{% static 'img/doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{d.password}}</td>
        <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{d.email}}</a></td>
+    <td><a href="#">{{d.email}}</a></td>
     <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{d.street}}</a></td>
+    <td><a href="#">{{d.street}}</a></td>
     <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{d.city}}</a></td>
-    <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{d.zip_code}}</a></td>
+    <td><a href="#">{{d.city}}</a></td>
+    <td><img src="#{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+    <td><a href="#">{{d.zip_code}}</a></td>
 
    
     </tr>
 {% endfor %}
 
    </table>
+
+
+    <div class="pagination">
+<ul>
+  {% if p.has_previous %}
+    <li><a href="?page={{ p.previous_page_number }}">&laquo;</a></li>
+  {% else %}
+    <li class="disabled"><a href="#">&laquo;</a></li>
+  {% endif %}
+
+  {% for num in p.paginator.page_range %}
+    {% ifequal num p.number %}
+      <li class="active"><a href="#">{{ num }}</a></li>
+    {% else %}
+      <li><a href="?page={{ num }}">{{ num }}</a></li>
+    {% endifequal %}
+  {% endfor %}
+
+  {% if p.has_next %}
+    <li><a href="?page={{ p.next_page_number }}">&raquo;</a></li>
+  {% else %}
+    <li class="disabled"><a href="#">&raquo;</a></li>
+  {% endif %}
+</ul>
+
+
 </div>
 
 

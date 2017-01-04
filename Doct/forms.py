@@ -1,22 +1,9 @@
 from django import forms
-from Doct.models import Page, Category, UserProfile, Topup, Register, Illness, Diognosis
+from Doct.models import Page, UserProfile, Topup, Register, Illness, Diognosis,Contact,converse
 from django.contrib.auth.models import User
 
 
 
-class CategoryForm(forms.ModelForm):
-	name=forms.CharField(max_length=128, help_text="Please enter the category name.")
-	views=forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-	likes=forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-
-
-
-	# An initial class to provide additional information on the form
-	class Meta:
-		# Provide an association between the ModelForm and a model
-		model=Category
-
-		fields = "__all__" 
 
 
 class PageForm(forms.ModelForm):
@@ -112,3 +99,45 @@ class AddIllDetForm(forms.ModelForm):
     class Meta:
         model = Illness
         fields = ['gender','kin','kintelno','username','email']
+
+
+class ContactForm(forms.ModelForm):
+
+    """
+    Form for adding  Illness details
+    """
+    class Meta:
+        model = Contact
+        fields = ['telno','email','msg']
+
+class LoginForm(forms.ModelForm):
+
+    """
+    Form for adding  Illness details
+    """
+    class Meta:
+        model = Register
+        fields = ['telno','role','page']
+
+
+
+
+class patientConverseForm (forms.ModelForm):
+
+    """
+    Form for adding  Illness details
+    """
+    class Meta:
+        model = converse
+        fields = ['telno','phonedoctor','pmsg']
+
+
+class doctorConverseForm (forms.ModelForm):
+
+    """
+    Form for adding  Illness details
+    """
+    class Meta:
+        model = converse
+        fields = ['telno','phonedoctor','dmsg']
+        

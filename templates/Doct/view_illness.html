@@ -2,7 +2,7 @@
 {% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
 
 <h2>Patients'  Illness</h2>
- <table width="300" border="0" cellpadding="30" style="text-align: center">
+ <table width="300" border="0" cellpadding="30" class="table table-striped table-bordered" id="example" style="text-align: center">
 
   <tr> 
   <th width="75"><strong> Email</strong></th> 
@@ -21,15 +21,15 @@
 {% for ill in ill %}
   <tr> 
   <td>{{ill.email}}</td>
-   <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
+   <td><a href="#">{{ill.pname}}</a></td> 
    <td><img src="{% static 'img/doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
    <td>{{ill.gender}}</td> 
-   <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
+   <td><a href="#">{{ill.illness}}</a></td> 
    <td><img src="{% static 'img/pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
+   <td>{{ill.kin }}</td> <td><a href="#">{{ill.kintelno}}</a></td> 
    <td><img src="{% static 'img/doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
        <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{ill.page}}</a></td>
+    <td><a href="#">{{ill.page}}</a></td>
  
    
     </tr>
@@ -37,3 +37,27 @@
 
    </table>
 
+<div class="pagination">
+<ul>
+  {% if ill.has_previous %}
+    <li><a href="?page={{ ill.previous_page_number }}">&laquo;</a></li>
+  {% else %}
+    <li class="disabled"><a href="#">&laquo;</a></li>
+  {% endif %}
+
+  {% for num in ill.paginator.page_range %}
+    {% ifequal num ill.number %}
+      <li class="active"><a href="#">{{ num }}</a></li>
+    {% else %}
+      <li><a href="?page={{ num }}">{{ num }}</a></li>
+    {% endifequal %}
+  {% endfor %}
+
+  {% if ill.has_next %}
+    <li><a href="?page={{ ill.next_page_number }}">&raquo;</a></li>
+  {% else %}
+    <li class="disabled"><a href="#">&raquo;</a></li>
+  {% endif %}
+</ul>
+
+</div>

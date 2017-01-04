@@ -1,0 +1,33 @@
+<!--messages-->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} notification inner_center " >
+<button type="button" class="close" data-dismiss="alert">×</button>
+{{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+
+{%if message.success%}
+<div class="alert alert-success notification inner_center " >
+<button type="button" class="close" data-dismiss="alert">×</button>
+{{message.message}}
+</div>
+{%endif%}
+
+
+{%if message.error%}
+<div class="alert alert alert-error notification inner_center " >
+<button type="button" class="close" data-dismiss="alert">×</button>
+{{message.message}}
+</div>
+{%endif%}
+
+
+{%if message.info%}
+<div class="alert alert alert-info notification inner_center " >
+<button type="button" class="close" data-dismiss="alert">×</button>
+{{message.message}}
+</div>
+{%endif%}

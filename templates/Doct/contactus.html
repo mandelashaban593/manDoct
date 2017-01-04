@@ -15,26 +15,26 @@ http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
     <li><a href="/Doct/about/">About Us</a>
         <ul class="submenu">
               <!-- <a href="/Doct/diogform/">Diognise</a> -->
-          <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>           
+          <!-- <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>  -->          
                     </ul>
     </li>
     <li><a href="/Doct/contact/">Contact Us</a>
       <ul class="submenu">
-              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
-          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
+        <!--       <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>    -->        
                     </ul>
     </li>
 
     <li><a href="/Doct/team/">Our Team</a>
       <ul class="submenu">
-              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
-          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
+            <!--   <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>   -->         
                     </ul>
 
-    <li><a href="/Doct/user_log/"> Log In</a>
+    <li><a href="/Doct/"> Log In</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
                     
                     </ul>
          </li>
@@ -43,23 +43,23 @@ http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
 
     <li><a href="/Doct/login/">Doctor/Admin Log In</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+            <!--   <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
                     
                     </ul>
          </li>
 
     <li><a href="/Doct/how_it_works/">How it works</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
                     
                     </ul>
          </li>
 <li><a href="/Doct/" title="Logout">Logout</a>
         <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+            <!--   <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
                     
                     </ul>
         
@@ -134,12 +134,19 @@ Welcome to Online Doctor Consultation System
 <div class="col-md-6 col-md-offset-1 contact-form">
 <h3>leave us a message</h3>
 
-<form class="form">
-<input class="name" type="text" placeholder="Name">
-<input class="email" type="email" placeholder="Email">
-<input class="phone" type="text" placeholder="Phone No:">
-<textarea class="message" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+<form class="form" action="/Doct/contact/">
+
+{% csrf_token %}
+<table style=" border:0px solid black; width:300px; height:300px">
+<tr><td>Phone</td><td><input class="" type="text" name="telno" placeholder="Phone No:" style="width:200px;"></td></tr>
+<tr><td>Email </td><td> <input class="" type="text" name="email"  placeholder="Email" style=" width:200px;"></td></tr>
+<tr><td>Message</td><td><textarea  style=" border:1px;"  class="" name="msg" id="" cols="30" rows="10" placeholder="Message"></textarea>
+</td>
+<tr><td></td><td></td></tr>
+</table>
+
 <input class="submit-btn" type="submit" value="SUBMIT">
+
 </form>
 </div>
 

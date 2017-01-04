@@ -1,0 +1,112 @@
+{% if type == 'process_payment' %}
+Your payment id is {{pay_id}}, please don't forget it
+{% endif %}
+
+
+{% if type == 'password_recover_email' %}
+We have sent a link to {{email}},please check your inbox for details on how to recover your password
+{% endif %}
+
+
+{% if type == 'password_recover' %}
+You have successfully changed your password details. <br />
+You can now log in with your new password
+{% endif %}
+
+{% if type == 'password_change' %}
+You have successfully changed your password details.
+{% endif %}
+
+
+
+{% if type == 'email_change' %}
+Your email was successfully updated.
+{% endif %}
+
+{% if type == 'process_transaction' %}
+
+
+{%if delivered_to_mobile == True %}
+Thank you. Your credit card payment was successful. <br />
+Your transaction #{{transaction.hashid}} to {{transaction.recipient_number}} has been delivered.
+You will receive an email notifying you of the transaction status.
+{% else %}
+
+{%if status_code == 'aei7p7yrx4ae34' %}
+Thank you. Your credit card payment was successful.<br />
+You will receive an email once the remittance is delivered.
+{%endif%}
+
+
+
+{%endif%}
+
+{% endif %}
+
+
+{% if type == 'admin_user_verified' %}
+The User {{profile.get_names}} was successfully verified
+{% endif %}
+
+
+{% if type == 'admin_user_unverified' %}
+The User {{profile.get_names}} was unverified
+{% endif %}
+
+{% if type == 'admin_user_blocked' %}
+The User {{profile.get_names}} was blocked
+{% endif %}
+
+
+{% if type == 'admin_user_unblocked' %}
+The User {{profile.get_names}} was unblocked
+{% endif %}
+
+
+{% if type == 'admin_process_transaction' %}
+The transaction was successfully processed. <br />
+An email and sms notifying the user of the delivery has been sent.
+{% endif %}
+
+
+{% if type == 'admin_resend_transaction' %}
+The transaction was successfully processed. <br />
+An email and sms notifying the user of the delivery has been sent.
+{% endif %}
+
+
+{% if type == 'admin_edit_transaction' %}
+The transaction was successfully edited. <br />
+An email and sms notifying the Admins about the changes has been sent.
+{% endif %}
+
+{% if type == 'admin_update_rates' %}
+The website rates and percentages where Successfully updated. <br />
+{% endif %}
+
+
+
+{% if type == 'admin_update_profile' %}
+The Users Profile was successfully updated. <br />
+{% endif %}
+
+
+{% if type == 'process_utility' %}
+
+
+{%if delivered_to_mobile == True %}
+
+Thank you. Your credit card payment was successful. <br />
+Your transaction #{{transaction.hashid}} to {{transaction.recipient_number}} has been processed.
+You will receive an email notifying you of the transaction status.
+
+{% else %}
+
+Thank you. Your credit card payment was successful.<br />
+You will receive an email once the transaction has been processed.
+
+{%endif%}
+
+
+
+{%endif%}

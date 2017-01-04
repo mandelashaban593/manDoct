@@ -5,11 +5,10 @@ from Doct import views
 urlpatterns = patterns('',
 		url(r'^$', views.index, name='index'),
 		#url(r'^about/$', views.about, name='about'),
-		url(r'^add_category/$', views.add_category, name='add_category'), #NEW MAPPING!
+		
 		url(r'^add_page/$', views.add_page, name='add_page'),
 
-		url(r'^category/(?P<category_name_url>\w+)/$', views.category, name='category'),
-		url(r'^category/(?P<category_name_url>\w+)/add_page/$', views.add_page, name='add_page'),
+		
 		url(r'^register/$', views.p_reg, name='register'),
 		url(r'^send_at/$', views.send_at, name='send_at'),
 		url(r'^airtime_sent_details/$', views.airtime_sent_details, name='airtime_sent_details'),
@@ -49,6 +48,19 @@ urlpatterns = patterns('',
 		url(r'^AddIllDet/$', views.AddIllDet, name='AddIllDet'),
 		url(r'^how_it_works/$', views.how_it_works, name='how_it_works'),
 		url(r'^team/$', views.our_team, name='team'),
+		url(r'^follup/$', views.follup, name='follup'),
+		url(r'^repmsg/$', views.repmsg, name='repmsg'),
+		
+		url(r'^sendmessage/$', views.sendmessage, name='sendmessage'),
+		url(r'^converse/$', views.patientConverse, name='converse'),
+
+		url(r'^doctConv/$', views.doctConv, name='doctConv'),
+
+		url(r'^sendtext/$', views.Converse, name='sendtext'),
+		url(r'^dviewmsg/$', views.dviewmsg, name='dviewmsg'),
+		url(r'^sendrep/$', views.sendrep, name='sendrep'),
+
+	
 		
 	
 		

@@ -4,6 +4,41 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 import os
+
+import django.conf.global_settings as DEFAULT_SETTINGS
+LOCALHOST = False
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
+
+LIVE = 1
+
+ADMINS = (
+    ('Mandela Shaban', 'mandelashaban@gmail.com'),
+)
+
+APP_EMAILS = {
+
+    'info':'mandelashaban@gmail.com',
+
+    }
+
+DEBUG_EMAILS = {
+
+    'mandelashaban@gmail.com' ,
+
+}
+
+BASE_URL = 'https://es-doctor.com/'
+
+
+APP_NAME = 'es-doctor'
+DOMAIN_NAME = 'es-doctor'
+APP_TITLE = 'Es-doctor | Consult a doctor online'
+
+MANAGERS = ADMINS
+
+
 SETTINGS_DIR = os.path.dirname(__file__)
 
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
@@ -27,21 +62,25 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+BASE_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), os.pardir)) + '/'
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': DATABASE_PATH,                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
+ 'default': {
+ 'ENGINE': 'django.db.backends.mysql',
+ 'NAME': 'mydoct',
+ 'USER': 'root',
+ 'PASSWORD': 'mandela',
+ 'HOST': 'localhost',   # Or an IP that your DB is hosted on
+ 'PORT': '3306',
+ }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.es-doctor.com', 'http://es-doctor.com',
+                 'https://es-doctor.com', 'https://es-doctor.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -69,6 +108,8 @@ USE_TZ = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media') # Absolute path to the media directory
+
+MEDIA_URL = BASE_URL + 'static/uploads/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -181,3 +222,29 @@ LOGGING = {
 
 TWI_ACCOUNT_SID = ""
 TWI_AUTH_TOKEN=""
+
+APP_EMAILS = {
+    'info':'mandelashaban593@gmail.com',
+    
+
+    }
+
+DISABLE_COMMS = False
+
+
+
+
+
+
+
+STATIC_ROOT = BASE_DIR + 'static'
+
+# URL prefix for static files.
+# Example: "http://example.com/static/", "http://static.example.com/"
+STATIC_URL = BASE_URL + 'static/'
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

@@ -15,27 +15,27 @@ http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
     <li><a href="/Doct/about/">About Us</a>
         <ul class="submenu">
               <!-- <a href="/Doct/diogform/">Diognise</a> -->
-          <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>           
+          <!-- <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>    -->        
                     </ul>
     </li>
     <li><a href="/Doct/contact/">Contact Us</a>
       <ul class="submenu">
-              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
-          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
+             <!--  <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>   -->         
                     </ul>
     </li>
 
-    <li><a href="/Doct/team/">Our Team</a>
+    <li><a href="/Doct/">Our Team</a>
       <ul class="submenu">
-              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
-          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
+             <!--  <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>   -->         
                     </ul>
     </li>
 
-    <li><a href="/Doct/user_log/"> Log In</a>
+    <li><a href="/Doct/"> Log In</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
                     
                     </ul>
          </li>
@@ -44,23 +44,23 @@ http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
 
     <li><a href="/Doct/login/">Doctor/Admin Log In</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
                     
                     </ul>
          </li>
 
     <li><a href="/Doct/how_it_works/">How it works</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+           <!--    <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
                     
                     </ul>
          </li>
 <li><a href="/Doct/" title="Logout">Logout</a>
         <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+             <!--  <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
                     
                     </ul>
         
@@ -118,87 +118,31 @@ Welcome to Online Doctor Consultation System
 {%  else %}
 {% load staticfiles %}
 
-<section class="team" id="team" style="width:100%; align: center">
-<div class="container" style="width:100%; align:center;height:15%;">
-<div class="row" style="width:100%; align:center;height:15%;">
-<div class="team-heading text-center" >
-<h2 style="width:100%; align:center">our team</h2>
+<section class="team" id="team" style="width:100%;margin: 30px">
 
-<h4 style="width:100%; align:center">The below people are our team Members</h4>
-</div>
 
-<div class="col-md-2 single-member col-sm-4" style="width:100%; height:15%; align:center">
-<div class="person" style="width:100%; height:15%; align:center">
-<img class="img-responsive" src="{% static 'img/ima5.jpg' %}" alt="member-1" style="width:1250px;height:300px; align:center">
-</div>
+<table>
+ <tr> 
+ <td  style="padding: 30px;"><img src="{% static 'img/images4.jpg' %}" alt="checked" width="400px" height="300px" /></td>
+   
+   <td style="padding: 30px"><img src="{% static 'img/avatar.jpeg' %}" alt="checked" width="400px" height="300px" /></td>
+   <td style="padding: 30px"><img src="{% static 'img/background.jpg' %}" alt="checked" width="400px" height="300px" /></td>
+   <td style="padding: 30px"><img src="{% static 'img/about1.jpg' %}" alt="checked" width="400px" height="300px" /></td>
 
-<div class="person-detail" style="width:100%; align:center">
+   </tr>
+   
 
-<h3 style="width:100%; align:center">Dr. Graham</h3>
-<p style="width:100%; align:center">This is our general doctor who attends to patients illness details submitted via the website </p>
-							</div>
-						
-</div>
+   <tr>
 
-<div class="col-md-2 single-member col-sm-4" style="width:100%;height:15%; align:center">
+   <td style="padding: 30px;text-align: center;">Joh Paul<br/>(Doctor)</td> 
+   <td style="padding: 30px;text-align: center;">Mandela Shaban <br/>CEO & (Software Engineer)</td>
+   <td style="padding: 30px;text-align: center;">Namara Hannington<br/>(Software Engineer)</td> 
+    <td style="padding: 30px;text-align: center;">Kren Sammy <br/>(Software Engineer)</td>
+   </tr>
 
-<div class="person-detail" style="width:100%; height:15%; align:center">
 
-<h3 style="width:100%; align:center">Mr. Mandela</h3>
-<p>This is the CEO/CTO  and the Software Developer of the site  : Contact: +256754307471, Email: mandelashaban593@gmail.com</p>
-</div>
-<div class="person" style="width:100%; height:15%; align:center">
-<img class="img-responsive" src="{% static 'img/ima5.jpg' %}" alt="member-2" style="width:1250px;height:300px;  align:center">
-</div>
-</div>
-<div class="col-md-2 single-member col-sm-4" style="width:100%;height:15%; align:center">
-<div class="person" style="width:1250px;height:500px;align:center">
-<img class="img-responsive" src="{% static 'img/images4.jpg' %}" alt="member-3" style="width:1250px;height:300px;  align:center">
-</div>
-<div class="person-detail" style="width:100%;height:15%; align:center">
+   </table>
 
-<h3 style="width:100%; align:center">Mr. Hannington</h3>
-<p>This is the Software Developer Of the Site </p>
-</div>
-</div>
-
-<div class="col-md-2 single-member col-sm-4" style="width:100%;height:15%; align:center">
-<div class="person-detail" style="width:100%;height:15%; align:center">
-
-<h3 style="width:100%; align:center">Mr Jasak</h3>
-<p style="width:100%; height:15%; align:center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-</div>
-<div class="person" style="width:100%;height:15%; align:center">
-<img class="img-responsive" src="{% static 'img/pat.jpg' %}" alt="member-4" style="width:1250px;height:300px; align:center">
-</div>
-</div>
-
-<div class="col-md-2 single-member col-sm-4" style="width:100%; height:15%; align:center">
-<div class="person" style="width:100%; height:15%; align:center">
-<img class="img-responsive" src="{% static 'img/images2.jpg' %}" alt="member-5" style="width:1250px;height:300px;align:center">
-</div>
-
-<div class="person-detail" style="width:100%;height:15%; align:center">
-
-<h3 style="width:100%;height:15%; align:center">Mr. Joy Ka</h3>
-<p style="width:100%; align:center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-</div>
-</div>
-
-<div class="col-md-2 single-member col-sm-4" style="width:100%;height:15%; align:center">
-
-<div class="person-detail" style="width:100%;height:15%; align:center">
-	
-	<h3 style="width:100%; align:center">Mr. Mikari</h3>
-	<p style="width:100%; align:center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
-</div>
-<div class="person" style="width:100%; height:15%;align:center">
-<img class="img-responsive" src="{% static 'img/item6.jpg' %}" alt="member-5" style="width:1250px;height:300px; align:center">
-</div>
-
-</div>
-</div>
-</div>
 </section><!-- end of team section -->
 
 

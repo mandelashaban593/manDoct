@@ -1,19 +1,19 @@
-<fieldset width:60%>
-<form action="/Doct/enterpay/" id="changepayform_form" method="post" >
-{% csrf_token %}
-<table style=" border:0px solid black; width:300px; height:300px">
-<tr><td>From Telephone Number </td><td> <input type="text" name="telno"  id="dname"/></td></tr>
-<tr><td> To Telephone Number: </td><th>0754307471</th></tr>
-<tr><td>Amount</td><td> <input type="text" name="amount" id="telno"/></td></tr>
 
-<tr><td><input type="reset" name="reset" style="width:100px" /></td> <td><input type="submit" name="submit" value="Submit" style="width:100px"/></td></tr>
+<form action="/Doct/enterpay/" id="changepayform_form" method="post" style="font-size: 18px;width:500px;font-weight: bold;" >
+{% csrf_token %}
+<table style=" border:0px solid black; ">
+<h1 align="center"  style="color: #337ab7; font-size: 18px;width:200px;font-weight: bold;"><b >Log In</b></h1>
+<tr><td style="width:200px; padding: 2px;"> Mobile Number </td><td style=" margin-bottom:10px;padding-bottom: 10px: padding-bottom: 10px: "> <input type="text" name="telno"  id="dname" style="width:200px; "/></td></tr>
+<tr><td><p>&nbsp;</td><td> <input type="hidden" name="role"  id="dname" value="patient"/></td></tr>
+<tr><td><p>&nbsp;</td><td> <input type="hidden" name="page"  id="dname" value="0"/></td></tr>
+<tr><td style=" margin-bottom:10px;padding-bottom: 10px: padding-bottom: 10px: "><input type="reset" name="reset" style="width:80px;" /></td> <td><input type="submit" name="submit" value="Submit" style="width:90px"/></td></tr>
 </table>
  
 </form>
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
-<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
+
 
 <script type="text/javascript">
    
@@ -57,4 +57,3 @@ $(document).ready(function(){
     });
 
 </script>
-</fieldset>

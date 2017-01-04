@@ -11,24 +11,33 @@
     <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
     -->
     <li><!-- <a href="/Doct/" title=" Home">Home</a> --></li>
+
+      <li><a href="/Doct/" title="Logout">Home</a>
+        <ul class="submenu">
+             <!--  <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
     
     <li><a href="/Doct/diogform/">Diognise</a>
       <ul class="submenu">
-              <li><a href="view_payments.php" title="View Taxi Details">View Payments</a></li>
-          <li><a href="edit_payments.php" title="Update Taxi Details">Update Payments</a></li>                <li><a href="delete_payments.php" title="Delete Taxi Details">Delete Payments</a></li>           
+             <!--  <li><a href="view_payments.php" title="View Taxi Details">View Payments</a></li>
+          <li><a href="edit_payments.php" title="Update Taxi Details">Update Payments</a></li>                <li><a href="delete_payments.php" title="Delete Taxi Details">Delete Payments</a></li>        -->    
                     </ul>
 
         </li>
     <li><a href="/Doct/ind_illness/">Particular Patient Illness Detail</a>
         <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+           <!--    <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
                     
                     </ul>
     <li><a href="/Doct/view_illness2/">View illness Details</a>
         <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+            <!--   <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
                     
                     </ul>
         
@@ -36,17 +45,34 @@
 
      <li><a href="/Doct/doctor_receipt/">Print reciept</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
                     
                     </ul>
          </li>
     
+
+    <li>
+        <form action="/Doct/doctConv/" style=" height:35px;border: 0px; background-color: #3399FF;" id="changesicknessform_form" method="post">
+{% csrf_token %}
+<input type="hidden" name="dtelno" value="{{phonedoctor}}" style="width: 200px; border: 0px; " id="dname"/>
+
+<tr><td style="width: 4px; padding-bottom: 10px"><input type="submit" name="submit" value="Converse"  style="width: 100px; border: 0px; background-color: #3399FF; color: white;" /></td></tr>
+
+</form>
+          <ul class="submenu">
+              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
+                    
+                    </ul>
+         </li>
+
+
                     
     <li><a href="/Doct/" title="Logout">Logout</a>
         <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+              <<!-- li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
                     
                     </ul>
         
@@ -62,6 +88,13 @@
 
 {% block body_block %}
 
+ <link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap.css' %}">
+    <script type="text/javascript" language="javascript" src="{% static 'js/dataTables.bootstrap.js' %}"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $('#example').dataTable();
+      } );
+    </script>
 
 {% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
 <p>&nbsp;</p>
@@ -122,16 +155,24 @@ return false;
 
 {% include "Doct/ind_ill.html" %}
 
+{% elif fup %}
+
+{% include "Doct/fup.html" %}
+
  {% else %}   
 
+
+   
+
+
 <h2>Patients'  Diognosis</h2>
- <table width="300" border="0" cellpadding="30" style="text-align: center">
+ <table width="300" border="0"  cellpadding="30" class="table table-striped table-bordered" id="example" style="text-align: center">
 
   <tr> 
   <th width="75"><strong> Doctor Name</strong></th> 
   <th><span style="font-weight: bold;">Telephone Number</span></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong>Gender</strong></th> 
+  <th width="75"><strong>Payment Id</strong></th> 
   <th><span style="font-weight: bold;">Diognosis</span></th>
   <th><span style="font-weight: bold;">Staff pic</span></th>  
   <th><span style="font-weight: bold;">Added</span></th>
@@ -140,20 +181,32 @@ return false;
   <th width="75"><strong> Email</strong></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th>
   <th width="75"><strong>Ambulance</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>Complicated Sickness Condition</strong></th> 
+  <th><span style="font-weight: bold;">Staff pic</span></th>
+  <th width="75"><strong>Reply</strong></th> 
+   <th><span style="font-weight: bold;">Staff pic</span></th>
    <th width="75"><strong>Edit</strong></th>
   </tr> 
 {% for diog in diog %}
   <tr> 
   <td>{{diog.dname}}</td>
-   <td><a href="tel:0123456785">{{diog.telno}}</a></td> 
+   <td><a href="#">{{diog.telno}}</a></td> 
    <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
    <td>{{diog.gender}}</td> 
-   <td><a href="tel:0123456785">{{diog.diognosis}}</a></td> 
+   <td><a href="#">{{diog.diognosis}}</a></td> 
    <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{diog.added }}</td> <td><a href="tel:0123456785">{{diog.page}}</a></td> 
+   <td>{{diog.added }}</td> <td><a href="#">{{diog.page}}</a></td> 
    <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{diog.email}}</td>
        <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{diog.amb}}</a></td>
+    <td><a href="#">{{diog.amb}}</a></td>
+    <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td>
+    <td><a href="#">{{diog.compill}}</a></td>
+    <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td>
+
+    <td><a href="#">{{diog.reply}}</a></td>
+    <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td>
+
     <td><a href="/Doct/editdiog/{{diog.id}}/">Precribe</a></td>
  
    
@@ -162,6 +215,31 @@ return false;
 
    </table>
 
+
+   <div class="pagination">
+<ul>
+  {% if diog.has_previous %}
+    <li><a href="?page={{ diog.previous_page_number }}">&laquo;</a></li>
+  {% else %}
+    <li class="disabled"><a href="#">&laquo;</a></li>
+  {% endif %}
+
+  {% for num in diog.paginator.page_range %}
+    {% ifequal num diog.number %}
+      <li class="active"><a href="#">{{ num }}</a></li>
+    {% else %}
+      <li><a href="?page={{ num }}">{{ num }}</a></li>
+    {% endifequal %}
+  {% endfor %}
+
+  {% if diog.has_next %}
+    <li><a href="?page={{ diog.next_page_number }}">&raquo;</a></li>
+  {% else %}
+    <li class="disabled"><a href="#">&raquo;</a></li>
+  {% endif %}
+</ul>
+
+</div>
 
 
    {% endif %}

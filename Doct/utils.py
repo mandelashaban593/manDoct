@@ -1,3 +1,10 @@
+from manDoct.settings import *
+from django.contrib import messages
+from django.shortcuts import render_to_response, render, \
+    get_object_or_404, HttpResponseRedirect, HttpResponse
+from django.template.loader import render_to_string
+from django.template import RequestContext
+
 def check_illness(post_values):
     from rango.models import Illness
     '''check if a number exists in a phonebook'''
@@ -45,3 +52,26 @@ def check_diognosis(post_values):
 #       page = request.POST['page']
 #       payi = request.POST['payi']
 #       email = request.POST['email']
+
+def mailer(request, subject, msg, to, sender=False):
+    if settings.DISABLE_COMMS:
+        return True
+    if not sender:
+        sender = settings.APP_EMAILS['info']
+    
+    #send_email(subject, msg, sender, to)
+    
+
+
+    
+        
+    return True
+
+
+
+def success_message(request, msgtype, data={}):
+    template = settings.BASE_DIR + 'templates/Doct/success_messages.html'
+    data['type'] = msgtype
+    text = render_to_string(
+        template, data, context_instance=RequestContext(request))
+    messages.success(request, text)

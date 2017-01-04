@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/animation.css' %}">
 
 <!-- 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> -->
@@ -78,6 +79,26 @@
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
 
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#purpose').on('change', function() {
+      if ( this.value == '1')
+      //.....................^.......
+      {
+        $("#business").show();
+      }
+      else
+      {
+        $("#business").hide();
+      }
+    });
+});
+
+</script>
 
 
 
