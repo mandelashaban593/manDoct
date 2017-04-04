@@ -1,0 +1,198 @@
+{% extends "Doct/base_site_admin.html" %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li>Home</li>
+</ul>
+{% endblock %}
+
+{% block pretitle %}
+Remit Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="module no-head"  style="color: ; font-size: 0x;font-weight: bold;padding-left:10px">
+      <div class="module-body no-padding">
+        <section class="docs">
+          <h2>Welcome To The Es-Doctor  Staff Dashboard</h2>
+          <p> <i>with great power comes great responsiblity </i></p>
+
+
+            <!--
+            <ol>
+              <li>Everything You do is monitored</li>
+              <li>Don't do anything stupid</li>
+              <li>If and when you do something stupid , tell an Admin</li>
+            </ol>
+            -->
+            <div class="muted">
+
+        {% include "Doct/notifications.html" %}
+
+        </div>
+
+      
+
+        {% if authindill %}
+
+{% include "Doct/ind_ill.html" %}
+
+{% elif ind_ill %}
+
+{% include "Doct/viewind_ill.html" %}
+
+{% elif endp %}
+
+{% include "Doct/view_receipt.html" %}
+
+{% elif editD %}
+
+{% include "Doct/edit_diogno.html" %}
+
+{% elif doctview_ill %}
+
+{% include "Doct/view_illness.html" %}
+
+{% elif dot_rec %}
+
+{% include "Doct/doctor_authreceipt.html" %}
+
+{% elif dform %}
+
+{% include "Doct/diog.html" %}
+
+{% elif indill_auth %}
+
+{% include "Doct/ind_ill.html" %}
+
+{% elif fup %}
+
+{% include "Doct/fup.html" %}
+
+{% elif chat %}
+
+{% include "Doct/dconverse.html" %}
+
+
+{% elif chatmsg %}
+
+{% include "Doct/convdoct.html" %}
+
+
+ {% else %}
+
+
+
+
+ <table class="table table-utilities vertical-top">
+              <tbody>
+
+
+
+
+
+      
+                <tr>
+                  <td class="cell-detail">
+                    
+                    {% if diogs%}
+
+                  <div class="span8">
+
+                    <div class="people-brief">
+                    {% for diog in diogs %}
+                      
+                      <table class="table table-bordered">
+          <thead>
+          
+          <tr>
+            <th># <a href="#">{{diog.telno}}</a></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+            <td>Payment Id</td>
+            <td>{{ diog.gender}}</td>
+          </tr>
+
+         
+          <tr>
+            <td>Diognosis</td>
+            <td>{{ diog.diognosis}}</td>
+          </tr>
+ 
+           <tr>
+            <td>Patient Age</td>
+            <td>{{ diog.page}}</td>
+          </tr>
+
+           <tr>
+            <td>Ambulance</td>
+            <td>{{ diog.amb}}</td>
+          </tr>
+
+          {% if diog.compill %}
+
+           <tr>
+            <td>Complicated Sickness Condition</td>
+            <td>{{ diog.compill}}</td>
+          </tr>
+
+          {% endif %}
+
+
+          
+         <tr>
+            <td>When</td>
+            <td>{{ diog.added | date:'d-m-Y'}}</td>
+          </tr>
+
+        
+
+           <tr>
+            <td>Edit</td>
+            <td><a href="/Doct/editdiog/{{diog.id}}/{{diog.ill_id}}/">Precribe</a></td>
+          </tr>
+
+          
+         {% endfor %}
+          
+
+          
+
+          </tbody>
+        </table>
+
+
+
+
+
+{% endif %}
+
+{% endif %}
+
+
+</div>
+   
+</div>
+
+
+
+
+             
+
+
+
+
+
+</section>
+
+{% endblock %}
+
+

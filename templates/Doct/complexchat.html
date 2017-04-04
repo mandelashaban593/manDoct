@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="instructions"> 
+  <p>Complex chat example here. Please refer to the documentation at my blog, the wiki and/or read the source code for the project's main views.py file, under the complex() function, it's all there... and here watch it in action:</p> 
+</div> 
+<h3>Chat for document: {{ document.title }}</h3>
+<div id="chat"></div>
+<!-- You should try to include this at another place at your convenience :D -->
+<script type="text/javascript" src="/static/js/jchat.js"></script>
+<script type="text/javascript">
+/* chat_id is passed form the view, the init_chat function then does all the magic */
+$(window).ready(function(){
+	init_chat({{chat_id}}, "chat");
+})
+</script>
+<div id="explanation">
+<strong>Emoticon Reference</strong> (try these)<br />
+<pre>
+>:D
+:D
+=D
+:)
+:O
+:P
+:(
+:3
+;)
+(ball)
+</pre>
+</div>
+
+{% endblock %}

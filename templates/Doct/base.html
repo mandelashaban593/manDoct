@@ -1,110 +1,146 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 {% load static %}
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Ubusina - Responsive HTML5 Template</title>
-	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
-	<link rel="stylesheet" href="{% static 'css/animation.css' %}">
-
-<!-- 	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css"> -->
-	<!-- <link rel="stylesheet" href="css/style.css"> -->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
-
-
-	<title>Consult a Doctor- {% block title %}A room {% endblock %}</title>
-		<!-- JavaScript -->
-		<script src="{% static 'js/jquery_popup.js' %}"></script> <!-- JavaScript -->
-			
-	
-		<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
-
-		<link href="{% static 'css/element.css' %}" rel="stylesheet">
-		<script src="{% static 'js/my_js.js' %}"></script>
-		 <center>
-
-     {% block navbar %}
-     {% endblock %}
-  
-
-
-
-</center>
+<title>Doctor(Medical)  Consultation Website | Home </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="{% static 'css/slider.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<script src="http://code.angularjs.org/1.2.6/angular.js"></script> 
+    <script src="app.js"></script>
+    
 </head>
 <body>
 
-<center>
-<div>
-{% block body_block %}	
+{% block nav_bar %}
+<div class="header" style="width: 2000px; ">
+<div class="wrap">
+<div class="logo"  ><a href="index.html" style="color: #fff; font-size: 32px;"><img src="{% static 'images/logocon.jpe' %}"  style="" alt="" />Online Doctor(Medical) Consulation</a></div>
+   <div class="con-right">
+      <div class="grid1-l-img">
+        <img src="{% static 'images/contact.png' %}" alt="">
+      </div>
+      <div class="grid1-l-desc">
+        <p>Contact : +256754307471</p>
+      </div>
+      <div class="clear"></div>
+  </div>
+    <div class="clear"></div>
+     </div>
+</div>
+<div class="header-bottom">
+      <div class="wrap">
+        <ul id="nav">
+                <li><a class="hsubs" href="/Doct/" title="Logout">Home</a></li>
+                <li><a class="hsubs" href="/Doct/about/">About Us</a></li>
+                <li><a class="hsubs" href="/Doct/team/">Our Team</a>
+                <li><a class="hsubs" href="/Doct/register/">Sign Up</a>
+                 <li><a class="hsubs" href="/Doct/login/">Doctor/Admin Log In</a></li>
+                <li><a href="/Doct/contact/">Contact Us</a></li>
+                <li><a href="/Doct/how_it_works/">How it works</a></li>
+
+                {% if qconvs or ill_more %}
+            
+                 <li><form action="/Doct/converse/" style="height:35px;border: 0px; background-color: #3399FF" id="changesicknessform_form" method="post">
+                {% csrf_token %}
+
+                <input type="hidden" name="username" value="{{username}}" style="width: 200px; border: 0px; " id="dname"/>
+
+                <input type="hidden" name="dusername" value="0754307471" style="width: 200px; border: 0px; " id="dname"/>
+
+                <tr><td style="width: 4px; padding-bottom: 10px"><input type="submit" name="submit" value="Converse"  style="width: 100px; border: 0px; background-color: white; color: #337ab7; " /></td></tr>
+
+                </form>
+                <ul class="submenu">
+                      <!-- <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                            <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul> </li>
+
+                    {% endif %}
+
+                <li><a href="/Doct/whyus/">Why Us</a></li>
+                    <ul class="subs">
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Restaurants</a></li>
+                        <li><a href="#">Beach Resorts</a></li>
+                    </ul>
+                </li>
+                {% if user.is_authenticated %}
+
+                <li><a href="/Doct/logout/">Logout</a></li>
+
+                {% endif %}
+               
+        </ul>
+
+       </div>
+</div>
 
 {% endblock %}
-</div>
-</center>
-
-<!-- footer starts here -->
-<footer class="footer clearfix" style="width:100%; align:center">
-<div class="container" style="width:100%; align:center">
-<div class="row" style="width:100%; align:center">
-<div class="col-xs-6 footer-para" style="width:100%; align:center">
-<p style="width:100%; align:center">&copy;e-sDoctor.com All right reserved</p>
-</div>
-
-<div class="col-xs-6 text-right" style="width:100%; align:center">
-<a href=""><i class="fa fa-facebook" style="width:100%; align:center"></i></a>
-<a href=""><i class="fa fa-twitter"></i></a>
-<a href=""><i class="fa fa-skype"></i></a>
-</div>
-					</div>
-				</div>
-			</footer>
 
 
 
-	
+{% block sickness_det %}
 
-	<!-- script tags
-	============================================================= -->
-	<script src="{% static 'js/jquery-2.1.1.js' %}"></script>
-<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script src="{% static 'js/gmaps.js' %}"></script>
-<script src="{% static 'js/smoothscroll.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/custom.js' %}"></script>
+{% endblock %}
 
 
-<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-</script>
-<script type="text/javascript">
-
-$(document).ready(function(){
-    $('#purpose').on('change', function() {
-      if ( this.value == '1')
-      //.....................^.......
-      {
-        $("#business").show();
-      }
-      else
-      {
-        $("#business").hide();
-      }
-    });
-});
-
-</script>
+<div class="header-banner">
+<div class="wrap">
+  <div class="banner">
+    <div class="indent">
+                
+                {% block body_block %} 
 
 
 
- 
+                {% block body_images %} 
+
+                {% endblock %}  
+
+
+                {% endblock %}  
+
+                
 
 
 
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+         </div>                                   
+
+{% block side_menue %}
+
+{% endblock %}
+
+     
+  </div>
+    <div class="clear"></div>
+      
+        <div class="clear"></div>
+      </div>
+      </div>
+
+
+      {% block bottom_content %}
+
+    
+        {% endblock %}
+
+     </div>
+      </div>
+
+      </div></div>
+
+
+
+      {% block footer %}
+
+
+{% endblock %}
 </body>
 </html>

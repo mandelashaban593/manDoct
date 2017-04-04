@@ -1,0 +1,165 @@
+{% if type == 'login' %}
+Please enter a correct email and password. Note that both fields are case-sensitive.
+{% endif %}
+
+
+{% if type == 'password_change' %}
+The passwords you entered are invalid. <br />
+Please make sure that you provide your correct old password plus two new matching passwords 
+{% endif %}
+
+{% if type == 'phonenumber_change' %}
+The phonenumber you entered is not invalid. <br />
+Please make sure that you provide the right number of digits for the right country code
+{% endif %}
+
+
+
+{% if type == 'email_change' %}
+An error occurred while updating your email.
+{% endif %}
+
+
+{% if type == 'signup' %}
+Please check that you entered a valid email and password. <br /> 
+Note that both fields are case-sensitive.
+{% endif %}
+
+
+{% if type == 'access_restricted' %}
+The password you entered is invalid, please try again
+{% endif %}
+
+
+{% if type == 'signup_email' %}
+This email is already in use. Please supply a different email.
+{% endif %}
+
+
+{% if type == 'sendmoney' %}
+{{errors}}
+{% endif %}
+
+
+{% if type == 'process_transaction' %}
+
+{%if status_code == 'UnKnown' %}
+We were unable to process your credit card payment. <br /> 
+Please verify your card details and try again. <br /> If the problem persits, please contact us 
+{%endif%}
+
+
+{%if status_code == 'cr5i3pgy9867e1' %}
+
+We are unable to process your credit card payment. Please verify your card details and try again. If the problem persits, contact us to complete your transaction
+
+
+{% elif status_code == 'bdi6p2yy76etrs' %}
+Your card was declined.<br />
+You will need you to contact your bank and ask them to allow your transactions on https://useremit.com or to check that you have entered the correct card details and have sufficient funds on the account.
+
+
+
+{% elif status_code == 'fe2707etr5s4wq' %}
+Your card was declined.<br />
+You will need you to contact your bank and ask them to allow your transactions on https://useremit.com or to check that you have entered the correct card details and have sufficient funds on the account.
+
+
+
+{% elif status_code == 'aei7p7yrx4ae34' %}
+
+Your transaction #{{transaction.hashid}} to {{transaction.recipient_number}} is pending delivery.
+We will send you an email / sms as soon as it is delivered.
+
+
+{% else %}
+
+We are unable to process your credit card payment. 
+The Details you provided are incomplete or incorrect ,Please verify your card details and try again.
+If the problem persits, contact us to complete your transaction
+
+{%endif%}
+
+
+
+{% endif %}
+
+{% if type == 'password_recover_email' %}
+The email you entered is invalid, please enter a valid email
+{% endif %}
+
+
+{% if type == 'password_recover' %}
+The passwords you entered are invalid, please enter two valid passwords that match and are more than 5 digits
+{% endif %}
+
+
+{% if type == 'admin_user_verified' %}
+An error occurred while  verify User {{profile.get_names}} <br />
+{% endif %}
+
+{% if type == 'admin_user_unverified' %}
+An error occurred while  Unverifying User {{profile.get_names}} <br />
+{% endif %}
+
+{% if type == 'admin_user_blocked' %}
+An error occurred while , The User {{profile.get_names}} was not blocked
+{% endif %}
+
+
+{% if type == 'admin_user_unblocked' %}
+An error occurred while , The User {{profile.get_names}} was not unblocked
+{% endif %}
+
+
+{% if type == 'admin_process_transaction' %}
+An error occurred while trying to process your transaction. <br />
+Please try again later , also please not the response code
+{%endif%}
+
+{% if type == 'admin_resend_transaction' %}
+An error occurred while trying to resend the transaction . <br />
+The StatusCode is {{response.statuscode}} <br />
+{{ response.statusmessage }}
+{% endif %}
+
+
+
+{% if type == 'admin_update_rates' %}
+There was an error updating the  website rates . <br />
+The following errors occured {{form_errors}}
+{% endif %}
+
+
+
+{% if type == 'admin_update_profile' %}
+There was an error updating the Users Profile . <br />
+The following errors occured {{form_errors}}
+{% endif %}
+
+
+{% if type == 'cc_form' %}
+Please provide the correct credit card details, <br />
+Make sure You selected a valid country and You entered a correct Visa or Master Card Credit/Debit card number.
+{%endif %}
+
+
+
+
+{% if type == 'paybill' %}
+The Account number  <b>{{referencenum}}</b> is invalid for Bill type <b>{{billtype}}</b> <br />
+Please make sure you entered a correct account number and location.
+{%endif %}
+
+
+{% if type == 'process_utility' %}
+An error occurred while trying to process your transaction. <br />
+We have been notified and we are working on it. <br />
+We shall be in contact if we need any more information.
+{%endif%}
+
+
+
+{% if type == 'cons_error' %}
+<strong style="color: green;">Please sent consultation <br/> fee of 3,000 ugx to 0754307471, <br/>  then try again</strong>
+{%endif%}

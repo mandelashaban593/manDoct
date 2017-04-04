@@ -129,23 +129,15 @@
 
 {% else  %}
 
-{{msg}}
  <table width="300" border="0" cellpadding="30" style="text-align: center">
-
-  <tr> 
-  <tr><th><span style="font-weight: bold;">Doctor's message</span></th> <td>{{fupmsg.fup}}</td></tr>
-  <tr><td></td><td></td></tr>
-  <tr><td></td><td></td></tr>
-  <form action="/Doct/sendreply/" id="changesicknessform_form" method="post">
+ <form action="/Doct/converse/" style=" height:35px;border: 0px;  width:60px;" id="changesicknessform_form" method="post">
 {% csrf_token %}
-  <tr><td></td><td><input type="hidden" name="gender" id="gender" value="{{fupmsg.gender}}"/></td></tr> 
+<tr><td style="width: 200px"><h1 style="color: #337ab7; font-size: 18px;font-weight: bold;">Converse</h1></td></tr>
+<tr style="border: 0px; padding-bottom: 7px"><td style="width: 100px; padding-bottom: 7px">Peter(Doctor)</td></tr>
 
-  <tr><th width="75"><strong></strong></th> <td><textarea class="message" rows="8" name="reply" id="message" cols="30" rows="10" placeholder="Message"></textarea></td></tr>
+<input type="hidden" name="telno" value="{{ptelno}}" style="width: 200px; border: 0px; " id="dname"/>
 
-  <tr><td><input type="reset" name="reset" /></td> <td><input type="submit" name="submit" value="Reply"  /></td></td></tr> 
-
-  </form>
-  </tr> 
+<tr><td style="width: 4px; padding-bottom: 10px"><input type="submit" name="submit" value="0754307471"  style="width: 100px; border: 0px; background-color: white; color: #337ab7; " /></td></tr>
 
    </table>
 

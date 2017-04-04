@@ -1,0 +1,30 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+{% load validation_tags %}
+{% load url from future %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4>Check Transaction status</h4>
+      <form class="form-horizontal" method="POST" action="{% url 'admin:transaction_status_response' %}">
+          {% csrf_token %}
+          <input type="text" class="form-control" id="transaction_id" name="transaction_id" placeholder="Transaction ID">
+          <button type="submit" class="btn btn-primary" id="tlance_proceed">Proceed</button>
+      </form>
+</div>
+
+{% endblock %}

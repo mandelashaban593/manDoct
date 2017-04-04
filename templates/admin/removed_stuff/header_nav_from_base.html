@@ -1,0 +1,59 @@
+  <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                {% block branding %}{% endblock %}
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+                        {% if user.is_active and user.is_staff %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Welcome,' %} <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong> <b class="caret"></b></a>
+                            <ul class="dropdown-menu pull-right">
+                                {% if user.has_usable_password %}
+                                <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
+                                {% endif %}
+                                <li><a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a></li>
+                            </ul>
+                        </li>
+                        {% block logs %}
+                        <li class="dropdown" id="recent-actions-module">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Recent Actions' %} <b class="caret"></b></a>
+                            {% load log %}
+                            {% get_admin_log 10 as admin_log for_user user %}
+                            <ul class="dropdown-menu pull-right">
+                                {% for entry in admin_log %}
+                                <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                                    <a href="{% if entry.is_deletion or not entry.get_admin_url %}#{% else %}{% url 'admin:index' %}{{ entry.get_admin_url }}{% endif %}">
+                                        <i class="icon-{% if entry.is_addition %}plus{% endif %}{% if entry.is_change %}edit{% endif %}{% if entry.is_deletion %}remove{% endif %}"></i>
+                                        {{ entry.object_repr }}
+                                        {% if entry.content_type %}
+                                        <span class="mini quiet">({% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %})</span>
+                                        {% else %}
+                                        <span class="mini quiet">({% trans 'Unknown content' %})</span>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                {% empty %}
+                                <li class="disabled"><a href="#">{% trans 'None available' %}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endblock %}
+                        {% block userlinks %}
+                        {% url 'django-admindocs-docroot' as docsroot %}
+                        {% if docsroot %}
+                        <li class="divider-vertical"></li>
+                        <li><a href="{{ docsroot }}">{% trans 'Documentation' %}</a></li>
+                        {% endif %}
+                        {% endblock %}
+                        {% endif %}
+                        {% block nav-global %}{% endblock %}
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>

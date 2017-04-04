@@ -1,88 +1,42 @@
-{% extends 'Doct/base.html' %}
+{% extends "Doct/base_site_admin.html" %}
 
-{% load staticfiles %}
-<h5><a href="/Doct/signout/" title=" Home">Logout</a></h5>
 
-{% block navbar %}
-<div id = "navigation">
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li>Home</li>
+</ul>
+{% endblock %}
 
-<nav class="cf">
-  <ul class="topmenu">
-    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
-    -->
-    <li><!-- <a href="/Doct/" title=" Home">Home</a> --></li>
-    <li><a href="/Doct/doct_view_illness/">view Illness Detail</a>
-      <ul class="submenu">
-              <li><a href="view_login.php" title="View Taxi Details">View Login</a></li>
-          <li><a href="edit_login.php" title="Update Taxi Details">Update Login</a></li>                <li><a href="delete_login.php" title="Delete Taxi Details">Delete Login</a></li>           
-                    </ul>
-
-        </li>
-    <li><a href="/Doct/diogform/">Diognise</a>
-      <ul class="submenu">
-              <li><a href="view_payments.php" title="View Taxi Details">View Payments</a></li>
-          <li><a href="edit_payments.php" title="Update Taxi Details">Update Payments</a></li>                <li><a href="delete_payments.php" title="Delete Taxi Details">Delete Payments</a></li>           
-                    </ul>
-
-        </li>
-    <li><a href="/Doct/ind_illness/">Particular Patient Illness Detail</a>
-        <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
-                    
-                    </ul>
-        
-    </li>
-     <li><a href="/Doct/doctor_receipt/">Print reciept</a>
-          <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
-                    
-                    </ul>
-         </li>
-    
-                    
-    <li> <li><a href="/Doct/" title="Logout">Logout</a>
-    </li>
-      </ul>
-</nav>
-
-</div>
+{% block pretitle %}
+Remit Dashboard
 {% endblock %}
 
 
-
-{% block body_block %}
-
-
-{% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
-<p>&nbsp;</p>
-</div>
-
- {% if illness %} <script type="text/javascript">alert("You have successfully submitted your Illness details, Please view Your diognosis");
- return false;
- </script>
- {% endif %}
-{% if pay_id %}
-<h2>Your payment Id is {{pay_id}}, please don't forget it</h2>
-<script type="text/javascript">alert('You have successfully submitted payment Details'); 
-
-return false;
-</script>
- {% endif %}
-
-      <div id="content">
-
-{% if editd_response %}
-
-<strong style="color:green">You have successfully diognised a patient</strong>
+{% block content %}
 
 
+<section class="module no-head">
+      <div class="module-body no-padding">
+        <section class="docs">
+          <h2>Welcome To The Es-Doctor  Staff Dashboard</h2>
+          <p> <i>with great power comes great responsiblity </i></p>
 
-{% endif %}
+            <!--
+            <ol>
+              <li>Everything You do is monitored</li>
+              <li>Don't do anything stupid</li>
+              <li>If and when you do something stupid , tell an Admin</li>
+            </ol>
+            -->
+            <div class="muted">
 
+        {% include "Doct/notifications.html" %}
 
-{% if authindill %}
+        </div>
+        
+        </section>
+
+        {% if authindill %}
 
 {% include "Doct/ind_ill.html" %}
 
@@ -90,28 +44,32 @@ return false;
 
 {% include "Doct/viewind_ill.html" %}
 
-
 {% elif editD %}
 
 {% include "Doct/edit_diogno.html" %}
 
 {% elif doctview_ill %}
 
-{% include "Doct/doct_view_illness.html" %}
+{% include "Doct/view_illness.html" %}
+
+{% elif dot_rec %}
+
+{% include "Doct/doctor_authreceipt.html" %}
 
 {% elif dform %}
 
 {% include "Doct/diog.html" %}
 
-{% elif doct_ill %}
-
-{% include "Doct/doct_view_illness.html" %}
-
 {% elif indill_auth %}
 
 {% include "Doct/ind_ill.html" %}
 
-{% else %}   
+{% elif fup %}
+
+{% include "Doct/fup.html" %}
+
+ {% else %}
+
 
 
 
@@ -167,305 +125,6 @@ function printPage(id) {
    {% endif %}
 </div>
 
+</section>     
 
-<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
-<script>
- $(document).ready(function() {
-  $('#navigation a').click(function(e) {
-   e.preventDefault();
-  /* $("div#my-container").load("/url/to/content/ #content-id")*/
-   $('#content').load($(this).attr('href'));
-   return false
-  });
- });
-</script> -->
-
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
-<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
-
-<script type="text/javascript">
-   function addToDiognosis(reload)
-{
-//do the search
-//start the ajax
-var myform = $('#changediognosisform_form');
-var disabled = myform.find(':input:disabled').removeAttr('disabled');
- // serialize the form
-var serialized = myform.serialize();
-
- // re-disabled the set of inputs that you previously enabled
-disabled.attr('disabled','disabled')
-
-    $.ajax({
-      //this is the php file that processes the data and send mail
-      url: "{{basedir}}/rango/diognosis/",
-
-      //GET method is used
-      type: "POST",
-
-      //pass the data
-      data:serialized,
-
-      //Do not cache the page
-      cache: false,
-
-             beforeSend: function(){
-            $('#loading').show();
-            },
-             complete: function(){
-             $('#loading').hide();
-            },
-
-
-      //success
-        success: function (html) {
-        $('#secure_area_message').html(html)  
-        },
-            error : function ()
-            {
-
-            }
-
-
-    });
-}
-
-
-$(document).ready(function(){
-    $("#changediognosisform_form").validate({
-    rules:{
-             dname:
-            {
-            required:true,
-            maxlength:40,
-            },
-            telno:
-            {
-            required:true,
-            digits: true,
-            maxlength:20,
-            },
-             gender: /*This is the payment Id*/
-            {
-            required:true,
-            digits: true,
-            maxlength:9,
-            },
-            diognosis:
-            {
-            required:true,
-            maxlength:700,
-            },
-              page:
-            {
-            required:true,
-            digits: true,
-            maxlength:3,
-            },
-             email:
-            {
-            required:true,
-            email: true,
-            maxlength:40,
-            },
-           
-          
-    },
-          messages: {
-        dname: {
-        required: "Please provide your names",
-        maxlength:"Please provide valid names",
-      },
-        telno: {
-        required: "Telephone number is required",
-        digits: "Enter the valid Telephone number",
-        maxlength:"Please provide valid phone number",
-      },
-       gender: {  /* This is the payment Id*/
-        required: "Please provide a valid Payment Id",
-        digits: "Please provide a Valid Payment Id",
-        maxlength:"Please provide a Valid Payment Id",
-      },
-
-        diognosis: {
-        required: "Please provide sickness details",
-        maxlength:"Please briefly explain sickness",
-      },
-      page: {
-      required: "Please provide your age",
-      digits: "Enter the valid age",
-      maxlength:"Please provide a valid age",
-      },
-
-        email: {
-        required: "Email is required",
-        digits: "Enter the valid email address",
-        maxlength:"Please provide a Valid email address",
-      },
-    
-    
-    },
-
-    submitHandler: function(form) {
-    addToDiognosis();
-    }
-
-    });
-    });
-
-
-
-
-
-$(document).ready(function(){
-    $("#changeauthindillform_form").validate({
-    rules:{
-            username:
-            {
-            required:true,
-            maxlength:40,
-            },
-          
-    },
-          messages: {
-        username: {
-        required: "Please provide your username",
-        maxlength:"Please provide valid username",
-      },
-    
-    },
-
-
-    });
-    });
-
-
-
-$(document).ready(function(){
-    $("#changereceiptform_form").validate({
-    rules:{
-            id:
-            {
-            required:true,
-            digits: true,
-            maxlength:40,
-            },
-          
-    },
-          messages: {
-        id: {
-        required: "Please provide your username",
-        digits: "Please provide a Valid Transaction Id",
-        maxlength:"Please provide valid username",
-      },
-    
-    },
-
-
-    });
-    });
-
-
-
-
-
-
-$(document).ready(function(){
-    $("#changeeditdiogform_form").validate({
-    rules:{
-             dname:
-            {
-            required:true,
-            maxlength:40,
-            },
-            telno:
-            {
-            required:true,
-            digits: true,
-            maxlength:20,
-            },
-             gender: /*This is the payment Id*/
-            {
-            required:true,
-            digits: true,
-            maxlength:9,
-            },
-            diognosis:
-            {
-            required:true,
-            maxlength:700,
-            },
-              page:
-            {
-            required:true,
-            digits: true,
-            maxlength:3,
-            },
-             email:
-            {
-            required:true,
-            email: true,
-            maxlength:40,
-            },
-           
-          
-    },
-          messages: {
-        dname: {
-        required: "Please provide your names",
-        maxlength:"Please provide valid names",
-      },
-        telno: {
-        required: "Telephone number is required",
-        digits: "Enter the valid Telephone number",
-        maxlength:"Please provide valid phone number",
-      },
-       gender: {  /* This is the payment Id*/
-        required: "Please provide a valid Payment Id",
-        digits: "Please provide a Valid Payment Id",
-        maxlength:"Please provide a Valid Payment Id",
-      },
-
-        diognosis: {
-        required: "Please provide sickness details",
-        maxlength:"Please briefly explain sickness",
-      },
-      page: {
-      required: "Please provide your age",
-      digits: "Enter the valid age",
-      maxlength:"Please provide a valid age",
-      },
-
-        email: {
-        required: "Email is required",
-        digits: "Enter the valid email address",
-        maxlength:"Please provide a Valid email address",
-      },
-    
-    
-    },
-
-
-    });
-    });
-
-
-
-
-
-</script>
-
-  
-
-
-
-{% endblock %}
-
-{% block footer %}
-<p>Posted by Mandela Shaban<br/>Contact Information:<a href="mailto:mandelashaban593@gmail.com"></a><br/>
-&copy; Consult Doctor : Fast and Cheap Response 2016</p>
 {% endblock %}

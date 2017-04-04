@@ -1,0 +1,11 @@
+appdirs==1.4.0
+Django==1.7
+django-bootstrap3==8.1.0
+django-forms-bootstrap==3.0.1
+django-tagging==0.4.5
+olefile==0.44
+packaging==16.8
+Pillow==4.0.0
+pyparsing==2.1.10
+six==1.10.0
+South==1.0.2

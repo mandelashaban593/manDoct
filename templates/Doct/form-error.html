@@ -1,8 +1,8 @@
-{% load custom_filters %}
+
 
 {% if form.errors %}
   <div class="alert alert alert-danger notification" >
-{% with form|nice_errors as qq %} {% for error_name,desc in qq.items %} 
+{% with form  as qq %} {% for error_name,desc in qq.items %} 
 <span> {{error_name}} | {{ desc }}</span><br /> 
 {% endfor %} 
 </div>

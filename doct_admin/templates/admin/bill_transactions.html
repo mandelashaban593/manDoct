@@ -1,0 +1,355 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if transactions %}
+
+<section class="row-fluid">
+      <div class="span12">
+        <div class="module no-head message">
+          <div class="module-body no-padding">
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8">
+                  <form class="form-absolute">
+                    <button class="btn btn-icon go-right"><i class="icon-search"></i></button>
+                    <input type="text" name="q" class="input-block-level" placeholder="Search transactions by Invoice ID ..." autocomplete="off">
+                  </form>
+                </div>
+
+
+
+              </div>
+            </div>
+            <table class="table table-utilities vertical-top">
+              <tbody>
+
+
+
+
+              {% for t in transactions %}
+
+                <tr>
+                  <td class="cell-detail">
+
+
+
+                  <div class="span8">
+                    <div class="people-brief">
+
+                      <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th># <a href="{% url 'admin:admin_transaction' t.get_invoice %}"> {{t.get_invoice}} </a></th>
+            <th>{% if type == 'successful' %}<a href="{{ t.get_receipt_url }}">Download Receipt</a>{% endif %}</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <!-- <tr>
+            <td>Sender</td>
+            <td><a href="{% url 'admin:admin_user' t.get_sender_profile.uid %}">{{t.get_sender_profile.get_names}}</a></td>
+          </tr> -->
+          <tr>
+            <td>Sender</td>
+            <td>
+                {{t.receiver_number}}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Customer Number</td>
+            <td>
+                <!-- {{t.recipient_number}} -->
+                {{t.receiver_number}}
+               <!-- {{t.recipient_names}} -->
+           </td>
+          </tr>
+
+          <tr>
+            <td>Bill Type</td>
+            <td>
+              {% if t.billtype == '1' %}
+              Electricity
+              {% elif t.billtype == '2'  %}
+              Water
+              {% endif %}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Reference Number</td>
+            <td>
+              {{t.referencenumber}}
+             </td>
+          </tr>
+
+          <tr>
+            <td>Account Name</td>
+
+            <td>
+              {{t.utility_account_name}}
+             </td>
+          </tr>
+
+          <tr>
+          <td>Account Type</td>
+            <td>
+             {{t.utility_account_type}}
+            </td>
+          </tr>
+
+          <!-- <tr>
+            <td>Amount Sent</td>
+            <td>{{ t.amount_sent | exchange }}</td>
+          </tr>
+
+          <tr>
+            <td>Amount recieved</td>
+            <td>{{ t.amount_received | currency }}</td>
+          </tr> -->
+          <tr>
+            <td>Amount Sent</td>
+            <td>{{ t.amount_received | currency }}</td>
+          </tr>
+
+
+          <tr>
+            <td>Date Initiated</td>
+            <td>{{ t.actual_initiation_date  }}</td>
+          </tr>
+
+          {% if t.mobile_is_pending %}
+
+          <tr>
+            <td>Amount to be Payed</td>
+            <td>{{t.to_country.currency}} {{ t.amount_received | currency }}</td>
+          </tr>
+
+           {% endif %}
+
+          {% if type == 'successful' %}
+
+          <tr>
+            <td>Amount Payed</td>
+            <td>{{t.to_country.currency}} {{ t.actual_amount_received | currency }}</td>
+          </tr>
+
+
+
+            <tr>
+            <td>Date Delivered</td>
+            <td>{{ t.actual_delivery_date }}</td>
+          </tr>
+
+
+          <tr>
+            <td>Processed By</td>
+            <td><a href="{{ t.processed_by_profile.admin_url }}">{{t.processed_by_profile.get_names}}</a></td>
+          </tr>
+
+
+
+
+
+
+          {%  endif  %}
+
+
+
+
+          <tr>
+            <td>Mobile Money Withdraw</td>
+            <!-- <td>{{ t.visa_response_data  | filter_response | safe }}</td> -->
+            <td>
+                <!-- {{ t.mobile_money_response_data  | filter_response | safe }} -->
+                {% if t.mobile_money_success%}
+                {{ t.mobile_money_response_data  | filter_response | safe }}
+                {% else %}
+                Failed <br/>
+                {{ t.mobile_response_data  | filter_response | safe }}
+                {% endif %}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Biller Response</td>
+            <td>
+                {% if t.mobile_money_success%}
+                {{ t.mobile_response_data  | filter_response | safe }}
+                {% else %}
+
+                {% endif %}
+            </td>
+          </tr>
+
+
+
+          </tbody>
+        </table>
+
+
+                    </div>
+                    </div>
+
+
+                {% if not t.mobile_money_success %}
+
+                    <div class="span4 action-buttons user">
+                        <div class="span10 form pull-right">
+                        {% if request.user.is_superuser %}
+                        <form id="mobilemoney_success_form-{{t.get_invoice}}" method="POST" action='{% url "admin:admin_mobilemoney_success" %}'>
+                        <input type="hidden" name="mobilemoney_success" value="{{t.get_invoice}}">
+                        {% csrf_token %}
+                        </form>
+                        <!-- <a href="{% url 'admin:edit_transaction' t.get_invoice %}" class="btn btn-success">Mark Mobile money successful</a> -->
+                      <button class="btn btn-success" OnClick="confirm_submit('You about to mark Mobile money as successful for the Transaction #{{t.get_invoice}}. Do you want to proceed ? ','#mobilemoney_success_form-{{t.get_invoice}}')"><i class="icon-check"></i> &nbsp; Mark Mobile money as successful </button>
+
+                        {% endif %}
+                        </div>
+                    </div>
+
+
+                {% endif %}
+
+                {% if not t.mobile_is_pending %}
+
+                 {% else %}
+
+                  <div class="span4 action-buttons user">
+
+
+                  <div class="span10 form pull-right">
+                  {% if request.user.is_superuser %}
+                  <a href="{% url 'admin:edit_transaction' t.get_invoice %}" class="btn btn-warning">Edit Transaction</a>
+                  {% endif %}
+                  </div>
+
+                  {% if permissions.edit_transaction or request.user.is_superuser %}
+
+                  <div class="span10 form pull-right">
+
+                  <form id="resend_transaction_form-{{t.get_invoice}}" method="POST" action='{% url "admin:admin_resend_transaction" %}'>
+                  <input type="hidden" name="resend_transaction" value="{{t.get_invoice}}">
+                  {% csrf_token %}
+                  </form>
+                  <button class="btn btn-danger" OnClick="confirm_submit('You are About to Send {{ t.amount_received | currency }} to  {{t.recipient_number}} , Are you sure you want to proceed ? ','#resend_transaction_form-{{t.get_invoice}}')"><i class="icon-refresh"></i> &nbsp; Resend </button>
+                  </div>
+
+
+                   {% if request.user.is_superuser %}
+
+                  <div class="span10 form pull-right">
+                  <form id="process_transaction_form-{{t.get_invoice}}" method="POST" action='{% url "admin:admin_process_transaction" %}'>
+                  <input type="hidden" name="process_transaction" value="{{t.get_invoice}}">
+                  {% csrf_token %}
+                  </form>
+                  <button class="btn btn-success" OnClick="confirm_submit('You about to mark the Transaction #{{t.get_invoice}} as processed , Do you want to proceed ? ','#process_transaction_form-{{t.get_invoice}}')"><i class="icon-check"></i> &nbsp; Mark As Processed </button>
+                  </div>
+
+
+                  <div class="span10 form pull-right">
+                  <form id="cancel_transaction_form-{{t.get_invoice}}" method="POST" action='{% url "admin:admin_process_transaction" %}'>
+                  <input type="hidden" name="cancel_transaction" value="{{t.get_invoice}}">
+                  {% csrf_token %}
+                  </form>
+                  <button class="btn btn-danger" OnClick="confirm_submit('You about to mark the Transaction #{{t.get_invoice}} as cancelled , Do you want to proceed ? ','#cancel_transaction_form-{{t.get_invoice}}')"><i class="icon-rotate"></i> &nbsp; Mark As Cancelled </button>
+                  </div>
+
+                  <div class="span10 form pull-right">
+                      <form id="transaction_status_form-{{t.get_invoice}}" method="POST" action='{% url "admin:check_transaction_status" %}'>
+                      <input type="hidden" name="check_transaction_status" value="{{t.get_invoice}}">
+                      {% csrf_token %}
+                      </form>
+                    <button class="btn btn-info" OnClick="confirm_submit('You about to check the status for the Transaction #{{t.get_invoice}}. Do you want to proceed ? ','#transaction_status_form-{{t.get_invoice}}')"><i class="icon-check"></i> &nbsp; Check Transaction Status </button>
+                  </div>
+
+                  {% endif %}
+
+                  </div>
+
+                  {% endif %}
+
+                  {% endif %}
+
+
+
+
+
+                  </td>
+                </tr>
+
+                {% endfor %}
+
+
+              </tbody>
+            </table>
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8 hidden-phone">
+                  <!--
+                  <div style="line-height: 30px">
+                    Displaying <b> {{ user.number }} </b> of {{admin_data.user_count}} transactions
+                  </div>
+                  -->
+
+
+
+                </div>
+                <div class="span11 message-navigation align-right">
+                  <div class="btn-toolbar">
+                    <div class=" btn-group">
+                    <!--
+                      <button class="btn"><i class="icon-chevron-left"></i></button>
+                      <button class="btn"><i class="icon-chevron-right"></i></button>
+                    -->
+
+
+{% with transactions as pages %}
+{% include 'pagination.html'%}
+{% endwith %}
+
+              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!--/.module-body-->
+        </div><!--/.module.message-->
+      </div><!--/.span12-->
+    </section>
+
+
+{% else %}
+
+
+{% include 'admin/noresult.html' %}
+
+{% endif %}
+
+
+
+
+
+{% endblock %}

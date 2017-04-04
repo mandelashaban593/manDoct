@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id="instructions"> 
+  <p>Ok, to get things started you could read some of the info on how this works on the post I made in my blog here: <a href="http://pythonhaven.wordpress.com/2009/07/13/django-powered-ajax-chat-%e2%80%93-part-2/" target="_blank">Django AJAX Powered chat Part 2 @ PythonHaven</a>, or visit the wiki section of the <a href="http://code.google.com/p/django-jchat/" target="_blank">project's homepage</a> (whenever it is updated)...</p> 
+</div> 
+<div id="explanation"> 
+  <p> 
+    The following links expose the two ways that django-jchat can be used in your site.
+    <ol>
+    	<li>The first mode (AKA "standalone" mode) the chat room is instanced and exists by itself, unattached to anything else in your project. This can be useful if you want to create a "global chat" application for your site, or simply chat rooms that exist by themselves.</li>
+    	<li>The second mode (AKA "the power of generic relations" mode) the chat room is binded to an instance of <strong><em>any</em></strong> model in your site, allowing you to create chat rooms for forum topics, user groups, user-user conversations, etc.</li>
+    </ol>
+  </p> 
+</div>
+<div id="example1">
+	<h3>Standalone</h3>
+	<p>This example leads you to a page where the chat room instance exists by itself, it is not bound to any other models in the project.</p>
+	<p>Go to <a href="/simple">simple (standalone)</a> demo.</p>
+</div>
+<div id="example2">
+	<h3>Complex</h3>
+	<p>For this example the database has been populated with dummy instances of a "document" model. The use case I'm covering with this example is that of a site like Google Docs, where you can edit documents and chat with the people editing the document at the same time (it's the only example I could think of, sorry). So, by binding the chatroom instances to each document I can have a separate chat room for each document so that contributors can collaborate in a more Web 2.0'esque way :D.</p>
+	<ul>
+	{% for doc in documents %}
+		<li>Go to <a href="/complex/{{ doc.id }}">{{ doc.title }}</a> document</li>
+	{% endfor %}
+	</ul>
+</div>
+
+{% endblock %} 

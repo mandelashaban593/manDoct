@@ -1,0 +1,25 @@
+{% load i18n admin_static %}
+
+
+{% if cl.search_fields %}
+<div class="module-option">
+                            <div class="row-fluid">
+                                <div class="span8">
+                                    <form class="form-absolute">
+                                        <button class="btn btn-icon go-right"><i class="icon-search"></i></button>
+                                        <input type="text" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" class="input-block-level" placeholder="Search {{cl.opts.module_name}}" autocomplete="off">
+                                    </form>
+                                    {% if show_result_count %}
+    <span class="small quiet">{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}pop=1{% endif %}">{% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}</a>)</span>
+{% endif %}
+{% for pair in cl.params.items %}
+    {% ifnotequal pair.0 search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endifnotequal %}
+{% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+{% endif %}
+
+
+  

@@ -1,0 +1,257 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<section class="row-fluid">
+      <div class="span12">
+        <div class="module no-head message">
+          <div class="module-body no-padding">
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8">
+                Transaction #{{transaction.get_invoice}}
+                </div>
+
+
+
+              </div>
+            </div>
+            <table class="table table-utilities vertical-top">
+              <tbody>
+
+
+
+
+
+                <tr>
+                  <td class="cell-detail">
+
+
+
+                  <div class="span8">
+                    <div class="people-brief">
+
+                      <table class="table table-bordered">
+          <thead>
+          <tr>
+          <h1></h1>
+          <!--
+            <th># <a href="{% url 'admin:admin_transaction' transaction.get_invoice %}"> {{transaction.get_invoice}} </a></th>
+            <th></th>
+            -->
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <tr>
+            <td>Sender</td>
+            <td><a href="{% url 'admin:admin_user' transaction.get_sender_profile.uid %}">{{transaction.get_sender_profile.get_names}}</a></td>
+          </tr>
+
+          <tr>
+            <td>Recipient</td>
+            <td>{{transaction.recipient_number}} {{transaction.recipient_names}}</td>
+          </tr>
+
+          <tr>
+            <td>Amount Sent</td>
+            <td>{{ transaction.amount_sent | exchange }}</td>
+          </tr>
+
+          <tr>
+            <td>Date Initiated</td>
+            <td>{{ transaction.started_on | date:"F j o , h:m:s a"  }}</td>
+          </tr>
+
+
+
+            <tr>
+            <td>{% if transaction.mobile_is_pending%}Amount to be Received{% else%} Received Amount{% endif%}</td>
+            <td>{{transaction.to_country.currency}} {{ transaction.actual_amount_received | currency }}</td>
+          </tr>
+
+
+
+          {% if type == 'successful' %}
+
+          <!--
+          <tr>
+            <td>Amount Received</td>
+            <td>{{ transaction.amount_received | currency }}</td>
+          </tr>
+          -->
+
+
+            <tr>
+            <td>Date Delivered</td>
+            <td>{{ transaction.processed_on | date:"F j o , h:m:s a" }}</td>
+          </tr>
+
+
+          <tr>
+            <td>Processed By</td>
+            <td><a href="{{ transaction.processed_by_profile.admin_url }}">{{transaction.processed_by_profile.get_names}}</a></td>
+          </tr>
+
+
+
+          {%  endif  %}
+
+
+
+
+          <tr>
+            <td>Credit Card Response Code</td>
+            <td>{{ transaction.visa_response_data | filter_response | safe }}</td>
+          </tr>
+
+          <tr>
+            <td>Mobile Response Code</td>
+            <td>{{ transaction.mobile_response_data  | filter_response | safe}}</td>
+          </tr>
+
+
+          {% if request.user.is_superuser%}
+
+           <tr>
+            <td>Credit Card Response Metadata</td>
+            <td>{{ transaction.visa_response_metadata | filter_response | safe }}</td>
+          </tr>
+
+
+
+           <tr>
+            <td>Mobile Response Metadata</td>
+            <td>{{ transaction.mobile_response_metadata | filter_response | safe }}</td>
+          </tr>
+
+
+          {% endif %}
+
+
+
+
+
+          </tbody>
+        </table>
+
+
+                    </div>
+                    </div>
+
+
+
+
+                {% if not transaction.mobile_is_pending %}
+
+
+
+                 {% else %}
+
+                  <div class="span4 action-buttons user">
+
+
+                  {% if request.user.is_superuser %}
+                  <div class="span10 form pull-right">
+                  <a href="{% url 'admin:edit_transaction' transaction.get_invoice %}" class="btn btn-warning"><i class="icon-edit"></i> &nbsp;Edit Transaction</a>
+                  </div>
+                  {% endif %}
+
+                  <div class="span10 form pull-right">
+                  <form id="resend_transaction_form-{{transaction.get_invoice}}" method="POST" action='{% url "admin:admin_resend_transaction" %}'>
+                  <input type="hidden" name="resend_transaction" value="{{transaction.get_invoice}}">
+                  {% csrf_token %}
+                  </form>
+                  <button class="btn btn-danger" OnClick="confirm_submit('You are About to Send {{ transaction.amount_received | currency }} to  {{transaction.recipient_number}} , Are you sure you want to proceed ? ','#resend_transaction_form-{{transaction.get_invoice}}')"><i class="icon-refresh"></i> &nbsp; Resend </button>
+                  </div>
+
+
+                  <div class="span10 form pull-right">
+                  <form id="process_transaction_form-{{transaction.get_invoice}}" method="POST" action='{% url "admin:admin_process_transaction" %}'>
+                  <input type="hidden" name="process_transaction" value="{{transaction.get_invoice}}">
+                  {% csrf_token %}
+                  </form>
+                  <button class="btn btn-success" OnClick="confirm_submit('You about to mark the Transaction #{{transaction.get_invoice}} as processed , Do you want to proceed ? ','#process_transaction_form-{{transaction.get_invoice}}')"><i class="icon-check"></i> &nbsp; Mark As Processed </button>
+                  </div>
+
+
+
+                  </div>
+
+                  {% endif %}
+
+
+
+
+
+                  </td>
+                </tr>
+
+
+
+
+              </tbody>
+            </table>
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8 hidden-phone">
+                  <!--
+                  <div style="line-height: 30px">
+                    Displaying <b> {{ user.number }} </b> of {{admin_data.user_count}} transactions
+                  </div>
+                  -->
+
+
+
+                </div>
+                <div class="span11 message-navigation align-right">
+                  <div class="btn-toolbar">
+                    <div class=" btn-group">
+                    <!--
+                      <button class="btn"><i class="icon-chevron-left"></i></button>
+                      <button class="btn"><i class="icon-chevron-right"></i></button>
+                    -->
+
+
+{% with transactions as pages %}
+{% include 'pagination.html'%}
+{% endwith %}
+
+              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!--/.module-body-->
+        </div><!--/.module.message-->
+      </div><!--/.span12-->
+    </section>
+
+
+
+
+{% endblock %}

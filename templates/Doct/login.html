@@ -1,25 +1,39 @@
-<div id="formWrapper">
-<form action="/Doct/login/" method="post" id="changeloginform_form">
+
+
+{% load staticfiles %}
+
+<div style="visibility:visible;position:relative;top: 10px;
+    right: 44px; margin-left: 400px;" id="paypalformContainer" align="center">
+
+<form id="signup" action="/Doct/login/"  method="POST" style=" ">
 {% csrf_token %}
-{% if response %}
-<script type="text/javascript">alert("Incorrect Username or Password");</script>
-{% endif %}
-<fieldset class="first">
-<h3>Enter Your Log In details</h3>
-
-<label class="labelone" for="username" required>Telephone:</label>
-<input name="username" type="user"/>
-
-<label for="telno">Password:</label>
-<input name="password" type="password"  />
+   
+            <h3>Log In</h3>
+          
+            
+        
 
 
- 
+            <p style="padding: 7px">Username:<br>
+            <input type="text" name="username" id="pname" autofocus style="width:340px; height:40px;" />
 
-<table>
-<tr><td><input class="btn" name="submit" type="submit" value="Log In" /></td><td><input class="btn" name="submit" type="reset" value="Clear Form" /></td></tr>
-</table>
+              </p>
 
-</form>
+               <p style=' padding: 7px' '>Password:<br>
+               <input type="password" name="password" id="pname" autofocus/>
 
-</fieldset>
+               </p>
+
+            <p style="padding: 7px">
+
+
+            <input type="submit" id="submit"  placeholder="Enter Message" value="Login" name="SUBMIT" required>
+           
+             </p>
+
+     
+
+    </form>
+
+    </div>
+

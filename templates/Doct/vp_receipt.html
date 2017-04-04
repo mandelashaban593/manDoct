@@ -13,8 +13,7 @@
 
  
       <ul class="submenu">
-              <li><a href="view_login.php" title="View Taxi Details">View Login</a></li>
-          <li><a href="edit_login.php" title="Update Taxi Details">Update Login</a></li>                <li><a href="delete_login.php" title="Delete Taxi Details">Delete Login</a></li>           
+                    
                     </ul>
 
         </li>
@@ -23,8 +22,7 @@
  
      <li><a href="/Doct/receipt/">Print reciept</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+              </li>
                     
                     </ul>
          </li>
@@ -32,8 +30,7 @@
 
           <li><a href="/Doct/authdiog/">View Your Diognosis</a>
         <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+             
                     
                     </ul>
         
@@ -41,8 +38,7 @@
 
     <li><a href="/Doct/" title="Logout">Logout</a>
         <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+             
                     
                     </ul>
         
@@ -132,7 +128,7 @@ function printPage(id) {
 
 {% if illness %}You have successfully sent your Sickness detail And Check Your Diagnosis after 5 minutes {% endif %}
 <p>&nbsp;</p>
-<div class="heder"><h1>Patients'  Payment Receipt</h1></div>
+<div class="heder"><h1 class="form-style-6" style="margin-left: 480px">Patients'  Payment Receipt</h1></div>
 <p>&nbsp;</p>
 
 
@@ -182,117 +178,6 @@ return false;
  <p>&nbsp;</p>
 
 
-<div id="imgs"><table><tr><td><img src="{% static 'doct.jpg' %}" alt="pat" width="100px" height="100px" align="left"/></td><td>
-<img src="{% static 'pat.jpg' %}" alt="pat" width="100px" height="100px" align="right"/></td>
-<td></td></tr></table>
-
-
-</div>
-<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
-
-<script type="text/javascript">
- 
-
-$(document).ready(function(){
-    $("#changesicknessform_form").validate({
-    rules:{
-
-          email:
-            {
-            required:true,
-            email: true,
-            maxlength:40,
-            },
-             gender:
-            {
-            required:true,
-            digits: true,
-            maxlength:40,
-            },
-             pname:
-            {
-            required:true,
-            maxlength:50,
-            },
-            illness:
-            {
-            required:true,
-            maxlength:700,
-            },
-             kin:
-            {
-            required:true,
-            maxlength:30,
-            },
-            kintelno:
-            {
-            required:true,
-            digits: true,
-            maxlength:20,
-            },
-            username:
-            {
-            required:true,
-            maxlength:20,
-            },
-            page:
-            {
-            required:true,
-            digits: true,
-            maxlength:3,
-            },
-    },
-          messages: {
-        email: {
-        required: "Email is required",
-        digits: "Enter the valid email address",
-        maxlength:"Please provide a Valid email address",
-      },
-       gender: {
-        required: "Please provide a valid Payment Id",
-        digits: "Please provide a Valid Payment Id",
-        maxlength:"Please provide a Valid Payment Id",
-      },
-        pname: {
-        required: "Please provide your names",
-        maxlength:"Please provide valid names",
-      },
-        illness: {
-        required: "Please provide sickness details",
-        maxlength:"Please briefly explain sickness",
-      },
-        kin: {
-        required: "Please provide next of kin names",
-        maxlength:"Please provide valid names",
-      },
-        kintelno: {
-        required: "Telephone number is required",
-        digits: "Enter the valid Telephone number",
-        maxlength:"Please provide valid phone number",
-      },
-      username: {
-      required: "Please provide username",
-      maxlength:"Please provide valid username",
-      },
-      page: {
-      required: "Please provide your age",
-      digits: "Enter the valid age",
-      maxlength:"Please provide a valid age",
-      },
-    
-    
-    },
-
-  
-
-    });
-    });
-
-
-
-
-
-</script>
 
 {% endblock %}
 

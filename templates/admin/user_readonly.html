@@ -1,0 +1,220 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block headcontent %}
+
+<div class="profile-head" style="overflow: hidden;margin-bottom:10px;">
+	<!--
+			<img src="images/samples/avatar-2.jpg" class="avatar img-radius pull-left" style="margin-right: 25px; width: 100px; border-radius: 
+			4px">
+			-->
+			<div style="overflow:hidden">
+				<h2 class="profile-name">{{user_profile.get_names}}</h2>
+				<div class="">
+
+
+
+
+                  {% if not user_profile.account_blocked %}
+
+
+                  {% if not user_profile.account_verified%}
+
+                	<a href="#" class="btn btn-warning">
+						<i class="icon-thumbs-down"></i>
+						<span class="visible-desktop">Not Verified</span>
+					</a>
+
+                  {% else %}
+
+             		<a href="#" class="btn btn-primary">
+						<i class="icon-thumbs-up"></i>
+						<span class="visible-desktop">Verifed</span>
+					</a>
+                
+                  {%endif%}
+
+                  {% else %}
+
+     		<a href="#" class="btn btn-danger">
+						<i class="icon-remove-sign"></i>
+						<span class="visible-desktop">Account Blocked</span>
+					</a>
+
+
+                  {% endif %}
+
+     
+
+				</div>
+			</div>
+		</div>
+
+
+{% endblock headcontent %}
+
+
+
+
+{% block content %}
+
+<section class="row-fluid">
+			<div class="span8">
+
+				
+
+				<section class="module rates">
+			<div class="module-head">
+				<ul class="module-control pull-left">
+					<li class="active"><a href="element-form.html#tab-1" data-toggle="tab">Acount Information</a></li>
+					
+					<!--
+					<li><a href="element-form.html#tab-2" data-toggle="tab">Tiered pricing</a></li>
+					-->
+
+				</ul>
+			</div><!--/.module-head-->
+			<div class="module-body">
+				<div class="tab">
+				
+						<div class="tab-pane fade active in" id="tab-1">
+							<div class="form-horizontal" >
+								{% csrf_token %}
+							<input type="hidden" name="update_account" value="True">
+								
+								<div class="control-group">
+									<label class="control-label" for="basicinput">Firstname</label>
+									<div class="controls">
+										<input type="text" name="firstname" value="{{user_profile.firstname}}" class="span8" disabled="disabled">
+									</div>
+								</div>
+
+
+								<div class="control-group">
+									<label class="control-label" for="basicinput">Lastname</label>
+									<div class="controls">
+										<input type="text" name="lastname" value="{{user_profile.lastname}}" class="span8" disabled="disabled">
+									</div>
+								</div>
+
+
+								<div class="control-group">
+									<label class="control-label" for="basicinput">ID Number</label>
+									<div class="controls">
+										<input type="text" name="id_number" value="{{user_profile.id_number}}" class="span8" disabled="disabled">
+									</div>
+								</div>
+
+
+								<div class="control-group">
+									<label class="control-label" for="basicinput">D.O.B</label>
+									<div class="controls">
+									
+										<select  class="mini" name="dob_day">
+<option value="{{user_profile.dob | date:'j'}}">{{user_profile.dob| date:'j'}}</option>
+</select>
+
+<select  class="mini" name="dob_month">
+<option value="{{user_profile.dob | date:'n'}}">{{user_profile.dob| date:'n'}}</option>
+</select>
+
+<select  class="mini" name="dob_year">
+<option value="{{user_profile.dob | date:'Y'}}">{{user_profile.dob| date:'Y'}}</option>
+</select>
+
+
+									</div>
+								</div>
+
+
+<div class="control-group">
+<label class="control-label" for="basicinput">ID Document</label>
+<div class="controls">
+{% if user_profile.id_pic%}
+ <img src="{{user_profile.id_pic.url}}" style="max-height:200px;">
+{% else %}
+
+
+ <div class="placeholder-image">
+                  No Passport Image
+                  </div>
+                  
+{% endif %}
+</div>
+</div>
+
+
+						
+						</div>
+					</div>
+				</div>
+
+
+			</div><!--/.module-body-->
+
+
+		
+		</section>
+
+				
+
+
+			</div><!--/.span7-->
+			<div class="span4">
+				
+				<section class="module">
+					<div class="module-head">
+						<b>Basic User Activity</b>
+					</div><!--/.module-head-->
+					<div class="module-body no-padding">
+						<ul class="module-list">
+							<li>
+								<p><b>Last Seen</b></p>
+								<div>{{ user_profile.user.last_login | date:'F j, o h:m a'}}</div>
+							</li>
+							<li>
+								<p><b>Number Of Successful Transactions</b></p>
+								<div>{{userdata.successful_transactions }}</dd>
+							</li>
+							<li>
+								<p><b>Amount Sent</b></p>
+								<div>{{ userdata.amount_sent | exchange  }}</div>
+							</li>
+							<li>
+								<p><b>Top Amount Sent</b></p>
+								<div>{{userdata.top_amount_sent| exchange }}</div>
+							</li>
+							<li>
+								<p><b>Joined</b></p>
+								<div>{{ user_profile.joined | date:'F j, o h:m a'}}</div>
+							</li>
+						</ul>
+					</div><!--/.module-body-->
+				</section>
+
+				
+			</div><!--/.span5-->
+		</section><!--/.row-fluid-->
+
+
+
+{% endblock %}

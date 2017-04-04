@@ -5,14 +5,14 @@
 
 
 
-<h3> <strong>View Receipt  !</strong><br /></h3>
+<h3> <strong style="padding-left:10px">View Receipt  !</strong><br /></h3>
 
 <fieldset width:60%>
 <form action="/Doct/doctor_receipt/" method="post" id="changereceiptform_form">
 {% csrf_token %}
 <table style=" border:0px solid black; width:300px; height:300px">
-<tr><td>Transaction Id </td><td> <input type="text" name="id"  id="dname" required="True" /></td></tr>
-<tr><td><input type="reset" name="reset" style="width:100px" required="True" /></td> <td><input type="submit" name="submit" value="Submit" style="width:100px"/></td></tr>
+<tr><td style="padding-left:10px">Transaction Id </td><td> <input type="text" name="id"  id="dname" required="True" /></td></tr>
+<tr><td style="padding-left:10px"><input type="reset" name="reset" style="width:100px" required="True" /></td> <td style="padding-left:8px"><input type="submit" name="submit" value="Submit" style="width:100px"/></td></tr>
 </table> 
 </form>
 </fieldset>

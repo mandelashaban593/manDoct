@@ -1,0 +1,33 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Log In</title>
+</head>
+<body>
+	
+<div class="container" style="max-width:400px">
+
+      <form method="post" class="form-signin">{% csrf_token %}
+        <h2 class="form-signin-heading">Please Log in</h2>
+        <input type="text" name="username" class="form-control" placeholder="username" autofocus>
+        <input type="password" name="password" class="form-control" placeholder="Password">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+      </form>
+		<p>{{error}}</p>
+    </div> <!-- /container -->
+
+
+    <p> for testing </p>
+    <p> username = test , password = test </p>
+    <p> username = test2 , password = test2 </p>
+    <p> username = test3 , password = test3 </p>
+    <p> username = test4 , password = test4 </p>
+
+
+
+
+
+
+
+</body>
+</html>

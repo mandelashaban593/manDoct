@@ -110,3 +110,8 @@ You will receive an email once the transaction has been processed.
 
 
 {%endif%}
+
+
+{% if type == 'process_illness' %}
+Your consultation payment id is #{{pay_id}}
+{%endif%}

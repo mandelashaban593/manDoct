@@ -1,0 +1,156 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+
+
+
+<section class="module rates">
+			<div class="module-head">
+				<ul class="module-control pull-left">
+					<li class="active"><a href="element-form.html#tab-1" data-toggle="tab">Rates & Limits</a></li>
+					
+					<!--
+					<li><a href="element-form.html#tab-2" data-toggle="tab">Tiered pricing</a></li>
+					-->
+
+				</ul>
+			</div><!--/.module-head-->
+			<div class="module-body">
+				<div class="tab">
+					<div class="tab-content">
+						<div class="tab-pane fade active in" id="tab-1">
+							<form class="form-horizontal" method="POST" action="{% url 'admin:admin_rates' %}">
+								
+								{% csrf_token %}
+
+							<input type="hidden" name="update_rates" value="True">
+								<div class="control-group">
+									<label class="control-label" for="basicinput">USD TO UGX</label>
+									<div class="controls">
+										<input type="text" name="usd_to_ugx" value="{{rate.usd_to_ugx}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">USD TO KES</label>
+									<div class="controls">
+										<input type="text" name="usd_to_kes" value="{{rate.usd_to_kes}}" class="span7" required="required">
+									</div>
+								</div>
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">USD TO TZS</label>
+									<div class="controls">
+										<input type="text" name="usd_to_tzs" value="{{rate.usd_to_tzs}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">USD TO RWF</label>
+									<div class="controls">
+										<input type="text" name="usd_to_rwf" value="{{rate.usd_to_rwf}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">GBP TO UGX</label>
+									<div class="controls">
+										<input type="text" name="gbp_to_ugx" value="{{rate.gbp_to_ugx}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">GBP TO KES</label>
+									<div class="controls">
+										<input type="text" name="gpb_to_kes" value="{{rate.gpb_to_kes}}" class="span7" required="required">
+									</div>
+								</div>
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">GBP TO TZS</label>
+									<div class="controls">
+										<input type="text" name="gpb_to_tzs" value="{{rate.gpb_to_tzs}}" class="span7" required="required">
+									</div>
+								</div>
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">GBP TO RWF</label>
+									<div class="controls">
+										<input type="text" name="gbp_to_rwf" value="{{rate.gbp_to_rwf}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+								<div class="control-group">
+									<div class="controls">
+										<button type="submit" class="btn btn-primary">Update Rates</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane fade" id="tab-2">
+							<form class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="basicinput">Basic Input</label>
+									<div class="controls">
+										<input type="text" name="basicinput" placeholder="Type something here..." class="span8">
+									</div>
+								</div>
+
+								
+
+								<div class="control-group">
+									<div class="controls">
+										<button type="submit" class="btn btn-primary">Update Limits</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+			</div><!--/.module-body-->
+
+
+				
+				<ul class="module-control pull-right">
+					<li class="active"><a href="#" >Last updated by  {{rate.last_modified_by}} on {{rate.added | date:"F j, o" }} </a></li>
+				</ul>
+
+
+		</section>
+
+
+
+{% endblock %}

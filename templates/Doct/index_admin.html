@@ -1,0 +1,126 @@
+{% extends "Doct/base_site_admin.html" %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li>Home'</li>
+</ul>
+{% endblock %}
+
+{% block pretitle %}
+Es-doctor Stats
+{% endblock %}
+
+
+{% block content %}
+
+<section class="module">
+            <div class="module-head">
+                <b>Stat Summary</b>
+            </div><!--/.module-head-->
+            <div class="module-body">
+                <table class="table table-striped">
+                <!--
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  -->
+                  <tbody>
+                  <tr>
+                      <td>#</td>
+                      <td>Diognised Patient Count</td>
+                      <td>{{diog_count}}</td>
+                    </tr>
+                    <tr>
+                      <td>#</td>
+                      <td>Undiognised  Patient Count</td>
+                      <td>{{undiog_count}}</td>
+                    </tr>
+                    <tr>
+                      <td>#</td>
+                      <td>Doctor count</td>
+                      <td>{{doctor_count}}</td>
+                    </tr>
+
+                     <tr>
+                      <td>#</td>
+                      <td>Logged in User count </td>
+                      <td>{{doctor_count}}</td>
+                    </tr>
+
+
+                    {% for country in countries %}
+                     <tr>
+                      <td>#</td>
+                      <td>Pending Mobile Money Transactions ({{country.currency}})</td>
+                      <td>{{country.pending_transaction_count}}</td>
+                    </tr>
+                    {%endfor%}
+                    <!--
+                    <tr>
+                      <td>#</td>
+                      <td>Pending Mobile Money Transactions (UGX)</td>
+                      <td>{{admin_data.pending_transactions_ugx}}</td>
+                    </tr>
+                    <tr>
+                      <td>#</td>
+                      <td>Pending Mobile Money Transactions (KES)</td>
+                      <td>{{admin_data.pending_transactions_kes}}</td>
+                    </tr>
+                    -->
+                    <tr>
+                      <td>#</td>
+                      <td>Amount Pending (USD)</td>
+                      <td>{{admin_data.amount_pending  }}</td>
+                    </tr>
+
+                     {% for country in countries %}
+                     <tr>
+                      <td>#</td>
+                      <td>Amount Pending ({{country.currency}})</td>
+                      <td>{{country.currency}} {{country.pending_transaction_amount }}</td>
+                    </tr>
+                    {%endfor%}
+
+                   
+                    <tr>
+                      <td>#</td>
+                      <td>Complete Transactions</td>
+                      <td>{{admin_data.complete_transactions}}</td>
+                    </tr>
+
+                     <tr>
+                      <td>#</td>
+                      <td>Failed Transactions</td>
+                      <td>{{admin_data.failed_transactions}}</td>
+                    </tr>
+
+                    <tr>
+                      <td>#</td>
+                      <td>Users with atleast 1 successfull transaction</td>
+                      <td>{{admin_data.user_with_transaction}}</td>
+                    </tr>
+                    <tr>
+                      <td>#</td>
+                      <td>Total Amount Transfered (USD)</td>
+                      <td>{{admin_data.total_amount_transfered}}</td>
+                    </tr>
+                    {% for country in countries %}
+                     <tr>
+                      <td>#</td>
+                      <td>Total Amount Transfered ({{country.currency}})</td>
+                      <td>{{country.currency}} {{country.successful_transaction_amount}}</td>
+                    </tr>
+                    {%endfor%}
+                  </tbody>
+                </table>
+            </div><!--/.module-body-->
+        </section>
+
+
+{% endblock %}
+
+

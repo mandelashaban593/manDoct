@@ -1,0 +1,253 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load admin_tags %}
+
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<section class="row-fluid">
+      <div class="span12">
+        <div class="module no-head message">
+          <div class="module-body no-padding">
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span12">
+                  <form class="form-vertical" method="GET" action="{% url 'admin:audits_trails' %}">
+                  
+               <div class="control-group  controls-row controls">   
+
+
+              <div class="span2">
+            <label class="control-label" for="basicinput">User</label>
+            <div class="controls">
+              <div class="input-appendspan11">
+                <select name="action_type" class="span12">
+                
+                {%if request.user.is_superuser %}
+                {%if not request.GET.audit_user or request.GET.audit_user == 'All' %} <option value="All">----</option>{%endif%}
+                {%endif%}
+
+                {%for value in unique_users %}
+                <option value="{{value}}" {%if request.GET.ctry == key %} selected="selected" {%endif%}>{{value}}</option>
+                {%endfor%} 
+                
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+            <div class="span2">
+            <label class="control-label" for="basicinput">Action Type</label>
+            <div class="controls">
+              <div class="input-appendspan11">
+                <select name="action_type" class="span12">
+                
+                {%if request.user.is_superuser %}
+                {%if not request.GET.action_type or request.GET.action_type == 'All' %} <option value="All">----</option>{%endif%}
+                {%endif%}
+
+                {%for value in unique_actions %}
+                <option value="{{value}}" {%if request.GET.action_type == value %} selected="selected" {%endif%}>{{value | action_type }}</option>
+                {%endfor%} 
+                
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+               <!--
+            <div class="span2">
+            <label class="control-label" for="basicinput">Country</label>
+            <div class="controls">
+              <div class="input-appendspan11">
+                <select name="ctry" class="span12">
+                
+                {%if request.user.is_superuser %}
+                {%if not request.GET.ctry or request.GET.ctry == 'All' %} <option value="All">----</option>{%endif%}
+                {%endif%}
+
+                {%for key,value in countries %}
+                <option value="{{key}}" {%if request.GET.ctry == key %} selected="selected" {%endif%}>{{value}}</option>
+                {%endfor%} 
+                
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+            <div class="span2">
+            <label class="control-label" for="basicinput">Mobile Network</label>
+            <div class="controls">
+              <div class="input-appendspan11">
+                <select name="network" class="span12">
+                
+                {%if request.user.is_superuser %}
+                {%if not request.GET.network or request.GET.network == 'All' %} <option value="All">----</option>{%endif%}
+                {%endif%}
+
+                {%for key,value in networks %}
+                <option value="{{key}}" {%if request.GET.network == key %} selected="selected" {%endif%}>{{value}}</option>
+                {%endfor%} 
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+            <div class="span2">
+            <label class="control-label" for="basicinput">Sender Country</label>
+            <div class="controls">
+              <div class="input-appendspan11">
+
+
+                <select name="sender_ctry" class="span12">
+                
+
+                 <option value="All">----</option>
+                {% for tr in countries_list %}
+                <option value="{{tr}}" {%if request.GET.sender_ctry == tr %} selected="selected" {%endif%}>{{tr}}</option>
+                {%endfor%} 
+
+                </select>
+              </div>
+            </div>
+          </div>
+
+          -->
+    
+
+            
+            <div class="span2">
+            <label class="control-label" for="basicinput">Start Date</label>
+            <div class="controls">
+              <div class="input-append span11">
+                <input class="span12"  id="start_date" data-date="{{start_date}}" data-date-format="dd-mm-yyyy" size="16" type="text" value="{{start_date}}" readonly="" name="start_date">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="span2">
+            <label class="control-label" for="basicinput">End Date</label>
+            <div class="controls">
+              <div class="input-append span10" >
+                <input class="span12" id="end_date" data-date="{{end_date}}" data-date-format="dd-mm-yyyy" size="16" type="text" value="{{end_date}}" readonly="" name="end_date">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+
+           <div class="span2" style="float:left;margin-top:24px;">
+            <div class="controls">
+              <div class="input-append date">
+              <button class="btn btn-primary" type="submit">Filter Audit Trail</button>
+              </div>
+            </div>
+          </div>
+
+          </div>
+
+
+
+
+                  </form>
+                </div>
+                
+
+
+              </div>
+            </div>
+
+
+{% if audit_logs %}
+
+
+
+
+
+
+            <div class="stream-message">
+              
+            {% for log in audit_logs %}
+              
+
+            <div class="stream media">
+                <img src="{{log.user.avatar}}" class="avatar pull-left">
+                <div class="media-body">
+                  <h3> <a href="{% if log.user.uid %}{% url 'admin:edit_admin_user' log.user.uid %}{%else%}#{%endif%}">{{log.user.username}}</a><small>{{ log.log_entry.action_time }},  from  {{log.user_location}} </small></h3>
+                  <div>{{log.log_entry.change_message | safe }} {% if log.get_edited_object %} <a href="{{log.get_edited_object.admin_url}}">{{log.log_entry.content_type}}</a> {% endif %} on {{ log.log_entry.action_time }} </div>
+                </div>
+              </div>
+
+
+              {% endfor %}
+
+            
+            </div><!--/.stream-message-->
+
+
+         
+
+          {% with audit_logs as pages %}   
+{% include 'pagination.html'%}
+{% endwith %}
+
+   
+          </div>
+               
+{% else %}
+
+
+{% include 'admin/noresult.html' %}
+
+
+{% endif %}
+
+       
+        </div><!--/.module.message-->
+      </div><!--/.span12-->
+    </section>
+<script src='{% static "admin/dashboard/bootstrap/js/bootstrap-datepicker.js" %}'></script>
+<script type="text/javascript">
+  
+//DATEPICKER
+$(function(){
+
+$('#start_date').datepicker();
+$('#end_date').datepicker();
+
+});
+
+</script>
+
+
+
+
+{% endblock %}
+
+

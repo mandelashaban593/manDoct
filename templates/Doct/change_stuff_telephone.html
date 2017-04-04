@@ -1,0 +1,92 @@
+{% extends "Doct/base_site_admin.html" %}
+
+
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">Home</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>Es-doctor </li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+Es-doctor 
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="module">
+      <div class="module-head">
+        <b>Change A Staff Phone No</b> <small><i>With great power comes great responsibility , Don't be careless </i>
+        </small>
+      </div><!--/.module-head-->
+
+      <div class="module-body">
+
+
+      <div id=''>
+
+
+        {% if success %}
+
+        <script type="text/script">alert("You have successfully changed the staff Telephone number"); </script>
+{% endif %}
+
+</div>
+
+        <form class="form-horizontal" method="POST" action="" id="createadminuserform">
+          {% csrf_token %}
+
+
+          <section class="docs">
+          <h4>Auth Details</h4>
+          {% include "Doct/notifications.html" %}
+          <hr />
+          </section>
+
+          <div class="control-group">
+            <label class="control-label">Old Phone No:</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" placeholder="old phone" name="old_phone">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">New Phone No:</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" placeholder="new phone" name="new_phone">
+            </div>
+          </div>
+
+
+
+           <div class="control-group">
+            <div class="controls">
+          <button class="btn btn-primary">Create User</button>
+          <input class="btn" type="reset" value="Reset">
+          </div>
+          </div>
+
+        </form>
+      </div><!--/.module-body-->
+    </section>
+
+
+<!-- Form Validation -->
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.form-validation.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+   
+    });
+
+</script>
+
+{% endblock %}
+
+

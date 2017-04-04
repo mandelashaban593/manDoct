@@ -1,67 +1,225 @@
 
 
-{% load staticfiles %}
+{% extends "Doct/base_site_admin.html" %}
 
-<div class="heder"><h1>A patient Sickness Detail</h1></div>
-<div>
- <table width="300" border="0" cellpadding="30" style="text-align: center">
 
-  <tr> 
-  <th width="75"><strong> Email</strong></th> 
-  <th><span style="font-weight: bold;">Patient Name</span></th> 
-  <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong>Gender</strong></th> 
-  <th><span style="font-weight: bold;">Illness</span></th>
-  <th><span style="font-weight: bold;">Staff pic</span></th>  
-  <th><span style="font-weight: bold;">Kin</span></th>
-  <th><span style="font-weight: bold;">Kintelno</span></th> 
-  <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong> Username</strong></th> 
-  <th><span style="font-weight: bold;">Staff pic</span></th>
-  <th width="75"><strong>Patient age</strong></th> 
-  </tr> 
-{% if ind_ill %}
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li>Home</li>
+</ul>
+{% endblock %}
 
-{% for ill in ill %}
-  <tr> 
-  <td>{{ill.email}}</td>
-   <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
-   <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
-   <td>{{ill.gender}}</td> 
-   <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
-   <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
-   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
-       <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{ill.page}}</a></td>
+{% block pretitle %}
+Remit Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="module no-head"  style="color: ; font-size: 0x;font-weight: bold;padding-left:10px">
+      <div class="module-body no-padding">
+        <section class="docs">
+          <h2>Welcome To The Es-Doctor  Staff Dashboard</h2>
+          <p> <i>with great power comes great responsiblity </i></p>
+
+
+            <!--
+            <ol>
+              <li>Everything You do is monitored</li>
+              <li>Don't do anything stupid</li>
+              <li>If and when you do something stupid , tell an Admin</li>
+            </ol>
+            -->
+            <div class="muted">
+
+        {% include "Doct/notifications.html" %}
+
+        </div>
+
+      
+
+        {% if authindill %}
+
+{% include "Doct/ind_ill.html" %}
+
+{% elif ind_ill %}
+
+{% include "Doct/viewind_ill.html" %}
+
+{% elif endp %}
+
+{% include "Doct/view_receipt.html" %}
+
+{% elif editD %}
+
+{% include "Doct/edit_diogno.html" %}
+
+{% elif doctview_ill %}
+
+{% include "Doct/view_illness.html" %}
+
+{% elif dot_rec %}
+
+{% include "Doct/doctor_authreceipt.html" %}
+
+{% elif dform %}
+
+{% include "Doct/diog.html" %}
+
+{% elif indill_auth %}
+
+{% include "Doct/ind_ill.html" %}
+
+{% elif fup %}
+
+{% include "Doct/fup.html" %}
+
+{% elif chat %}
+
+{% include "Doct/dconverse.html" %}
+
+
+{% elif chatmsg %}
+
+{% include "Doct/convdoct.html" %}
+
+
+ {% else %}
+
+
+
+
+ <table class="table table-utilities vertical-top">
+              <tbody>
+
+
+
+
+
+      
+                <tr>
+                  <td class="cell-detail">
+                    
+                    {% if ind_ill %}
+
+                  <div class="span8">
+
+                    <div class="people-brief">
+                    {% for ill in ill %}
+                      
+                      <table class="table table-bordered">
+          <thead>
+          
+          <tr>
+            <th># <a href="#">{{ill.telno}}</a></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+            <td>Payment Id</td>
+            <td>{{ ill.gender}}</td>
+          </tr>
+
+           <tr>
+            <td>illness Detail</td>
+            <td>{{ ill.diognosis}}</td>
+          </tr>
+
+          
+         {% endfor %}
+          
+
+          
+
+          </tbody>
+        </table>
+
+
+
+
+{% else %}
+
  
-   </tr>
+ <table class="table table-utilities vertical-top">
+              <tbody>
 
-   {% endfor %}
 
-{% elif ind_illrecs %}
 
- <tr> 
-  <td>{{ill.email}}</td>
-   <td><a href="tel:0123456785">{{ill.pname}}</a></td> 
-   <td><img src="{% static 'doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
-   <td>{{ill.gender}}</td> 
-   <td><a href="tel:0123456785">{{ill.illness}}</a></td> 
-   <td><img src="{% static 'pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{ill.kin }}</td> <td><a href="tel:0123456785">{{ill.kintelno}}</a></td> 
-   <td><img src="{% static 'doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
-       <td><img src="{% static 'doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-    <td><a href="tel:0123456785">{{ill.page}}</a></td>
- 
-   </tr>
 
-  {% else %}
-  
 
-   {% endif %}
+      
+                <tr>
+                  <td class="cell-detail">
+                    
+                    {% if ind_illrecs %}
 
-   </table>
+                  <div class="span8">
 
+                    <div class="people-brief">
+                   
+                      
+                      <table class="table table-bordered">
+          <thead>
+          
+         <tr>
+            <th># <a href="#">{{ill.telno}}</a></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr>
+            <td>Payment Id</td>
+            <td>{{ ill.gender}}</td>
+          </tr>
+
+           <tr>
+            <td>illness Detail</td>
+            <td>{{ ill.diognosis}}</td>
+          </tr>
+
+          <tr>
+            <td>Patient Age </td>
+            <td>{{ ill.page}}</td>
+          </tr>
+
+          <tr>
+            <td>Ambulance</td>
+            <td>{{ ill.amb}}</td>
+          </tr>
+          
+    
+          
+
+          
+
+          </tbody>
+        </table>
+
+
+{% endif %}
+
+{% endif %}
 
 
 </div>
+   
+</div>
+
+
+
+{% endif %}
+             
+
+
+
+
+
+</section>
+
+{% endblock %}
+
+

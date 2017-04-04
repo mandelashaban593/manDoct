@@ -1,0 +1,248 @@
+{% extends 'Doct/base.html' %}
+
+{% load staticfiles %}
+
+{% block navbar %}
+
+<div id = "navigation">
+
+<nav class="cf">
+  <ul class="topmenu">
+    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
+    -->
+
+ 
+      <ul class="submenu">
+              <li><a href="view_login.php" title="View Taxi Details">View Login</a></li>
+          <li><a href="edit_login.php" title="Update Taxi Details">Update Login</a></li>                <li><a href="delete_login.php" title="Delete Taxi Details">Delete Login</a></li>           
+                    </ul>
+
+        </li>
+          <li><a href="/Doct/" title="Logout">Home</a>
+        <ul class="submenu">
+              <!-- <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
+   
+   
+ 
+     <li><a href="/Doct/receipt/">Print reciept</a>
+          <ul class="submenu">
+            <!--   <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
+                    
+                    </ul>
+         </li>
+
+
+          <li><a href="/Doct/authdiog/">View Your Diognosis</a>
+        <ul class="submenu">
+              <!-- <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
+
+
+     <li><a href="/Doct/repmsg/">Reply message</a>
+        <ul class="submenu">
+              <!-- <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
+
+      <li><a href="/Doct/" title="Logout">Logout</a>
+        <ul class="submenu">
+             <!--  <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
+
+
+  
+
+   
+                    
+   </ul>
+</nav>
+
+</div>
+
+
+
+{% endblock %}
+
+{% block body_block %}
+
+      <div id="content">
+     {% if illness %} <script type="text/javascript">alert("You have successfully submitted your Illness details, Please view Your diognosis");
+ return false;
+ </script>
+ {% endif %}
+
+
+ {% include "Doct/notifications.html" %} 
+
+ {% if pdiogs %}
+
+{% endif %}
+
+
+{% if qconvs %}
+
+<table style="position: absolute; left: 500px ">
+
+<tr><td style="width: 200px"><h1 style="color: #337ab7; font-size: 18px;font-weight: bold;">Converse</h1></td></tr>
+<tr><td style="width: 200px"><a href="#">
+{{dname}}(Doctor)
+<br/>
+{{dtelno}}
+</td></tr>
+
+{% for qconv in qconvs %}
+
+
+<tr><td style="width: 200px; background: #add8e6; border: 5px;">{{qconv.friend_phone}}</td></tr>
+<tr><td  style="width: 200px; background: #add8e6; padding-bottom: 7px;">{{qconv.person_msg}}</td></tr>
+<tr style=""><td  style="width:200px;background: #90ee90;">{{qconv.friend_phone}}</td></tr>
+<tr style=""><td  style="width:200px;background: #90ee90;padding-bottom: 7px">{{qconv.friend_msg}}</td></tr>
+
+{% endfor %}  
+
+
+<form action="/Doct/sendtext1/" style="width: 200px; border: 0px;" id="changesicknessform_form" method="post">
+{% csrf_token %}
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="hidden" name="person_phone" value="{{telno}}" style="width: 200px; border: 0px; padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="hidden" name="friend_phone" value="{{ftelno}}" style="width: 200px; border: 0px; padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="text" name="person_msg" style="width: 200px;  padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="submit" name="submit" value="Converse"  style="width: 100px; border: 0px;" /></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"></form>
+
+
+{% else %}
+
+
+
+
+<tr><td><form action="/Doct/sendtext1/" style="width: 200px; border: 0px;" id="changesicknessform_form" method="post"></td></tr>
+{% csrf_token %}
+<tr><td style="width: 100px"><h1 style="color: #337ab7; font-size: 18px;font-weight: bold;">Converse</h1></td></tr>
+<tr style="border: 0px; padding-bottom: 7px"><td style="width: 100px; padding-bottom: 7px"><input type="text" name="telno"  value="{{dname}}" style="width: 100px; border: 0px; padding-bottom: 7px" readonly="readonly" id="dname"/>(Doctor)</td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="hidden" name="person_phone" value="{{telno}}" style="width: 200px; border: 0px; padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="hidden" name="friend_phone" value="{{ftelno}}" style="width: 200px; border: 0px; padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td"><input type="text" name="person_msg" style="width: 200px;  padding-bottom: 7px"    id="dname"/></td></tr></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="submit" name="submit" value="Converse"  style="width: 100px; border: 0px;" /></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"></form></td></tr>
+
+
+{% endif %}
+
+
+</table>
+
+{% if pdiogs %}
+
+ 
+
+
+
+
+
+
+<table>
+
+</table>
+
+
+<table>
+<tr>
+
+<td>
+<table  style="left:0px;margin-left: 0px; ">
+<tr><td>
+<table style="margin-right: 500px; top: 0px;">
+
+{% if pdiogs %}
+
+{% for pdiog in pdiogs %}
+
+
+{% endfor %}  
+
+</table>
+
+
+ <td style="margin-top: 0px"></td></tr>
+
+{% else %}
+
+
+
+</td>
+
+<td>
+<table>
+
+<tr>
+
+
+{% endif %}
+
+</td></tr>
+</table>
+
+</td>
+<td>
+<table>
+
+<tr>
+ <td style="margin-top: 0px"></td></tr>
+
+
+
+</table>
+{% else %}
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+</div>
+
+
+
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
+
+{% endblock %}
+
+{% block footer %}
+<p>Posted by Mandela Shaban<br/>Contact Information:<a href="mailto:mandelashaban593@gmail.com">mandelashaban593@gmail.com</a><br/>
+&copy; Consult Doctor : Fast and Cheap Response 2016</p>
+{% endblock %}

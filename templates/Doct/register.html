@@ -1,225 +1,92 @@
-{% extends 'Doct/base.html' %}
+{% extends "Doct/base.html" %}
 {% load staticfiles %}
-<!-- 
-link for the popup
 
-http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
-
-{% block navbar %}
-<div id = "navigation">
-
-<nav class="cf">
-  <ul class="topmenu">
-    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
-    -->
-    <li><a href="/Doct/about/">About Us</a>
-        <ul class="submenu">
-              <!-- <a href="/Doct/diogform/">Diognise</a> -->
-          <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>           
-                    </ul>
-    </li>
-    <li><a href="/Doct/contact/">Contact Us</a>
-      <ul class="submenu">
-              <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
-          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>           
-                    </ul>
-    </li>
- 
-     <li><a href="/Doct/receipt/">Print reciept</a>
-          <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
-                    
-                    </ul>
-         </li>
-    
-                    
-   
-      </ul>
-</nav>
-
+{% block nav_bar %}
+<div class="header" style="width: 2000px; ">
+<div class="wrap">
+<div class="logo"><a href="index.html" style="color: #fff; font-size: 32px;"><img src="{% static 'images/logocon.jpe' %}"  style="width:40px" alt="" />Online Doctor(Medical) Consulation</a></div>
+   <div class="con-right">
+      <div class="grid1-l-img">
+        <img src="{% static 'images/contact.png' %}" alt="">
+      </div>
+      <div class="grid1-l-desc">
+        <p>Contact : +256754307471</p>
+      </div>
+      <div class="clear"></div>
+  </div>
+    <div class="clear"></div>
+     </div>
 </div>
+<div class="header-bottom">
+      <div class="wrap">
+        <ul id="nav">
+                <li><a class="hsubs" href="/Doct/" title="Logout">Home</a></li>
+                <li><a class="hsubs" href="/Doct/about/">About Us</a></li>
+                <li><a class="hsubs" href="/Doct/team/">Our Team</a>
+                 <li><a class="hsubs" href="/Doct/login/">Doctor/Admin Log In</a></li>
+                <li><a href="/Doct/contact/">Contact Us</a></li>
+                <li><a href="/Doct/how_it_works/">How it works</a></li>
+                <li><a href="/Doct/convbaddy/">Converse</a></li>
+                <li><a href="/Doct/whyus/">Why Us</a></li>
+                    <ul class="subs">
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Restaurants</a></li>
+                        <li><a href="#">Beach Resorts</a></li>
+                    </ul>
+                </li>
+               
+        </ul>
 
-
-
-
-
-<div id = "navig" style="width: 10%; align:left;line-height: 2em;
-padding: 0px 1.5em; text-decoration: none;display: block; ">
-
-<nav class="">
-  <ul class="topmenu">
-
-  <li> <li><a href="/Doct/" title="Logout">Logout</a>
-    </li>
-      </ul>
-</nav>
-
+       </div>
 </div>
 
 {% endblock %}
 
 
 {% block body_block %}
-Welcome to Online Doctor Consultation System
+<div class="hero-unit"  style="margin-left: 500px">
 
-{% if msg %}
-{{msg}}
-{% endif %}
-
+<br />
+<div class="container">
 {% if registered %}
-		<strong>
-		<script>alert("You have successfully registered")</script>
-		</strong>
-		<br />
-{% endif %}
-
-<div id="content">
-
-
-<!-- Contact Us Form -->
-<form action="/Doct/register/" id="form" method="post" name="form">
+<p>Thank you for registering.</p>
+<p><a href="/Doct/">Login</a> when you are ready to Consult A doctor.</p>
+{% else %}
+<form class="form-signin span8" id="user_form" method="post" action="/Doct/register/"
+enctype="multipart/form-data">
 {% csrf_token %}
-<a id="close"  onclick ="div_hide()"><strong><bold>Close</bold></strong></a>
-<h2>Sign Up</h2>
-<hr>
-<table><tr><td>
-<input id="name" name="fname" placeholder="First Name" type="text"></td><td>
-<input id="name" name="sname" placeholder="Second Name" type="text"></td></tr>
-<tr><td>
-<input id="name" name="page" placeholder="Patient age" type="text"></td><td><input id="name" name="telno" placeholder="Telephone Number" type="text">
-</td></tr>
-<tr><td>
-<input id="name" name="gender" placeholder="Gender" type="text"></td><td>
-
-<input id="name" name="password" placeholder="password" type="text">
-</td></tr>
-
-<tr><td>
-<input id="email" name="username" placeholder="username" type="text"></td><td>
-<input id="email" name="street" placeholder="street" type="text"></td></tr>
-<tr><td>
-<input id="email" name="city" placeholder="city" type="text"></td><td>
-<input id="email" name="state" placeholder="state" type="text"></td></tr><tr><td>
-<input id="email" name="email" placeholder="Email" type="text"></td><td>
-<input id="email" name="zip_code" placeholder="zip code" type="text"></td><td>
-<input id="email" name="role"  type="hidden" value="patient"></td></tr><tr><td>
-<input id="email" name="specialty" placeholder="specialty" type="text"></td></tr>
-<tr> <td><input type="submit" name="submit" value="register"   id="submit"/></td></tr> 
-</table>
+<h2 class="form-signin-heading" style="width:280px">Sign up </h2>
+<!-- Display each form here -->
+{% for field in user_form.visible_fields %}
+{{ field.errors }}
+{{ field.help_text }}<br />
+<p style="margin-bottom: 20px">{{ field }}</p>
+{% endfor %}
+{% for field in profile_form.visible_fields %}
+{{ field.errors }}
+{{ field.help_text }}<br />
+{{ field }}<br />
+{% endfor %}
+<br />
+<!-- Provide a button to click to submit the form. -->
+<input class="btn btn-primary" type="submit" name="submit" value="Register"/>
 </form>
+{% endif %}
 </div>
-<!-- Popup Div Ends Here -->
-<script type='text/javascript' src='{{STATIC_URL}}js/jquery.form-validation.js'></script>
-<script type='text/javascript'>
-//form validation
-$(document).ready(function(){
-
-	$.validator.addMethod('alphanumeric', function(value, element) {
-		return this.optional(element) && value.match(/[0-9]/
-			));
-},
-'Password must contain at least one numeric and one alphabetic character.');
-
-
-$(document).ready(function(){
-    $("#form").validate({
-    rules:{
-    	 fname:
-            {
-            required:true,
-            maxlength:20,
-            },
-         
-            
-    },
-          messages: {
-          fname: {
-        required: "Please provide your first name",
-        maxlength:"Please provide valid first name",
-      },
-     
-
-    },
-
-  
-
-    });
-    });
-
-
-</script>
-
-<script type='text/javascript'>
-
-//F
-//form validation
-  $(document).ready(function(){
-    $("#changeloginform_form").validate({
-    rules:{
-
-          username:
-            {
-            required:true,
-            minlength:3,
-            maxlength:20,
-            },
-            password:
-            {
-            required:true,
-            minlength:5,
-            maxlength:30,
-            },
-        
-    },
-          messages: {
-      username: {
-        required: "Please provide a username",
-        minlength: "Please provide a Valid username",
-        maxlength:"Please provide a Valid username",
-      },
-      password: {
-        required: "Please provide a password",
-         minlength: "Please provide a Valid password",
-         maxlength:"Please provide a Valid password",
-      },
-    },
-
-    });
-    });
-
-
-
-</script>
-<div>
-
-
-
-
-
-
-
-
-<h4 style="font-size:20px;">How It Works</h4>
-<aside>
-<strong style="font-size:18px;">1. Register into the system with the right information and confirmation message will be sent either to your Email or via the web immediately after you have registered</strong>.<br /><br />
-<strong style="font-size:18px;">2. Use your username and password  for you to access the home page</strong>.<br /><br />
-
-<strong style="font-size:18px;">3. Note that you can only submit your Diognosis details after you have paid consultation fee of ugx 20,000 to the specified mobile money number 256754307471 </strong>
-
-
-</aside>
-
 </div>
-
-
-
 {% endblock %}
 
 
-		
 
 
+<div class="footer-bottom" style="width: 1800px; ">
+<div class="wrap">  
+  <div class="copy">
+    <p>ES - DOCTOR&copy; 2017 All rights Reserved | Design by <a href="http://w3layouts.com">Mandela Shaban</a> &nbsp;&nbsp;&nbsp;Photos by <a href="http://www.freegreatpicture.com/">Freegreatpicture</a></p>
+  </div>
+ </div>
+</div>
 
+</body>
+</html>
 
-	

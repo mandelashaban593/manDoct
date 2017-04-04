@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>E-sDoctor - </title>
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+
+
+<!-- 	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css"> -->
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> 
+ 
+    <!-- JS ===================== -->
+    <!-- load angular -->
+    <script src="http://code.angularjs.org/1.2.6/angular.js"></script> 
+    <script src="app.js"></script>
+
+
+
+
+	<title>Consult a Doctor- {% block title %} {% endblock %}</title>
+		<!-- JavaScript -->
+		<script src="{% static 'js/jquery_popup.js' %}"></script> <!-- JavaScript -->
+			
+	
+		<script type='text/javascript' src="{% static 'js/jquery.form-validation.js' %}"></script>
+
+		<link href="{% static 'css/element.css' %}" rel="stylesheet">
+   
+		<script src="{% static 'js/my_js.js' %}"></script>
+
+		 <center>
+
+     {% block navbar %}
+     {% endblock %}
+  
+
+
+
+</center>
+</head>
+<body>
+
+<center>
+
+<div id="conten" style="height:400px;">
+{% include "Doct/notifications.html" %}
+
+
+{% block body_block %}	
+
+ <link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap.css' %}">
+    <script type="text/javascript" language="javascript" src="{% static 'js/dataTables.bootstrap.js' %}"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $('#example').dataTable();
+      } );
+    </script>
+
+
+{% endblock %}
+</div>
+</center>
+
+
+
+
+
+	<!-- script tags
+	============================================================= -->
+	<script src="{% static 'js/jquery-2.1.1.js' %}"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="{% static 'js/gmaps.js' %}"></script>
+<script src="{% static 'js/smoothscroll.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
+
+
+    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+	
+    $('#purpose').on('change', function() {
+      if ( this.value == '1')
+      //.....................^.......
+      {
+        $("#business").show();
+        $("#cond_options").hide();
+        
+      }
+      else
+      {
+        $("#business").hide();
+        $("#cond_options").show();
+      }
+    });
+
+
+     $('#ambulance').on('change', function() {
+      if ( this.value == '1')
+      //.....................^.......
+      {
+        $("#ambform").show();
+        $("#illness").hide();
+        
+      }
+      else
+      {
+        $("#ambform").hide();
+        $("#illness").show();
+      }
+    });
+
+
+
+
+
+
+});
+
+
+
+</script>
+
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+</body>
+</html>

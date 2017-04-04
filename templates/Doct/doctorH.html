@@ -88,13 +88,7 @@
 
 {% block body_block %}
 
- <link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap.css' %}">
-    <script type="text/javascript" language="javascript" src="{% static 'js/dataTables.bootstrap.js' %}"></script>
-    <script type="text/javascript" charset="utf-8">
-      $(document).ready(function() {
-        $('#example').dataTable();
-      } );
-    </script>
+
 
 {% if illness %}You have successfully sent your illness detail And Check Your Diagnosis after 5 minutes {% endif %}
 <p>&nbsp;</p>
@@ -112,7 +106,7 @@ return false;
 </script>
  {% endif %}
 
-      <div id="content">
+      <div id="">
 
 {% if editd_response %}
 
@@ -188,7 +182,7 @@ return false;
    <th><span style="font-weight: bold;">Staff pic</span></th>
    <th width="75"><strong>Edit</strong></th>
   </tr> 
-{% for diog in diog %}
+{% for diog in diogs %}
   <tr> 
   <td>{{diog.dname}}</td>
    <td><a href="#">{{diog.telno}}</a></td> 

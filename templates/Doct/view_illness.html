@@ -5,30 +5,23 @@
  <table width="300" border="0" cellpadding="30" class="table table-striped table-bordered" id="example" style="text-align: center">
 
   <tr> 
-  <th width="75"><strong> Email</strong></th> 
-  <th><span style="font-weight: bold;">Patient Name</span></th> 
+
   <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong>Gender</strong></th> 
+  <th width="75"><strong>Payment Id</strong></th> 
   <th><span style="font-weight: bold;">Illness</span></th>
   <th><span style="font-weight: bold;">Staff pic</span></th>  
-  <th><span style="font-weight: bold;">Kin</span></th>
   <th><span style="font-weight: bold;">Kintelno</span></th> 
   <th><span style="font-weight: bold;">Staff pic</span></th> 
-  <th width="75"><strong> Username</strong></th> 
-  <th><span style="font-weight: bold;">Staff pic</span></th>
   <th width="75"><strong>Patient age</strong></th> 
   </tr> 
 {% for ill in ill %}
   <tr> 
-  <td>{{ill.email}}</td>
-   <td><a href="#">{{ill.pname}}</a></td> 
    <td><img src="{% static 'img/doct.jpg' %}" alt="checked" width="50px" height="50px" /></td>
    <td>{{ill.gender}}</td> 
    <td><a href="#">{{ill.illness}}</a></td> 
    <td><img src="{% static 'img/pat.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
-   <td>{{ill.kin }}</td> <td><a href="#">{{ill.kintelno}}</a></td> 
-   <td><img src="{% static 'img/doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td><td>{{ill.username}}</td>
-       <td><img src="{% static 'img/doct2.jpg' %}" alt="checked"  width="50px" height="50px"/></td>
+   <td><a href="#">{{ill.kintelno}}</a></td> 
+   <td><img src="{% static 'img/doct2.jpg' %}" alt="checked" width="50px" height="50px"/></td>
     <td><a href="#">{{ill.page}}</a></td>
  
    

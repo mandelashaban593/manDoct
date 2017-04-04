@@ -1,0 +1,89 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li>{% trans 'Home' %}</li>
+</ul>
+{% endblock %}
+
+{% block pretitle %}
+Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<div id="content-related">
+
+{% for m in message %}
+
+<div class="alert alert-info">
+                  <a href="element-form.html#" class="close" data-dismiss="alert"><i class="icon-remove"> /</i></a>
+                  <strong>{{m.title}}</strong> <br> {{m.text}}
+</div>
+
+{%endfor%}
+
+ <section class="module">
+            <div class="module-head">
+                <ul class="module-control pull-left">
+                    <li class="active"><a href="element-form.html#tab-1" data-toggle="tab">Migrate Remit Data</a></li>
+                </ul>
+            </div><!--/.module-head-->
+            <div class="module-body">
+                <div class="tab">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="tab-1">
+                            
+
+                            <!--
+
+                            <form class="form-horizontal" action="{% url 'admin:admin_migratedata' %}" method="POST">
+                            {%csrf_token%}
+                                <div class="control-group">
+                                    <label class="control-label" for="basicinput">Mysql Database Name</label>
+                                    <div class="controls">
+                                        <input type="text" name="dbname" id="basicinput" placeholder="Type something here..." class="span7">
+                                    </div>
+                                </div>
+
+                                 <div class="control-group">
+                                    <label class="control-label" for="basicinput">Mysql Database Username</label>
+                                    <div class="controls">
+                                        <input type="text" name="dbusername" id="basicinput" placeholder="Type something here..." class="span7">
+                                    </div>
+                                </div>
+
+                                 <div class="control-group">
+                                    <label class="control-label" for="basicinput">Mysql Database Password</label>
+                                    <div class="controls">
+                                        <input type="text" name="dbuserpass" id="basicinput" placeholder="Type something here..." class="span7">
+                                    </div>
+                                </div>
+
+
+                             
+
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button type="submit" class="btn btn-primary">Migrate Data</button>
+                                        <button type="reset" class="btn">Reset Form</button>
+                                    </div>
+                                </div>
+                                
+                                
+                            </form>
+
+                            -->
+
+                        </div>
+                
+                    </div>
+                </div>
+            </div><!--/.module-body-->
+        </section>
+</div>
+
+{% endblock %}

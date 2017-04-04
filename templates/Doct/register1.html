@@ -122,53 +122,62 @@ padding: 0px 1.5em; text-decoration: none;display: block; ">
 		Doctor consultation  Portal  says: <strong>thank you for Registering!</strong>
 		<a href="/Doct/adminH/">Return to  Doctor  homepage.</a><br />
 		{% else %}
-		
+	
 
-<h3>Register: <strong>a doctor!</strong><br /></h3>
-<br/>
-<fieldset width="60%">
-<form action="/Doct/regdoctor/" method="post" onsubmit="validateReg()">
+
+<form action="/Doct/regdoctor/" method="post" onsubmit="validateReg()" style="font-size: 18px;margin-left:379px;width:700px;">
 {% csrf_token %}
-<table style="border:0px solid black; width:300px; height:300px">
-<tr><td>First Name</td><td> <input type="text" name="fname" id="fname"  required="True"/></td></tr>
-<tr><td>Second Name</td><td><input type="text" name="sname" id="sname"  required="True"/></td></tr>
-<tr><td>Patient Age</td> <td><input type="text" name="page" id="page" /></td></tr>
-<tr><td>Gender</td><td> <select name="gender"  required="True"><option value="Male" >Male</option><option value="Female">Female</option></select></td></tr> 
-<tr><td>Telephon No</td><td> <input type="text" name="telno" id="telno"  required="True"/></td></tr>
-<tr><td>Password</td> <td><input type="password" name="password" id="pwd"  required="True"/></td> </tr> 
-<tr><td>Email</td> <td> <input type="email" name="email" id="email"  required="True"/></td></tr>
-<tr><td>Username</td><td><input type="text" name="username"  required="True"/></td></tr>
+<table style=" border:0px solid black;">
+<h1 align="center"  style="color: #337ab7; font-size: 18px;width:200px;font-weight: bold;"><b>Register a doctor!</b></h1>
+<tr><td style="width:200px; padding: 2px;">First Name</td><td style=" margin-bottom:10px;padding-bottom: 10px: "> <input type="text" name="fname" id="fname"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;">Second Name</td><td style=" margin-bottom:10px;padding-bottom: 10px: "><input type="text" name="sname" id="sname"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;">Doctor Age</td> <td style=" margin-bottom:10px;padding-bottom: 10px: "><input type="text" name="page" id="page" /></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
 
-<tr><td>street</td><td> <input type="text" name="street" id="telno"  required="True"/></td></tr>
-<tr><td> city</td> <td><input type="text" name="city" id="pwd"  required="True"/></td> </tr> 
-<tr><td>state</td> <td> <input type="text" name="state" id="email"  required="True"/></td></tr>
-<tr><td>zip code</td><td><input type="text" name="zip_code"  required="True"/></td></tr>
-<tr><td>specialty</td><td><input type="text" name="specialty"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;">Gender</td><td style=" margin-bottom:10px;padding-bottom: 10px: "> <select name="gender"  required="True"><option value="Male" >Male</option><option value="Female">Female</option></select></td></tr> 
+<tr><td style="width:200px; padding: 2px;">Phone No</td><td style=" margin-bottom:10px;padding-bottom: 10px: "> <input type="text" name="telno" id="telno"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+
+<tr><td style="width:200px; padding: 2px;">Password</td> <td style=" margin-bottom:50px;padding-bottom: 50px: "><input type="password" name="password" id="telno"  required="True"/></td> </tr> 
+
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+<tr><td style="width:200px; padding: 2px;"></td><td style=" margin-bottom:10px;padding-bottom: 10px: "></td></tr>
+
+<tr><td></td><td></td></tr>
+<tr><td style="width:200px; padding: 2px;">Email</td> <td style=" margin-bottom:10px;padding-bottom: 10px: "> <input type="email" name="email" id="telno"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;">Username</td><td style=" margin-bottom:10px;padding-bottom: 10px: "><input type="text" name="username"  required="True"/></td></tr>
+
+<tr><td style="width:200px; padding: 2px;">street</td><td style=" margin-bottom:10px;padding-bottom: 10px: "> <input type="text" name="street" id="telno"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;"> city</td> <td style=" margin-bottom:10px;padding-bottom: 10px: "><input type="text" name="city" id="pwd"  required="True"/></td> </tr> 
+<tr><td style="width:200px; padding: 2px;">state</td> <td style=" margin-bottom:10px;padding-bottom: 10px: "> <input type="text" name="state" id="email"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;">zip code</td><td style=" margin-bottom:10px;padding-bottom: 10px: "><input type="text" name="zip_code"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;">specialty</td><td style=" margin-bottom:10px;padding-bottom: 10px: "><input type="text" name="specialty"  required="True"/></td></tr>
+<tr><td style="width:200px; padding: 2px;">Upload Photo</td><td style=" margin-bottom:10px;padding-bottom: 10px: "> <input class="passport_image_upload" id="passport" name="profile_pic" size="8" type="file" multiple accept='image/*,application/pdf'></td></tr>
 
 <tr><td></td><td><input type="hidden" name="role" value="doctor"  required="True" /></td></tr>
 <tr> <td><input type="submit" name="submit" value="register" /></td></tr>  
 </table> 
 </form>
-</fieldset>
-
-		<!-- <form id="user_form" method="post" action="/rango/register/" enctype="multipart/form-data">
-
-		{% csrf_token %}
-
-		Display each form. The as_p method wraps each element in a paragraph
-				(<p>) elements. This ensures each element appears on a new line,
-				making everything look neater.
-			{{ user_form.as_p }}
-			{{ profile_form.as_p }}
-
-			Provide a button to click to submit the form 
-			<input type="submit" name="submit" value="Register" />
-		</form> -->
-		{% endif %}
-	
 
 	
 
+
+</div>
+
+
+
+
+
+
+  {% endif %}
 
 
 	

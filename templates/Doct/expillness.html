@@ -1,43 +1,95 @@
 {% load staticfiles %}
-{{illmsg}}
 
-<fieldset style="width:40%; align-self: right; margin-left: 0px;top: 120px;position: absolute;">
+<div style="visibility:visible;position:relative;top:-40px;left: 320px;" id="paypalformContainer" align="center">
 
-<form action="/Doct/illness/" id="changesicknessform_form" method="post">
+<form id="signup" action="/Doct/illness/"  method="POST" style=" ">
 {% csrf_token %}
-<table>
-<img src="{% static 'img/images4.jpg' %}" alt="pat" width="50px" height="50px" align="left" /><h1 align="center"  style="color: #337ab7; font-size: 18px;font-weight: bold;"><b >Consult Doctor</b></h1>
-<tr style="padding: 18px"><td>Sickness Complicated ?</td><td style="padding: 8px"><select id='purpose' required="True">
-<option value="None">Select option</option>
-<option value="0">No</option>
-<option value="1">Yes</option>
+       <form id="signup" action="/Doct/illness/"  method="POST" style=" ">
+{% csrf_token %}
+       
+        <img src="{% static 'img/images4.jpg' %}" alt="pat" width="50px" height="50px" align="left" />
+            <h3>Consult Doctor</h3>
+          
+ 
+        
+      
 
-</select></td></tr>
-<tr style="padding: 10px"> <td>Patient Name</td><td style="padding: 2px"> <input type="text" name="pname" id="pname"/></td></tr>
-<br/>
 
-<tr style="padding: 18px"> <td>Sickness Condition</td> <td style="padding: 2px"><select name="illness"  required="True">{% include "Doct/cond_options.html" %}
-</select></td></tr>
+            <p style="padding: 4px">Disease  signs (Condition):<br>
 
-<tr><td></td><td></td></tr>
-<tr style='display:none; padding: 18px' id='business'><td>
-Explain sickness Condition </td><td style="padding: 14px"> <input type='text' class='text' name='compill' value size='20' /></td>
- </tr>
+             <select name="comp_signs"  required="True" style="width: 160px;" autofocus>{% include "Doct/cond_options.html" %}
+              </select>
+              </p>
 
-<tr style="padding: 18px"><td>You need an ambulance ?</td> <td style="padding: 2px"><select name="amb"  required="True">
-<option value="">Select option</option>
-<option value="No">No</option>
-<option value="Yes">Yes</option>
-</select></td></tr>
-<tr><td></td><td></td></tr>
-<tr ><td>Patient Age</td><td style="padding: 2px"> <input type="text" name="page" id="page"/></td></tr>
-<tr ><td>Mobile Number </td><td style="padding: 5px"> <input type="text" name="telno"  id="dname"/></td></tr>
-<tr ><td>Amount</td><th style="padding: 5px">ugx.3,000</th></tr>
-<tr><td> Doctor's Mob Number: </td><th>0754307471</th></tr>
+               <p style=' padding: 4px' id='business'>Explain Disease signs:<br>
+               <textarea type='text' class='text' name='illness' rows="3" cols="38"  Placeholder="Disease signs" value size='20'  autofocus></textarea>
 
-<tr><td><input type="reset" name="reset" style="width:100px"/></td> <td><input type="submit" name="submit" value="Submit"  style="width:100px"/></td></td></tr>  
-</table> 
-</form>
+               </p>
 
-</fieldset>
-<div id="secure_area_message" align="center"></div>
+                <p style="padding: 4px">
+                You need an ambulance ?:<br>
+                <input value="1" type="radio" name="amb" onClick="displayForm(this)"></input>Yes
+                <br>
+                <input value="0" type="radio" name="amb" onClick="displayForm2(this)"></input>No
+
+
+               </p>
+
+                <p style="padding: 4px"> Gender:<br>
+                 <select type="text" name="gender" Placeholder="Patient Age" id="page" autofocus>
+                 <option value="Male">Male</option>
+                 <option value="Female">Female</option>
+
+                 </select>
+              
+                </p>
+
+                 <p style="padding: 7px"> Patient Name:<br>
+                <input type="text" name="pname" id="pname" autofocus/>
+                </p>
+
+`                <p style="padding: 7px"> Phonenumber:<br>    
+                 <input type="telno" name="telno"  id="password"  Placeholder="Mobile Number" />
+                 </p>
+
+
+                <p style="padding: 7px"> Doctor:<br>
+                 <select type="text" name="dname" Placeholder="Patient Age" id="page" autofocus>
+                 <option value="Peter">Choose A Doctor</option>
+                 <option value="Peter">Peter(General Doctor)</option>
+                 <option value="John">John(General Doctor)</option>
+                 <option value="Anguda">Anguda(Physicians)</option>
+
+                 </select>
+              
+                </p>
+
+
+
+                <input type="hidden" name="username"  id="username"   value="{{username}}"/>
+                 <input type="hidden" name="password"  id="password" value="{{password}"/>
+
+                <input type="hidden" name="role"  id="dname" value="patient"/> 
+                <input type="hidden" name="page"  id="dname" value="0"/> 
+           
+
+            <p style="padding: 7px">
+
+
+            <input type="submit" id="submit"  placeholder="Enter Message" value="Submit" name="SUBMIT" required>
+           
+             </p>
+
+    </form>
+
+    </div>
+
+
+<div style="visibility:hidden; position:relative;top:-110px;margin-top:40px" id="ccformContainer">
+
+{% include "Doct/ambulance.html" %}
+
+</div>
+
+
+

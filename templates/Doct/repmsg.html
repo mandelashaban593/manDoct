@@ -8,37 +8,12 @@
 
 <nav class="cf">
   <ul class="topmenu">
-    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
-    -->
-    <li><!-- <a href="/Doct/" title=" Home">Home</a> --></li>
-    
-    <li><a href="/Doct/diogform/">Diognise</a>
-      <ul class="submenu">
-              <li><a href="/Doct/follup/" title="View Taxi Details">Follow Up</a></li>
-              <li><a href="view_payments.php" title="View Taxi Details">View Payments</a></li>
-          <li><a href="edit_payments.php" title="Update Taxi Details">Update Payments</a></li>                <li><a href="delete_payments.php" title="Delete Taxi Details">Delete Payments</a></li>           
-                    </ul>
 
-        </li>
-    <li><a href="/Doct/ind_illness/">Particular Patient Illness Detail</a>
-        <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
-                    
-                    </ul>
-    <li><a href="/Doct/view_illness2/">View illness Details</a>
-        <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
-                    
-                    </ul>
-        
-    </li>
+  
 
-     <li><a href="/Doct/doctor_receipt/">Print reciept</a>
+     <li><a href="/Doct/receipt/">Print reciept</a>
           <ul class="submenu">
-              <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li>
+             
                     
                     </ul>
          </li>
@@ -46,8 +21,7 @@
                     
     <li><a href="/Doct/" title="Logout">Logout</a>
         <ul class="submenu">
-              <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li>
+            
                     
                     </ul>
         
@@ -81,6 +55,8 @@ return false;
  {% endif %}
 
       <div id="content">
+
+       {% include "Doct/notifications.html" %} 
 
 {% if editd_response %}
 
@@ -125,19 +101,40 @@ return false;
 
  {% else %}   
 
-<h1 align="center"><b >view Doctor Message</b></h1>
-{{msg2}}
-<fieldset width:60%>
 
-<form action="/Doct/repmsg/" id="changesicknessform_form" method="post">
+<strong style="color: #337ab7;">  </strong>
+
+    <form ng-app="myApp" action="/Doct/repmsg/" method="post" ng-controller="validateCtrl" name="myForm" novalidate class="form-style-6" style="margin-left: 450px;">
 {% csrf_token %}
-<table>
-<tr><td>Payment Id</td><td><input type="text" name="gender" id="gender"/></td></tr> 
-<tr><td><input type="reset" name="reset" style="width:100px"/></td> <td><input type="submit" name="submit" value="Submit"  style="width:100px"/></td></td></tr> 
-</table> 
-</form>
 
-</fieldset>
+<h1><b >Converse</b></h1>
+
+<p>Payment Id:<br>
+  <input type="text" name="gender"  style="width:280px" ng-model="gender" required>
+  <span style="color:red" ng-show="myForm.gender.$dirty && myForm.gender.$invalid">
+  <span ng-show="myForm.gender.$error.required">Payment Id is required.</span>
+  </span>
+</p>
+
+ <input type="hidden" name="ptelno"  value="{{ptelno}}" id="gender"/>
+
+  
+<p>
+  <input type="submit"
+  ng-disabled="myForm.gender.$dirty && myForm.gender.$invalid" class="btn btn-primary" value="Submit">
+</p>
+
+    </form>
+
+    <script>
+var app = angular.module('myApp', []);
+app.controller('validateCtrl', function($scope) {
+    $scope.gender = '';
+});
+</script>
+
+
+
 <div id="secure_area_message" align="center"></div>
 
 

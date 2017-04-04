@@ -1,0 +1,88 @@
+{% extends "Doct/base_site_admin.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">Home</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>Es-doctor </li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+Es-doctor 
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="module">
+      <div class="module-head">
+        <b>Create A Staff User</b> <small><i>With great power comes great responsibility , Don't be careless </i></small>
+      </div><!--/.module-head-->
+      <div class="module-body">
+
+      <div id='signup_form_response'>
+{% include "Doct/form-error.html" %}
+</div>
+
+        <form class="form-horizontal" method="POST" action="" id="createadminuserform">
+          {% csrf_token %}
+
+
+          <section class="docs">
+          <h4>Auth Details</h4>
+          <hr />
+          </section>
+
+          <div class="control-group">
+            <label class="control-label">Old Phone No:</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" placeholder="old_phone" name="username">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">New Phone No:</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" placeholder="new_phone" name="username">
+            </div>
+          </div>
+
+
+
+           <div class="control-group">
+            <div class="controls">
+          <button class="btn btn-primary">Create User</button>
+          <input class="btn" type="reset" value="Reset">
+          </div>
+          </div>
+
+        </form>
+      </div><!--/.module-body-->
+    </section>
+
+
+<!-- Form Validation -->
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.form-validation.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#createadminuserform").validate({
+
+    rules:{% validation_rules  form %} ,
+    messages: {% validation_messages form %} ,
+
+    });
+    });
+
+</script>
+
+{% endblock %}
+
+

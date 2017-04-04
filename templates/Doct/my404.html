@@ -1,0 +1,21 @@
+{% extends "Doct/base_404.html" %}
+
+
+{% block content %}
+<link href="{{STATIC_URL}}css/404.css" media="screen" rel="stylesheet" type="text/css" /> 
+
+<div class="f04">
+	
+
+<div class="page-content" role="main">
+                <h1>404</h1>
+                <h2>Nothing to see here</h2>
+                <p>You've stumbled across a page that does not exist. Check that you have the correct URL or return to the <a href="{{BASE_URL}}">homepage</a>.</p>
+            </div>
+<div style='width:100%;margin-top:5%;margin-left:10%;overflow:hidden;border:0 none;float:left;'>
+<img src='{{STATIC_URL}}images/404.jpg'>
+</div>
+
+</div>
+
+{% endblock %}

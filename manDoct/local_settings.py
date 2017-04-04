@@ -27,16 +27,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-
 DATABASES = {
- 'default': {
- 'ENGINE': 'django.db.backends.mysql',
- 'NAME': 'mydoct',
- 'USER': 'root',
- 'PASSWORD': 'mandela',
- 'HOST': 'localhost',   # Or an IP that your DB is hosted on
- 'PORT': '3306',
- }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': DATABASE_PATH,                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                      # Set to empty string for default.
+    }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -178,16 +178,3 @@ LOGGING = {
         },
     }
 }
-
-TWI_ACCOUNT_SID = ""
-TWI_AUTH_TOKEN=""
-
-APP_EMAILS = {
-    'info':'mandelashaban593@gmail.com',
-    
-
-    }
-
-DISABLE_COMMS = False
-
-PAGNATION_LIMIT = 10

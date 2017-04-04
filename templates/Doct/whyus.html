@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+<head>
+<title>Free Easy-Trip Website Template | About :: w3layouts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="{% static 'css/slider.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<style type="text/css">
+  
+  html{
+  width: 100%;
+  height: 100%;
+}
+
+
+</style>
+<body>
+<div class="header" style="width: 2000px; ">
+<div class="wrap">
+<div class="logo"><a href="index.html" style="color: #fff; font-size: 32px;"><img src="{% static 'images/logocon.jpeg' %}"  style="width:40px" alt="" />Online Doctor(Medical) Consulation</a></div>
+   <div class="con-right">
+      <div class="grid1-l-img">
+        <img src="{% static 'images/contact.png' %}" alt="">
+      </div>
+      <div class="grid1-l-desc">
+        <p>Contact : +256754307471</p>
+      </div>
+      <div class="clear"></div>
+  </div>
+    <div class="clear"></div>
+     </div>
+</div>
+<div class="header-bottom">
+      <div class="wrap">
+        <ul id="nav">
+                <li><a class="hsubs" href="/Doct/" title="Logout">Home</a></li>
+                <li><a class="hsubs" href="/Doct/about/">About Us</a></li>
+                <li><a class="hsubs" href="/Doct/team/">Our Team</a>
+                <li><a class="hsubs" href="/Doct/register/">Sign Up</a>
+                 <li><a class="hsubs" href="/Doct/login/">Doctor/Admin Log In</a></li>
+                <li><a href="/Doct/contact/">Contact Us</a></li>
+                <li><a href="/Doct/how_it_works/">How it works</a></li>
+
+                {% if qconvs or ill_more %}
+            
+                 <li><form action="/Doct/converse/" style="height:35px;border: 0px; background-color: #3399FF" id="changesicknessform_form" method="post">
+                {% csrf_token %}
+
+                <input type="hidden" name="username" value="{{username}}" style="width: 200px; border: 0px; " id="dname"/>
+
+                <input type="hidden" name="dusername" value="0754307471" style="width: 200px; border: 0px; " id="dname"/>
+
+                <tr><td style="width: 4px; padding-bottom: 10px"><input type="submit" name="submit" value="Converse"  style="width: 100px; border: 0px; background-color: white; color: #337ab7; " /></td></tr>
+
+                </form>
+                <ul class="submenu">
+                      <!-- <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                            <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul> </li>
+
+                    {% endif %}
+
+                <li><a href="/Doct/whyus/">Why Us</a></li>
+                    <ul class="subs">
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Restaurants</a></li>
+                        <li><a href="#">Beach Resorts</a></li>
+                    </ul>
+                </li>
+                {% if user.is_authenticated %}
+
+                <li><a href="/Doct/logout/">Logout</a></li>
+
+                {% endif %}
+               
+        </ul>
+
+       </div>
+</div>
+
+
+
+
+<div class="content">
+  <div class="wrap">
+   <div class="about">
+    <h3 style="margin-left: 380px;">Why Us</h3>
+    <img src="" style="height:250px; width:600px;" alt=""/>
+    <p>Fast reply<br>
+Stop being in a line while waiting for a doctor and having boring appointment. Consult a doctor in less than 30 minutes&rdquo;
+   </p>
+
+    <p>Lab tests &  Medicine<br/>
+You can order lab tests  and medicines from  your home or from where you feel its comfortable   after prescription. The lab doctor will reach you in few minutes once order for lab tests. The carrier will also reach you in a few minutes once you order for medicines. you will recover without stepping out of your home .</p>
+
+    <p>24/7 service<br/>
+We work around the clock. You can access doctors  all day long even during holidays </p>
+
+    <p>Private & Secure<br/>
+All chats are confidentials. You can pour your heart out to the doctors and be rest assured that your information is safe with us. You can choose to delete chats once your  consultation has ended</p>
+<p>
+Quality & Trust<br/>
+We only  have  the best doctors to consult via the web application. We follow a standard selection process before we enroll doctors. We take ratings and feedbacks about doctors by customers very seriously
+</p>
+  </div>
+  </div>
+  </div>
+<div class="footer-bottom" style="width: 2000px; ">
+<div class="wrap">  
+  <div class="copy">
+    <p>ES - DOCTOR&copy; 2017 All rights Reserved | Design by <a href="http://w3layouts.com">Mandela Shaban</a> &nbsp;&nbsp;&nbsp;Photos by <a href="http://www.freegreatpicture.com/">Freegreatpicture</a></p>
+  </div>
+ </div>
+</div>
+
+</body>
+</html>
+
+
+
+		
+
+
+
+
+	

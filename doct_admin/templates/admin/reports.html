@@ -1,0 +1,340 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<section class="row-fluid">
+      <div class="span12">
+        <div class="module no-head message">
+          <div class="module-body no-padding">
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span12">
+                  <form class="form-vertical" method="GET" action="{% url 'admin:admin_reports' %}">
+                  
+               <div class="control-group  controls-row controls">   
+
+
+            <div class="span2">
+            <label class="control-label" for="basicinput">Country</label>
+            <div class="controls">
+              <div class="input-appendspan11">
+                <select name="ctry" class="span12">
+                
+                {%if request.user.is_superuser %}
+                {%if not request.GET.ctry or request.GET.ctry == 'All' %} <option value="All">----</option>{%endif%}
+                {%endif%}
+
+                {%for key,value in countries %}
+                <option value="{{key}}" {%if request.GET.ctry == key %} selected="selected" {%endif%}>{{value}}</option>
+                {%endfor%} 
+                
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+            <div class="span2">
+            <label class="control-label" for="basicinput">Mobile Network</label>
+            <div class="controls">
+              <div class="input-appendspan11">
+                <select name="network" class="span12">
+                
+                {%if request.user.is_superuser %}
+                {%if not request.GET.network or request.GET.network == 'All' %} <option value="All">----</option>{%endif%}
+                {%endif%}
+
+                {%for key,value in networks %}
+                <option value="{{key}}" {%if request.GET.network == key %} selected="selected" {%endif%}>{{value}}</option>
+                {%endfor%} 
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+            <div class="span2">
+            <label class="control-label" for="basicinput">Sender Country</label>
+            <div class="controls">
+              <div class="input-appendspan11">
+
+
+                <select name="sender_ctry" class="span12">
+                
+
+                 <option value="All">----</option>
+                {% for tr in countries_list %}
+                <option value="{{tr}}" {%if request.GET.sender_ctry == tr %} selected="selected" {%endif%}>{{tr}}</option>
+                {%endfor%} 
+
+                </select>
+              </div>
+            </div>
+          </div>
+
+    
+
+            
+            <div class="span2">
+            <label class="control-label" for="basicinput">Start Date</label>
+            <div class="controls">
+              <div class="input-append span11">
+                <input class="span12"  id="start_date" data-date="{{start_date}}" data-date-format="dd-mm-yyyy" size="16" type="text" value="{{start_date}}" readonly="" name="start_date">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="span2">
+            <label class="control-label" for="basicinput">End Date</label>
+            <div class="controls">
+              <div class="input-append span10" >
+                <input class="span12" id="end_date" data-date="{{end_date}}" data-date-format="dd-mm-yyyy" size="16" type="text" value="{{end_date}}" readonly="" name="end_date">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+
+           <div class="span2" style="float:left;margin-top:24px;">
+            <div class="controls">
+              <div class="input-append date">
+              <button class="btn btn-primary" type="submit">Filter Transactions</button>
+              </div>
+            </div>
+          </div>
+
+          </div>
+
+
+<div class="control-group">
+                  <label class="control-label">Transaction Status</label>
+                  <div class="controls">
+                    <label class="radio inline">
+                      <input type="radio" name="status" value="1" {% if request.GET.status == '1' or not request.GET.status  %} checked="checked" {% endif %}>
+                      Successful
+                    </label> 
+                    <label class="radio inline">
+                      <input type="radio" name="status" value="2" {% if request.GET.status == '2' %} checked="checked" {% endif %} >
+                      Pending
+                    </label> 
+                    
+                    <!--
+                    <label class="radio inline">
+                      <input type="radio" name="status" value="3" {% if request.GET.status == '3' %} checked="checked" {% endif %}>
+                      Failed
+                    </label>
+                    -->
+                    <label class="radio inline">
+                      <input type="radio" name="status" value="4" {% if request.GET.status == '4' %} checked="checked" {% endif %}>
+                      All
+                    </label>
+                  </div>
+                </div>
+
+
+          <!--
+          <div class="control-group  controls-row controls">   
+            <div class="span5">
+            <div class="controls">
+              <div class="input-appendspan11">
+              <label class="control-label" for="basicinput">Successful Transactions</label>
+              <input class="span12" id="transaction_status" name="transaction_status" type="radio">
+              </div>
+            </div>
+          </div>
+          </div>
+          -->
+
+
+
+                  </form>
+                </div>
+                
+
+
+              </div>
+            </div>
+
+
+{% if transactions %}
+
+
+
+        <div class="module-body">
+        <section class="module">
+      <div class="module-head">
+      <div class="span6 pull-left">
+        <b>Transaction Totals : <i> {{start_date}} - {{end_date}}  </i>  </b>
+        </div>
+
+        <div class="span5 pull-right">
+        <form method="POST">
+          {% csrf_token %}
+          <input type='hidden' name='generate_report' value=''>
+          <button class="btn btn-primary" type="submit">Download This Report</button>
+        </form>
+        </div>
+
+      </div><!--/.module-head-->
+      <div class="module-body">
+        <table class="table table-striped table-bordered table-condensed">
+          <thead>
+          <tr>
+            <th>Number of Transactions</th>
+            <th>Amount Transfered (UGX)</th>
+            <th>Number of Unique Senders</th>
+            <th>Average Amount Per Transaction (UGX) </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{number_of_trasactions}}</td>
+            <td>{{amount_transfered | currency }}</td>
+            <td>{{number_of_unique_senders}}</td>
+            <td>{{average_transaction_amount | currency}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div><!--/.module-body-->
+    </section>
+
+
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>Transaction Id</th>
+            <th>Transaction Date</th>
+            <th>Sender Name</th>
+            <th>Sender Number</th>
+            <th>Sender Country</th>
+
+            <!--
+            <th>Nature of Transaction</th>
+            -->
+            <th>Currency</th>
+            <th>Mobile Network</th>
+            <th>Recipient name</th>
+            <th>Recipient Number</th>
+            
+            <!--
+            <th>Purpose</th>
+            -->
+            
+            <th>Amount</th>
+            <th>Status</th>
+            <!--
+            <th>Instrument</th>
+            -->
+          </tr>
+          </thead>
+          <tbody>
+          {% for t in transactions %}
+          <tr>
+            <td><a href="{% url 'admin:admin_transaction' t.get_invoice %}">{{t.get_invoice}}</a></td>
+            <td>{% if t.actual_delivery_date  %}{{ t.actual_delivery_date }} {% else%} {{ t.actual_initiation_date }}  {% endif %}</td>
+            <td><a href="{% url 'admin:admin_user' t.get_sender_profile.uid %}">{{t.get_sender_profile.get_names}}</a></td>
+            <td>{{t.get_sender_profile.get_phonenumber}}</td>
+            <td>{{t.sender_country}}</td>
+            
+            <!--
+            <td>OutFlow</td>
+            -->
+            <td>{{t.currency_sent}}</td>
+            <td>{{t.get_mobile_network}}</td>
+            <td>{{t.recipient_names}}</td>
+            <td>{{t.recipient_number}}</td>
+            <td>{{ t.amount_received | currency }}</td>
+            <td>{{ t.actual_status }}</td>
+          </tr>
+          {%endfor%}
+          </tbody>
+        </table>
+           
+
+           <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8 hidden-phone">
+                  <!--
+                  <div style="line-height: 30px">
+                    Displaying <b> {{ user.number }} </b> of {{admin_data.user_count}} transactions
+                  </div>
+                  -->
+
+       
+
+                </div>
+                <div class="span11 message-navigation align-right">
+                  <div class="btn-toolbar">
+                    <div class=" btn-group">
+                    <!--
+                      <button class="btn"><i class="icon-chevron-left"></i></button>
+                      <button class="btn"><i class="icon-chevron-right"></i></button>
+                    -->
+ 
+
+{% with transactions as pages %}   
+{% include 'pagination.html'%}
+{% endwith %}
+
+              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+       </div><!--/.module-body-->
+               
+{% else %}
+
+
+{% include 'admin/noresult.html' %}
+
+
+{% endif %}
+
+       
+        </div><!--/.module.message-->
+      </div><!--/.span12-->
+    </section>
+<script src='{% static "admin/dashboard/bootstrap/js/bootstrap-datepicker.js" %}'></script>
+<script type="text/javascript">
+  
+//DATEPICKER
+$(function(){
+
+$('#start_date').datepicker();
+$('#end_date').datepicker();
+
+});
+
+</script>
+
+
+
+
+{% endblock %}
+
+

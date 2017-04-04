@@ -1,0 +1,220 @@
+{% extends 'Doct/base.html' %}
+
+{% load staticfiles %}
+
+{% block navbar %}
+
+<div id = "navigation">
+
+<nav class="cf">
+  <ul class="topmenu">
+    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
+    -->
+     <li><a href="/Doct/" title="Logout">Home</a>
+        <ul class="submenu">
+            <!--   <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
+   
+ 
+
+
+     <li><a href="/Doct/convbaddy/">Converse</a>
+        <ul class="submenu">
+              <!-- <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
+
+     
+  
+</nav>
+
+
+</div>
+
+
+
+{% endblock %}
+
+{% block body_block %}
+
+      <div id="content">
+     {% if illness %} <script type="text/javascript">alert("You have successfully submitted your Illness details, Please view Your diognosis");
+ return false;
+ </script>
+ {% endif %}
+
+
+ {% include "Doct/notifications.html" %} 
+
+ {% if convpfs %}
+
+{% endif %}
+
+
+{% if convpfs %}
+
+<table style="position: absolute; left: 500px ">
+
+<tr><td style="width: 200px"><h1 style="color: #337ab7; font-size: 18px;font-weight: bold;">Converse</h1></td></tr>
+<tr><td style="width: 200px"><a href="#">
+{{ftelno}}
+</td></tr>
+
+{% for qconv in convpfs %}
+
+
+
+<tr style=""><td  style="width:200px;background: #add8e6;padding-bottom: 7px">{{qconv.msg}}</td></tr>
+
+
+
+
+{% endfor %}  
+
+
+
+
+<form action="/Doct/sendtext1/" style="width: 200px; border: 0px;" id="changesicknessform_form" method="post">
+{% csrf_token %}
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="hidden" name="person_phone" value="{{telno}}" style="width: 200px; border: 0px; padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="hidden" name="friend_phone" value="{{ftelno}}" style="width: 200px; border: 0px; padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="text" name="msg" style="width: 200px;  padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="submit" name="submit" value="Converse"  style="width: 100px; border: 0px;" /></td></tr>
+
+</form>
+
+
+
+{% elif convpf %}
+
+<tr><td style="width: 200px; background: #add8e6; border: 5px;">{{convpf.friend_phone}}</td></tr>
+<tr style=""><td  style="width:200px;background: #90ee90;padding-bottom: 7px">{{convpf.person_msg}}</td></tr>
+
+
+{% else %}
+
+
+<form action="/Doct/sendtext1/" style="width: 200px; border: 0px;" method="post"></td></tr>
+{% csrf_token %}
+<tr><td style="width: 100px"><h1 style=" font-size: 18px;font-weight: bold;">Converse</h1></td></tr>
+<tr style="border: 0px; padding-bottom: 7px"><td style="width: 100px; padding-bottom: 7px"><input type="text" name="telno"  value="{{dname}}" style="width: 100px; border: 0px; padding-bottom: 7px" readonly="readonly" id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="hidden" name="person_phone" value="{{telno}}" style="width: 200px; border: 0px; padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="hidden" name="friend_phone" value="{{ftelno}}" style="width: 200px; border: 0px; padding-bottom: 7px"    id="dname"/></td></tr>
+
+<tr><td"><input type="text" name="msg" style="width: 200px;  padding-bottom: 7px"    id="dname"/></td></tr></td></tr>
+
+<tr><td style="width: 100px; padding-bottom: 7px"><input type="submit" name="submit" value="Converse" style="width:90px"/></td></tr>
+</form>
+
+
+
+{% endif %}
+
+
+</table>
+
+{% if pdiogs %}
+
+ 
+
+
+
+
+
+
+<table>
+
+</table>
+
+
+<table>
+<tr>
+
+<td>
+<table  style="left:0px;margin-left: 0px; ">
+<tr><td>
+<table style="margin-right: 500px; top: 0px;">
+
+{% if pdiogs %}
+
+{% for pdiog in pdiogs %}
+
+
+{% endfor %}  
+
+</table>
+
+
+ <td style="margin-top: 0px"></td></tr>
+
+{% else %}
+
+
+
+</td>
+
+<td>
+<table>
+
+<tr>
+
+
+{% endif %}
+
+</td></tr>
+</table>
+
+</td>
+<td>
+<table>
+
+<tr>
+ <td style="margin-top: 0px"></td></tr>
+
+
+
+</table>
+{% else %}
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+</div>
+
+
+
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login_effect.js' %}"></script>
+
+
+
+{% endblock %}
+
+{% block footer %}
+
+
+
+
+{% endblock %}

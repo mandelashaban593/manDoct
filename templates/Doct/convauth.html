@@ -1,0 +1,38 @@
+
+
+
+    <form ng-app="myApp" class="form-style-6" action="/Doct/convbaddy/" method="post" ng-controller="validateCtrl" name="myForm" style="margin-left:450px" novalidate>
+{% csrf_token %}
+
+<h1>Converse</h1>
+
+
+<p>Names:<br>
+  <input type="text" name="names"  style="width:280px" ng-model="names"  Placeholder="names" required>
+  <span style="color:red" ng-show="myForm.names.$dirty && myForm.names.$invalid">
+  <span ng-show="myForm.names.$error.required">Name is required.</span>
+  </span>
+</p>
+  
+  <p>Mobile Number:<br>
+  <input type="telno" name="telno"  style="width:280px" ng-model="telno" required>
+  <span style="color:red" ng-show="myForm.telno.$dirty && myForm.telno.$invalid">
+  <span ng-show="myForm.telno.$error.required">Mobile Number is required.</span>
+  </span>
+</p>
+
+  <input type="submit"
+  ng-disabled="myForm.names.$dirty && myForm.names.$invalid ||
+  myForm.telno.$dirty && myForm.telno.$invalid" class="btn btn-primary" value="Submit">
+</p>
+
+    </form>
+
+    <script>
+var app = angular.module('myApp', []);
+app.controller('validateCtrl', function($scope) {
+    $scope.telno = '';
+    $scope.password = '';
+});
+</script>
+

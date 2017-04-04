@@ -1,0 +1,115 @@
+{% extends "admin/base_site.html" %}
+{% load custom_filters %}
+
+
+
+{% load url from future %}
+
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+
+
+
+<section class="module rates">
+			<div class="module-head">
+				<ul class="module-control pull-left">
+					<li class="active"><a href="element-form.html#tab-1" data-toggle="tab">Audit Trails</a></li>
+					
+					<!--
+					<li><a href="element-form.html#tab-2" data-toggle="tab">Tiered pricing</a></li>
+					-->
+
+				</ul>
+			</div><!--/.module-head-->
+			<div class="module-body">
+				<div class="tab">
+					<div class="tab-content">
+						<div class="tab-pane fade active in" id="tab-1">
+			
+			{% if audit_logs %}
+
+			<section class="row-fluid">
+			<div class="span12">
+				<div class="module no-head message-read">
+					<div class="module-head">
+						<b>{{log_user}}</b>
+					</div>
+					<div class="module-body no-padding">
+						<div class="stream-message">
+							
+						{% for log in audit_logs %}
+							
+
+						<div class="stream media">
+								<img src="{{log.user.avatar}}" class="avatar pull-left">
+								<div class="media-body">
+									<h3> <a href="{% if log.user.uid %}{% url 'admin:edit_admin_user' log.user.uid %}{%else%}#{%endif%}">{{log.user.username}}</a><small>{{ log.log_entry.action_time }},  from  {{log.user_location}} </small></h3>
+									<div>{{log.log_entry.change_message}} <a href="{{log.get_edited_object.admin_url}}">{{log.log_entry.content_type}}</a> on {{ log.log_entry.action_time }} </div>
+								</div>
+							</div>
+
+
+							{% endfor %}
+
+						
+						</div><!--/.stream-message-->
+					</div>
+
+				</div><!--/.module.message-->
+
+					{% with audit_logs as pages %}   
+{% include 'pagination.html'%}
+{% endwith %}
+
+			</div><!--/.span12-->
+		</section><!--/.row-fluid-->
+
+		{% else %}
+
+
+		<div class="noresult">
+
+<div class="docs-example">
+<p>Your query <b>{{request.GET.q }}</b> did not return any results </p>
+<pre class="pre">
+  <span>No Results were found</span>
+</pre>
+</div>
+
+</div>
+
+
+		{% endif %}
+
+
+
+						</div>
+					</div>
+				</div>
+
+
+			</div><!--/.module-body-->
+
+
+				<!--
+				<ul class="module-control pull-right">
+					<li class="active"><a href="#" >Last updated by  {{rate.last_modified_by}} on {{rate.added | date:"F j, o" }} </a></li>
+				</ul>
+				-->
+
+
+		</section>
+
+
+
+{% endblock %}

@@ -1,0 +1,251 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load url from future %}
+
+{% load validation_tags %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="module">
+      <div class="module-head">
+        <b>Create A Staff User</b> <small><i>With great power comes great responsibility , don't fuck up!! </i></small>
+      </div><!--/.module-head-->
+      <div class="module-body">
+
+      <div id='signup_form_response'>
+{% include "form-error.html" %}
+</div>
+
+        <form class="form-horizontal" method="POST" action="" id="editadminuserform">
+          {% csrf_token %}
+
+
+          <section class="docs">
+          <h4>Edit Stuff User <a href='#'>#{{stuff_profile.user.username}}</a></h4>
+          <hr />
+          </section>
+
+          <div class="control-group">
+            <label class="control-label">Username</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" placeholder="username" value="{{stuff_profile.user.username}}" name="username" readonly="readonly">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Email</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" value="{{stuff_profile.user.email}}" readonly="readonly" placeholder="email address" name="email">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Password</label>
+            <div class="controls">
+              <input type="password" class="input-block-level" placeholder="password" name="password">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Repeat Password</label>
+            <div class="controls">
+              <input type="password" class="input-block-level" placeholder="repeat password" name="password2">
+            </div>
+          </div>
+
+
+          <section class="docs">
+          <h4>Access Level</h4>
+          <hr />
+          </section>
+
+
+          <div class="control-group">
+            <label class="control-label">Country Access</label>
+            <div class="controls">
+                <select class="span7" name="country">
+
+                  {% if country_access|length < 4 %}
+                  {%for key,value in country_access %}
+                  <option value="{{key}}" selected="selected">{{value}}</option>
+                  {%endfor%}
+                  {% endif %}
+
+                  <option value="1">All</option>
+                  {%for key,value in COUNTRY_CHOICES%}
+                  <option value="{{key}}">{{value}}</option>
+                  {%endfor%}
+                </select>
+            </div>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label">Network Access</label>
+            <div class="controls">
+                <select class="span7" name="network">
+
+                     {% if network_access|length < 3 %}
+                     {%for key,value in network_access %}
+                     <option value="{{key}}" selected="selected">{{value}}</option>
+                    {%endfor%}
+                    {% endif %}
+
+
+                  <option value="1">All</option>
+                  {%for key,value in NETWORK_CHOICES%}
+                  <option value="{{key}}">{{value}}</option>
+                  {%endfor%}
+                </select>
+            </div>
+          </div>
+
+  {% if stuff_profile.is_customer_care %}
+
+          <input type="hidden" name="users" value='1'>
+          <input type="hidden" name="rates" value="2" >
+          <input type="hidden" name="transactions" value="1">
+          <input type="hidden" name="reports" value="1">
+
+          {% else %}
+
+
+
+          <section class="docs">
+          <h4>User Permissions</h4>
+          <hr />
+          </section>
+
+          <div class="control-group">
+            <label class="control-label">Users</label>
+            <div class="controls">
+                <select class="span7" name="users">
+                    
+                 {% if not edit_permissions.view_profile%}
+                 <option value="1" selected="selected">Cannot View or Edit</option>
+                 {% elif edit_permissions.edit_profile %}
+                 <option value="3" selected="selected">Can Edit</option>
+                 {% else %} 
+                 <option value="2" selected="selected">Can Only View </option>
+                 {% endif%} 
+
+                  <option value="1">Cannot View or Edit</option>
+                  <option value="2">Can Only View </option>
+                  <option value="3">Can Edit</option>
+
+
+                </select>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Rates</label>
+            <div class="controls">
+                <select class="span7" name="rates">
+
+                   {% if not edit_permissions.view_rate%}
+                 <option value="1" selected="selected">Cannot View or Edit</option>
+                 {% elif edit_permissions.edit_rate %}
+                 <option value="3" selected="selected">Can Edit</option>
+                 {% else %} 
+                 <option value="2" selected="selected">Can Only View </option>
+                 {% endif%} 
+
+                  <option value="1">Cannot View or Edit</option>
+                  <option value="2">Can Only View </option>
+                  <option value="3">Can Edit</option>
+                </select>
+            </div>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label">Transactions</label>
+            <div class="controls">
+                <select class="span7" name="transactions">
+
+                   {% if not edit_permissions.view_transaction %}
+                 <option value="1" selected="selected">Cannot View or Edit</option>
+                 {% elif edit_permissions.edit_transaction %}
+                 <option value="3" selected="selected">Can Edit</option>
+                 {% else %} 
+                 <option value="2" selected="selected">Can Only View </option>
+                 {% endif%} 
+
+                  <option value="1">Cannot View or Edit</option>
+                  <option value="2">Can Only View </option>
+                  <option value="3">Can Edit</option>
+                </select>
+            </div>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label">Reports</label>
+            <div class="controls">
+                <select class="span7" name="reports">
+
+                {% if not edit_permissions.view_reports %}
+                 <option value="1" selected="selected">Cannot View </option>
+                 {% else %} 
+                 <option value="2" selected="selected">Can View </option>
+                 {% endif%} 
+
+                  <option value="1">Cannot View</option>
+                  <option value="2">Can View</option>
+                </select>
+            </div>
+          </div>
+
+
+          {% endif%}
+
+
+
+           <div class="control-group">
+            <div class="controls">
+          <button class="btn btn-primary">Edit Stuff User Details</button>
+          <input class="btn" type="reset" value="Reset">
+          </div>
+          </div>
+
+        </form>
+      </div><!--/.module-body-->
+    </section>
+
+
+<!-- Form Validation -->
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.form-validation.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#editadminuserform").validate({
+
+    rules:{% validation_rules  form %} ,
+    messages: {% validation_messages form %} ,
+
+    });
+    });
+
+</script>
+
+{% endblock %}
+
+

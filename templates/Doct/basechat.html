@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"><head> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="robots" content="NONE,NOARCHIVE"><title>Welcome to Django-jChat</title>
+  <style type="text/css"> 
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font:small sans-serif; }
+    body>div { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; }
+    h2 { margin-bottom:.8em; }
+    h2 span { font-size:80%; color:#666; font-weight:normal; }
+    h3 { margin:0em 0 .5em 0; }
+    h4 { margin:0 0 .5em 0; font-weight: normal; }
+    table { border:1px solid #ccc; border-collapse: collapse; width:100%; background:white; }
+    tbody td, tbody th { vertical-align:top; padding:2px 3px; }
+    thead th { padding:1px 6px 1px 3px; background:#fefefe; text-align:left; font-weight:normal; font-size:11px; border:1px solid #ddd; }
+    tbody th { width:12em; text-align:right; color:#666; padding-right:.5em; }
+    ul, ol { margin-left: 2em; margin-top: 1em; }
+    #summary { background: #a0ffab; }
+    #summary h2 { font-weight: normal; color: #666; }
+    #explanation { background:#eee; }
+    #instructions { background:#f6f6f6; }
+    #example1 { background:#ffeeee; }
+    #example2 { background:#eeffee; }
+    #footer { background:#f6fff6; font-size: 0.8em;}
+    #summary table { border:none; background:transparent; }
+  </style>
+  <link href="/static/css/jchat.css" rel="stylesheet" type="text/css" media="screen,projection" />
+  <script type="text/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+</head> 
+ 
+<body> 
+<div id="summary"> 
+  <h1><a href="/" style="color: black;">Django-jChat</a></h1> 
+  <h2>Welcome to the django-jchat demo.</h2> 
+</div> 
+
+{% block content %}{% endblock %} 
+<div id="footer">
+	Made with <a href="http://www.djangoproject.com" target="_blank">django</a> &amp; <a href="http://jquery.com">jQuery</a>.<br />
+	Credit where it is due: Images from <a href="http://www.famfamfam.com/lab/icons/silk/" target="_blank">FAMFAMFAM's Silk icon set</a>.<br />
+	Visit django-jchat at <a href="http://code.google.com/p/django-jchat/" target="_blank">google code</a>
+</div>
+</body></html> 

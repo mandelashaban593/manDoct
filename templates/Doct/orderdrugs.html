@@ -1,0 +1,216 @@
+{% extends 'Doct/base.html' %}
+{% load staticfiles %}
+<!-- 
+link for the popup
+
+http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
+
+{% block navbar %}
+<div id = "navigation">
+
+<nav class="cf">
+  <ul class="topmenu">
+    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
+    -->
+
+     <li><a href="/Doct/" title="Logout">Home</a>
+        <ul class="submenu">
+            <!--   <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+
+    </li>
+
+    
+    <li><a href="/Doct/about/">About Us</a>
+        <ul class="submenu">
+              <!-- <a href="/Doct/diogform/">Diognise</a> -->
+          <!-- <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>  -->          
+                    </ul>
+    </li>
+    <li><a href="/Doct/contact/">Contact Us</a>
+      <ul class="submenu">
+        <!--       <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>    -->        
+                    </ul>
+    </li>
+
+    <li><a href="/Doct/team/">Our Team</a>
+      <ul class="submenu">
+            <!--   <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
+          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>   -->         
+                    </ul>
+
+  
+
+
+    <li><a href="/Doct/login/">Doctor/Admin Log In</a>
+          <ul class="submenu">
+            <!--   <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
+                    
+                    </ul>
+         </li>
+
+    <li><a href="/Doct/how_it_works/">How it works</a>
+          <ul class="submenu">
+              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
+                    
+                    </ul>
+         </li>
+
+
+          <li><a href="/Doct/test/">Test</a>
+          <ul class="submenu">
+              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
+              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
+                    
+                    </ul>
+         </li>
+
+
+          <li><a href="/Doct/whyus/">Why Us</a>
+        <ul class="submenu">
+              <!-- <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
+
+    
+
+
+<li><a href="/Doct/" title="Logout">Logout</a>
+        <ul class="submenu">
+            <!--   <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul>
+        
+    </li>
+
+
+    </ul>
+ 
+     
+  
+</nav>
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block body_block %}
+
+
+{% if msg %}
+{{msg}}
+{% endif %}
+
+{% if registered %}
+		<strong>
+		<script>alert("You have successfully registered")</script>
+		</strong>
+		<br />
+{% endif %}
+
+<div id="">
+
+
+
+
+{% include "Doct/notifications.html" %}
+
+    <form ng-app="myApp" action="/Doct/orderdrugs/" ng-controller="validateCtrl" name="myForm"   novalidate class="form-style-6" style="margin-left: 450px;" method="post">
+    <h1>Order Drugs</h1>
+{% csrf_token %}
+<p>Drugs:<br>
+  <textarea ng-model="msg" name="msg" rows="4" cols="27"
+                        class="input-no-width rounded shaded left clearboth"  required>
+</textarea>
+
+  <span style="color:red" ng-show="myForm.msg.$dirty && myForm.msg.$invalid">
+  <span ng-show="myForm.msg.$error.required">Message is required.</span>
+  </span>
+</p>
+
+<p>Phonenumber:<br>
+  <input type="text" name="telno"  style="width:280px" ng-model="phone" required>
+  <span style="color:red" ng-show="myForm.telno.$dirty && myForm.telno.$invalid">
+  <span ng-show="myForm.telno.$error.required">Phonenumber is required.</span>
+  </span>
+</p>
+  
+
+
+<p>Location:<br>
+  <input type="text" name="location"  style="width:280px" ng-model="location" required>
+  <span style="color:red" ng-show="myForm.location.$dirty && myForm.location:.$invalid">
+  <span ng-show="myForm.location.$error.required">Email is required.</span>
+  </span>
+</p>
+  
+
+
+  <p>Message:<br>
+
+</p>
+  
+<p>
+  <input type="submit"
+  ng-disabled="myForm.phone.$dirty && myForm.phone.$invalid || myForm.email.$dirty && myForm.email.$invalid || myForm.msg.$dirty && myForm.msg.$invalid" class="btn btn-primary" value="Submit">
+</p>
+
+    </form>
+
+    <script>
+var app = angular.module('myApp', []);
+app.controller('validateCtrl', function($scope) {
+    $scope.telno = '';
+    $scope.email = '';
+    $scope.msg = '';
+});
+
+</script>
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div id="secure_area_message" align="center"></div>
+
+
+
+
+
+
+<div>
+
+</div>
+
+
+
+{% endblock %}
+
+
+		
+
+
+
+
+	

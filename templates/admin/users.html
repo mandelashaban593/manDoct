@@ -1,0 +1,348 @@
+{% extends "Doct/base_site_admin.html" %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="">Home</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<section class="row-fluid">
+      <div class="span12">
+        <div class="module no-head message">
+          <div class="module-body no-padding">
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8">
+                  <form class="form-absolute">
+                    <button class="btn btn-icon go-right"><i class="icon-search"></i></button>
+                    <input type="text" name="q" class="input-block-level" placeholder="Search users..." autocomplete="off">
+                  </form>
+                </div>
+                
+
+
+              </div>
+            </div>
+
+  {% if users %}
+            <table class="table table-utilities vertical-top">
+              <tbody>
+
+
+
+
+              {% for u in users %}
+                <tr>
+                  <td class="cell-avatar id-pic">
+                  
+                  {% if  u.profile_pic %}
+
+                  <a href="#"  data-toggle="modal" data-target="#imgModal{{u.uid}}">
+                  <img src="{{u.profile_pic.url}}" class="avatar img-circle">
+                  </a>
+
+                  {% else %}
+                    
+                  
+                    <div class="placeholder-image">
+                  No Profile Image
+                  </div>
+                  {% endif %}
+
+                  </td>
+
+
+                  <td class="cell-detail">
+                    
+                    
+
+                  <div class="span8">
+
+                    <h5 class="people-name"><a href="{% url 'admin:admin_user' u.uid %}">{{u.get_names}}</a></h5>
+                    <div class="people-brief">
+                      
+                      <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Added</td>
+            <td>{{ u.added | date:'d-m-Y'}}</td>
+          </tr>
+
+          <tr>
+            <td>Email</td>
+            <td>{{ u.email}}</td>
+          </tr>
+
+          <tr>
+            <td>First Name</td>
+            <td>{{ u.fname}}</td>
+          </tr>
+
+          <tr>
+            <td>Second Name</td>
+            <td>{{ u.sname}}</td>
+          </tr>
+
+          <tr>
+            <td>Gender</td>
+            <td>{{u.gender}}</td>
+          </tr>
+
+
+
+          <tr>
+            <td>Illness</td>
+            <td>{{ u.illness}}</td>
+          </tr>
+
+          <tr>
+            <td>Phonenumber:</td>
+            <td>{{ u.kintelno}}</td>
+          </tr>
+
+
+          <tr>
+            <td>Uername</td>
+            <td>{{ u.username}}</td>
+          </tr>
+
+          <tr>
+            <td>Age</td>
+            <td>{{ u.page}}</td>
+          </tr>
+          
+          
+          <tr>
+            <td>Ambulance</td>
+            <td>{{u.amb}}</td>
+          </tr>
+
+
+          <tr>
+            <td>Amount</td>
+            <td>{{ u.amt}</td>
+          </tr>
+
+          <tr>
+            <td>Doctor Phone</td>
+            <td>{{ u.doctortelno}}</td>
+          </tr>
+
+          <tr>
+            <td>Location</td>
+            <td>{{ u.location}}</td>
+          </tr>
+
+
+          </tbody>
+        </table>
+
+
+                    </div>
+                    
+
+                  {% if not u.profile_pic%}
+                  {% else %}
+                   
+
+                    {%if super_admin %}
+                    <div class="muted">
+                      <a style="cursor:pointer;" class="" data-toggle="collapse" data-target="#people-brief-{{u.pk}}">Large Profile Image..</a>
+<!--
+                        <div class="modal fade" id="imgModal{{u.uid}}"  role="dialog" aria-labelledby="{{u.get_names}}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      <img src="{{u.id_pic.url}}" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+                    </div>
+                       
+
+                      <div class="people-action">
+                      <div id="people-brief-{{u.pk}}" class="collapse">
+                
+                    <img src="{{u.profile_pic.url}}" class="">
+                 
+                      </div>
+                    </div>
+                     {%endif%} 
+
+                     {% endif %}
+                    </div>
+
+
+                  {%if super_admin or admin %}
+                 
+                  <div class="span4 action-buttons users ">
+                  
+                  <div class="span10 form pull-right">
+                  <a href="{% url 'admin:contact_user' u.uid %}" class="btn btn-success" ><i class="icon-envelope"></i> &nbsp; Contact User</a>
+                  </div>
+
+                  <div class="">
+                      
+
+                 
+                    
+                  {% if u.profile_pic == 'False' %}
+
+
+                  {% else %}
+
+
+                  {% if not u.account_blocked %}
+
+
+                  {% if not u.account_verified%}
+
+                  <div class="span10 form pull-right">
+                  <form id="verify_user_form-{{u.pk}}" method="POST" action='{% url "admin:admin_verify_user" %}'>
+                  <input type="hidden" name="verifyuser" value="{{u.uid}}">
+                  {% csrf_token %}
+                  <button class="btn btn-success" OnClick="confirm_submit('Are you sure you want to verify {{u.get_names}} ','#verify_user_form-{{u.pk}}')"><i class=" icon-thumbs-up"></i> &nbsp; Verify User</button>
+                  </form>
+                  </div>
+
+                  {% else %}
+
+                  <div class="span10 form pull-right">
+                  <form id="unverify_user_form-{{u.pk}}" method="POST" action='{% url "admin:admin_unverify_user" %}'>
+                  <input type="hidden" name="unverifyuser" value="{{u.uid}}">
+                   {% csrf_token %}
+                  </form>
+                  <button class="btn btn-warning" OnClick="confirm_submit('Are you sure you want to unverify {{u.get_names}} ','#unverify_user_form-{{u.pk}}')"><i class=" icon-thumbs-down"></i> &nbsp; UnVerify User</button>
+                  </div>
+                
+                  {%endif%}
+
+                  {% else %}
+
+                  {% endif %}
+
+                  {% endif %}
+
+      
+
+
+                  {% if not u.account_blocked%}
+                 
+                   <div class="span10 form pull-right">
+                  <form id="block_user_form-{{u.pk}}" method="POST" action='{% url "admin:admin_block_user" %}'>
+                  <input type="hidden" name="block_user" value="{{u.uid}}">
+                   {% csrf_token %}
+                  </form>
+                  <button class="btn btn-danger" OnClick="confirm_submit('Are you sure you want to block {{u.get_names}}','#block_user_form-{{u.pk}}')"><i class=" icon-remove-sign"></i> &nbsp; Block User</button>
+                  </div>
+
+                  
+                  {%else%}
+
+                  
+                 
+
+                  <div class="span10 form pull-right">
+                  <form id="unblock_user_form-{{u.pk}}" method="POST" action='{% url "admin:admin_unblock_user" %}'>
+                  <input type="hidden" name="unblock_user" value="{{u.uid}}">
+                   {% csrf_token %}
+                  </form>
+                  <button class="btn btn-danger" OnClick="confirm_submit('Are you sure you want to unblock {{u.get_names}}','#unblock_user_form-{{u.pk}}')"><i class=" icon-plus-sign"></i> &nbsp; UnBlock User</button>
+                  </div>
+                  
+
+                  {%endif%}
+
+                  </div>
+                  
+                  {%endif%}
+
+
+                  </td>
+                </tr>
+
+                {% endfor %}
+
+               
+              </tbody>
+            </table>
+
+            {% else %}
+
+
+{% include 'Doct/noresult.html' %}
+
+{% endif %}
+
+{%if users%}
+
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8 hidden-phone">
+                  <!--
+                  <div style="line-height: 30px">
+                    Displaying <b> {{ user.number }} </b> of {{admin_data.user_count}} users
+                  </div>
+                  -->
+
+       
+
+                </div>
+                <div class="span11 message-navigation align-right">
+                  <div class="btn-toolbar">
+                    <div class=" btn-group">
+                    <!--
+                      <button class="btn"><i class="icon-chevron-left"></i></button>
+                      <button class="btn"><i class="icon-chevron-right"></i></button>
+                    -->
+{% with users as pages %}   
+{% include 'Doct/pagination.html'%}
+{% endwith %}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {%endif%}
+
+          </div><!--/.module-body-->
+        </div><!--/.module.message-->
+      </div><!--/.span12-->
+    </section>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+

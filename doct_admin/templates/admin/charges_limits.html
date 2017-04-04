@@ -1,0 +1,175 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+{% load validation_tags %}
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+
+
+
+<section class="module rates">
+			<div class="module-head">
+				<ul class="module-control pull-left">
+					{% for country in countries %}
+					<li  {% if rate.country.name == country.name %}class="active"{%endif%} ><a href="{{country.admin_charges_limits_url}}">{{country.name}}</a></li>
+					{% endfor %}
+
+
+				</ul>
+			</div><!--/.module-head-->
+			<div class="module-body">
+				<div class="tab">
+					<div class="tab-content">
+						<div class="tab-pane fade active in" id="tab-1">
+							<form class="form-horizontal" method="POST" action="{{rate.admin_charges_limits_url}}" id="charges_limits_form">
+								{% csrf_token %}
+							<input type="hidden" name="update_rates" value="True">
+									<div class="control-group">
+								<label class="control-label" for="basicinput">Forex Rate %</label>
+								<!-- Implement Tiered-->
+								<div class="controls">
+										<input type="text" name="forex_percentage" value="{{rate.forex_percentage}}" class="span7" required="required">
+									</div>
+								</div>
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">Transfer Fee Rate %</label>
+								<!-- Implement Tiered-->
+								<div class="controls">
+										<input type="text" name="transfer_fee_percentage" value="{{rate.transfer_fee_percentage}}" class="span7" required="required">
+									</div>
+								</div>
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">Transfer Maximum ( USD )</label>
+								<div class="controls">
+										<input type="text" name="transfer_maximum_usd" value="{{rate.transfer_maximum_usd}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+								
+
+
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">Transfer Minimum ( USD )</label>
+								<div class="controls">
+										<input type="text" name="transfer_minimum_usd" value="{{rate.transfer_minimum_usd}}" class="span7" required="required">
+									</div>
+								</div>
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">Default Network Charge</label>
+								<div class="controls">
+										<input type="text" name="general_network_charge" value="{{rate.general_network_charge}}" class="span7" required="required">
+									</div>
+								</div>
+
+									<div class="control-group">
+								<label class="control-label" for="basicinput">MTN Network Charge</label>
+								<div class="controls">
+										<input type="text" name="mtn_charge" value="{{rate.mtn_charge}}" class="span7" required="required">
+									</div>
+								</div>
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">Airtel Network Charge</label>
+								<div class="controls">
+										<input type="text" name="airtel_charge" value="{{rate.airtel_charge}}" class="span7" required="required">
+									</div>
+								</div>
+
+									<div class="control-group">
+								<label class="control-label" for="basicinput">Safaricom Network Charge</label>
+								<div class="controls">
+										<input type="text" name="safaricom_charge" value="{{rate.safaricom_charge}}" class="span7" required="required">
+									</div>
+								</div>
+
+								<!--
+								<div class="control-group">
+								<label class="control-label" for="basicinput">MTN Network Charge</label>
+								<div class="controls">
+										<input type="text" name="mtn_charge" value="{{rate.mtn_charge}}" class="span7" required="required">
+									</div>
+								</div>
+
+									<div class="control-group">
+								<label class="control-label" for="basicinput">MTN Network Charge</label>
+								<div class="controls">
+										<input type="text" name="mtn_charge" value="{{rate.mtn_charge}}" class="span7" required="required">
+									</div>
+								</div>
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">MTN Network Charge</label>
+								<div class="controls">
+										<input type="text" name="mtn_charge" value="{{rate.mtn_charge}}" class="span7" required="required">
+									</div>
+								</div>
+
+								-->
+
+
+
+
+
+								<div class="control-group">
+									<div class="controls">
+										<button type="submit" class="btn btn-primary">Update Charges & Limits</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+			</div><!--/.module-body-->
+
+
+				
+				<ul class="module-control pull-right">
+					<li class="active"><a href="#" >Last updated by  {{rate.user}} on {{rate.added | date:"F j, o" }} </a></li>
+				</ul>
+
+
+		</section>
+
+<!-- Form Validation -->
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.form-validation.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#charges_limits_form").validate({
+
+    rules:{% validation_rules  form %} ,
+    messages: {% validation_messages form %} ,
+
+    });
+    });
+</script>
+
+
+{% endblock %}

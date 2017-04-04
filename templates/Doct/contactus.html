@@ -1,216 +1,161 @@
-{% extends 'Doct/base.html' %}
-{% load staticfiles %}
-<!-- 
-link for the popup
-
-http://makecodeeasy.blogspot.ug/2012/07/popup-in-java-script-and-css.html -->
-
-{% block navbar %}
-<div id = "navigation">
-
-<nav class="cf">
-  <ul class="topmenu">
-    <!--<li><a href="#" title="Home Page" class="current">Home</a></li>
-    -->
-    <li><a href="/Doct/about/">About Us</a>
-        <ul class="submenu">
-              <!-- <a href="/Doct/diogform/">Diognise</a> -->
-          <!-- <li><a href="edit_employee.php" title="Update Staff Details">Update </a></li>                 <li><a href="delete_employee.php" title="Delete Staff Details">Delete </a></li>  -->          
-                    </ul>
-    </li>
-    <li><a href="/Doct/contact/">Contact Us</a>
-      <ul class="submenu">
-        <!--       <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
-          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>    -->        
-                    </ul>
-    </li>
-
-    <li><a href="/Doct/team/">Our Team</a>
-      <ul class="submenu">
-            <!--   <li><a href="view_taxi.php" title="View Taxi Details">View </a></li>
-          <li><a href="edit_taxi.php" title="Update Taxi Details">Update </a></li>                <li><a href="delete_taxi.php" title="Delete Taxi Details">Delete </a></li>   -->         
-                    </ul>
-
-    <li><a href="/Doct/"> Log In</a>
-          <ul class="submenu">
-              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
-                    
-                    </ul>
-         </li>
-
-
-
-    <li><a href="/Doct/login/">Doctor/Admin Log In</a>
-          <ul class="submenu">
-            <!--   <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
-                    
-                    </ul>
-         </li>
-
-    <li><a href="/Doct/how_it_works/">How it works</a>
-          <ul class="submenu">
-              <!-- <li><a href="view_verification.php" title="Verification Details">View Verification</a></li>
-              <li><a href="edit_vcode.php" title="Verification Edit">Edit Verification</a></li> -->
-                    
-                    </ul>
-         </li>
-<li><a href="/Doct/" title="Logout">Logout</a>
-        <ul class="submenu">
-            <!--   <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
-                    <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
-                    
-                    </ul>
-        
-    </li>
-
-
-    </ul>
- 
-     
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+<head>
+<title>Free Easy-Trip Website Template | Home :: w3layouts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="{% static 'css/slider.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<style type="text/css">
   
-</nav>
-
-</div>
-
-
-
+  html{
+  width: 100%;
+  height: 100%;
+}
 
 
-{% endblock %}
-
-
-{% block body_block %}
-Welcome to Online Doctor Consultation System
-
-{% if msg %}
-{{msg}}
-{% endif %}
-
-{% if registered %}
-		<strong>
-		<script>alert("You have successfully registered")</script>
-		</strong>
-		<br />
-{% endif %}
-
-<div id="content">
-
-{% if signup %}
-
-{% include "Doct/signup.html" %}
-
-{% elif log  %}
-
-{% include "Doct/login.html" %}
-
-{% elif u_log  %}
-
-{% include "Doct/u_log.html" %}
-
-
-{% elif recfm  %}
-
-{% include "index_rform.html" %}
-
-{%  else %}
-
-<h2 style="color: #42B3E5;">contact us</h2>
-
-
-<div class="col-md-5 contact-info text-left">
-<h3>contact information</h3>
-<div class="info-detail">
-<ul><li><i class="fa fa-calendar"></i><span>Monday - Friday:</span> 9:30 AM to 6:30 PM</li></ul>
-<ul><li><i class="fa fa-map-marker"></i><span>Address:</span> 123 Some Street , California, US, CP 123</li></ul>
-<ul><li><i class="fa fa-phone"></i><span>Phone:</span> (01) 999-1235</li></ul>
-<ul><li><i class="fa fa-fax"></i><span>Fax:</span> (01) 999-1234</li></ul>
-<ul><li><i class="fa fa-envelope"></i><span>Email:</span> info@domain.com</li></ul>
+</style>
+</head>
+<body>
+<div class="header" style="width: 2000px; ">
+<div class="wrap">
+<div class="logo"><a href="index.html" style="color: #fff; font-size: 32px;"><img src="{% static 'images/logocon.jpe' %}"  style="width:40px" alt="" />Online Doctor(Medical) Consulation</a></div>
+   <div class="con-right">
+      <div class="grid1-l-img">
+        <img src="{% static 'images/contact.png' %}" alt="">
+      </div>
+      <div class="grid1-l-desc">
+        <p>Contact : +256754307471</p>
+      </div>
+      <div class="clear"></div>
   </div>
+    <div class="clear"></div>
+     </div>
+</div>
+<div class="header-bottom">
+      <div class="wrap">
+        <ul id="nav">
+                <li><a class="hsubs" href="/Doct/" title="Logout">Home</a></li>
+                <li><a class="hsubs" href="/Doct/about/">About Us</a></li>
+                <li><a class="hsubs" href="/Doct/team/">Our Team</a>
+                <li><a class="hsubs" href="/Doct/register/">Sign Up</a>
+                 <li><a class="hsubs" href="/Doct/login/">Doctor/Admin Log In</a></li>
+                <li><a href="/Doct/contact/">Contact Us</a></li>
+                <li><a href="/Doct/how_it_works/">How it works</a></li>
+
+                {% if qconvs or ill_more %}
+            
+                 <li><form action="/Doct/converse/" style="height:35px;border: 0px; background-color: #3399FF" id="changesicknessform_form" method="post">
+                {% csrf_token %}
+
+                <input type="hidden" name="username" value="{{username}}" style="width: 200px; border: 0px; " id="dname"/>
+
+                <input type="hidden" name="dusername" value="0754307471" style="width: 200px; border: 0px; " id="dname"/>
+
+                <tr><td style="width: 4px; padding-bottom: 10px"><input type="submit" name="submit" value="Converse"  style="width: 100px; border: 0px; background-color: white; color: #337ab7; " /></td></tr>
+
+                </form>
+                <ul class="submenu">
+                      <!-- <li><a href="edit_username.php" title="Update Username">Change Username</a></li>   
+                            <li><a href="edit_password.php" title=" Update Password">Change Password</a></li> -->
+                    
+                    </ul> </li>
+
+                    {% endif %}
+
+                <li><a href="/Doct/whyus/">Why Us</a></li>
+                    <ul class="subs">
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Restaurants</a></li>
+                        <li><a href="#">Beach Resorts</a></li>
+                    </ul>
+                </li>
+                {% if user.is_authenticated %}
+
+                <li><a href="/Doct/logout/">Logout</a></li>
+
+                {% endif %}
+               
+        </ul>
+
+       </div>
 </div>
 
 
-<div class="col-md-6 col-md-offset-1 contact-form">
-<h3>leave us a message</h3>
+<div class="contact">
+    <div class="wrap">
+                        <div class="contact-top">
+                        <h3>Contact Information</h3>
+                        <p> You can use this page to reach us through commenting about our work, say anything about how you were handled by our doctor . We are there for you</p>
+                        </div>
+                    <div class="form">
+                        <form class="cmxform" action="/Doct/addcontact/"  id="contactForm" method="post">
+                        <div>
+                            <input type="text" class="textbox" name="name" >
+                        </div>
+                        <div>
+                            <input type="text" class="textbox"  name="email" >
+                        </div>
+                        <div>
+                            <input type="text" class="textbox"  name="telno" value="Phone:" >
+                        </div>
 
-<form class="form" action="/Doct/contact/">
+               
 
-{% csrf_token %}
-<table style=" border:0px solid black; width:300px; height:300px">
-<tr><td>Phone</td><td><input class="" type="text" name="telno" placeholder="Phone No:" style="width:200px;"></td></tr>
-<tr><td>Email </td><td> <input class="" type="text" name="email"  placeholder="Email" style=" width:200px;"></td></tr>
-<tr><td>Message</td><td><textarea  style=" border:1px;"  class="" name="msg" id="" cols="30" rows="10" placeholder="Message"></textarea>
-</td>
-<tr><td></td><td></td></tr>
-</table>
 
-<input class="submit-btn" type="submit" value="SUBMIT">
+                       <div>
+                            <p><span class="read">Submit</span></p>
+                       </div>
+                  
+             </div>
 
-</form>
+                       <div class="form1">
+                            <div>
+                <textarea value="Message:" type="text" name="msg"></textarea>
+            </div>
+            </div>
+               
+
+
+               </form>
+            <div class="clear"></div>
+             <div class="contact-bottom">
+                <div class="contact-left">
+                     <div class="contact-add">
+                        <h3>Address One</h3>
+                        <p> </p>   
+                        <p>Telephone:+256702784998</p>
+                        <p>Telephone:1+256777373312</p>
+                        <a href="#"><p>Email:mandelashaban593@gmail.com</p></a>
+                    </div>
+                 <div class="contact-add">
+                    <h3>Address Two</h3>    
+                    <p>Telephone:+256702784998</p>
+                    <p>Telephone:1+256777373312</p>
+                    <a href="#"><p>Email:mandelashaban593@gmail.com</p></a>
+                </div>
+                </div>
+                 <div class="contact-map">
+                       <iframe width="580" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Rashelle+Way,+San+Ramon,+CA,+United+States&amp;aq=0&amp;oq=rash&amp;sll=44.308127,-111.75293&amp;sspn=22.280521,53.569336&amp;ie=UTF8&amp;hq=&amp;hnear=Rashelle+Way,+San+Ramon,+Contra+Costa,+California+94582,+United+States&amp;ll=37.768294,-121.922369&amp;spn=0.001503,0.00327&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br><small><a href="http://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Rashelle+Way,+San+Ramon,+CA,+United+States&amp;aq=0&amp;oq=rash&amp;sll=44.308127,-111.75293&amp;sspn=22.280521,53.569336&amp;ie=UTF8&amp;hq=&amp;hnear=Rashelle+Way,+San+Ramon,+Contra+Costa,+California+94582,+United+States&amp;ll=37.768294,-121.922369&amp;spn=0.001503,0.00327&amp;t=m&amp;z=14&amp;iwloc=A" style="color: #555;text-align:left">View Larger Map</a></small>
+                 </div>
+                 <div class="clear"></div>
+             </div>
+             <div class="clear"></div>
+        </div>
 </div>
-
-</section><!-- end of contact section -->
-
-
-
-
-{% endif %}
+<div class="footer-bottom" style="width: 2000px; ">
+<div class="wrap" style="margin-left: 20px;">  
+    <div class="copy" >
+        <p >Your Company Name &copy; 2013 All rights Reserved | Design by <a href="http://w3layouts.com">W3Layouts</a> &nbsp;&nbsp;&nbsp;Photos by <a href="http://www.freegreatpicture.com/">Freegreatpicture</a></p>
+    </div>
+ </div>
 </div>
-
-<script type='text/javascript'>
-
-//F
-//form validation
-  $(document).ready(function(){
-    $("#changeloginform_form").validate({
-    rules:{
-
-          username:
-            {
-            required:true,
-            minlength:3,
-            maxlength:20,
-            },
-            password:
-            {
-            required:true,
-            minlength:5,
-            maxlength:30,
-            },
-        
-    },
-          messages: {
-      username: {
-        required: "Please provide a username",
-        minlength: "Please provide a Valid username",
-        maxlength:"Please provide a Valid username",
-      },
-      password: {
-        required: "Please provide a password",
-         minlength: "Please provide a Valid password",
-         maxlength:"Please provide a Valid password",
-      },
-    },
-
-    });
-    });
-
-
-
-</script>
-<div>
-
-</div>
-
-
-
-{% endblock %}
-
-
-		
-
-
-
-
-	
+</body>
+</html>

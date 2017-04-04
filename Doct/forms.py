@@ -1,5 +1,5 @@
 from django import forms
-from Doct.models import Page, UserProfile, Topup, Register, Illness, Diognosis,Contact,converse
+from Doct.models import Page, UserProfile, Topup, Register, Illness, Diognosis,Contact,converse,convPersonFrien,Messages,Contact
 from django.contrib.auth.models import User
 
 
@@ -36,13 +36,24 @@ class PageForm(forms.ModelForm):
 
 
 
+
+
 class UserForm(forms.ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput())
-
-
+	username = forms.CharField(help_text="Username.")
+	email = forms.CharField(help_text="Email.")
+	password = forms.CharField(widget=forms.PasswordInput(), help_text="Password.")
 	class Meta:
 		model = User
-		fields = ('username', 'password')
+		fields = ['username', 'email', 'password']
+
+
+class UserProfileForm(forms.ModelForm):
+	website = forms.URLField(help_text="Please enter your website.", required=False)
+	picture = forms.ImageField(help_text="Select a profile image to upload.", required=False)
+	class Meta:
+		model = Register
+		fields = ['username', 'email', 'password']
+
 
 
 
@@ -61,7 +72,7 @@ class PatientForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
 	class Meta:
 		model = Register
-		fields = ('fname', 'sname', 'page', 'gender', 'telno','username','password','email', 'street', 'city', 'state', 'zip_code', 'role', 'specialty')
+		fields = ('fname', 'sname', 'page', 'gender', 'telno','username','password','email', 'street', 'city', 'state', 'zip_code', 'role', 'specialty', 'profile_pic')
 
 
 class IllnessForm(forms.ModelForm):
@@ -117,7 +128,7 @@ class LoginForm(forms.ModelForm):
     """
     class Meta:
         model = Register
-        fields = ['telno','role','page']
+        fields = ['username','password','role','page']
 
 
 
@@ -129,7 +140,7 @@ class patientConverseForm (forms.ModelForm):
     """
     class Meta:
         model = converse
-        fields = ['telno','phonedoctor','pmsg']
+        fields = ['username','dusername','pmsg']
 
 
 class doctorConverseForm (forms.ModelForm):
@@ -139,5 +150,16 @@ class doctorConverseForm (forms.ModelForm):
     """
     class Meta:
         model = converse
-        fields = ['telno','phonedoctor','dmsg']
-        
+        fields = ['username','dusername','dmsg']
+
+
+class MessagesForm(forms.ModelForm):
+
+    """
+    Form for adding  Illness details
+    """
+    class Meta:
+        model = Messages
+        fields = ['password_phone','password_phone','msg']
+
+

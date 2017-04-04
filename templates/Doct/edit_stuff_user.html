@@ -1,0 +1,173 @@
+{% extends "Doct/base_site_admin.html" %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="">Home</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="module">
+      <div class="module-head">
+        <b>Edit A Staff User</b> <small><i>With great power comes great responsibility , don't fuck up!! </i></small>
+      </div><!--/.module-head-->
+      <div class="module-body">
+
+      <div id='signup_form_response'>
+{% include "Doct/form-error.html" %}
+</div>
+
+        <form class="form-horizontal" method="POST" action="" id="editadminuserform">
+          {% csrf_token %}
+
+
+          <section class="docs">
+          <h4>Edit Stuff User <a href='#'>#{{stuff_profile.username}}</a></h4>
+          <hr />
+          </section>
+
+          <div class="control-group">
+            <label class="control-label">First Name</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" value="{{stuff_profile.fname}}"  placeholder="username" name="fname">
+            </div>
+          </div>
+
+           <div class="control-group">
+            <label class="control-label">Second Name</label>
+            <div class="controls">
+              <input type="text" value="{{stuff_profile.sname}}" class="input-block-level" placeholder="username" name="sname">
+            </div>
+          </div>
+
+           <div class="control-group">
+            <label class="control-label">Age</label>
+            <div class="controls">
+              <input type="text" class="input-block-level"  value="{{stuff_profile.page}}" placeholder="username" name="page">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Gender</label>
+            <div class="controls">
+              <select name="gender"  required="True"><option value="Male" >Male</option><option value="Female">Female</option></select>
+            </div>
+          </div>
+
+             <div class="control-group">
+            <label class="control-label">Phone No</label>
+            <div class="controls">
+              <input type="text"  value="{{stuff_profile.telno}}" class="input-block-level" placeholder="Phone number" name="telno">
+            </div>
+          </div>
+
+          
+
+          <div class="control-group">
+            <label class="control-label">Email</label>
+            <div class="controls">
+              <input type="text" value="{{stuff_profile.email}}" class="input-block-level" placeholder="email address" name="email">
+            </div>
+          </div>
+
+            <div class="control-group">
+            <label class="control-label">Username</label>
+            <div class="controls">
+              <input type="text" value="{{stuff_profile.username}}" class="input-block-level" placeholder="username" name="username">
+            </div>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label">Street</label>
+            <div class="controls">
+              <input type="text" value="{{stuff_profile.street}}" class="input-block-level" placeholder="Street" name="street">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Specialty</label>
+            <div class="controls">
+              <input type="text" value="{{stuff_profile.specialty}}" class="input-block-level" placeholder="Specialty" name="specialty">
+            </div>
+          </div>
+
+           <div class="control-group">
+            <label class="control-label">Password</label>
+            <div class="controls">
+              <input type="text" value="{{stuff_profile.password}}" class="input-block-level" placeholder="Password" name="password">
+            </div>
+          </div>
+
+
+
+          <div class="control-group">
+            <label class="control-label">Repeat Password</label>
+            <div class="controls">
+              <input type="password" value="{{stuff_profile.password}}"  class="input-block-level" placeholder="repeat password" name="password2">
+            </div>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label">Upload Photo</label>
+            <div class="controls">
+              <input class="passport_image_upload" id="passport" name="profile_pic" size="8" type="file" multiple accept='image/*,application/pdf'>
+            </div>
+          </div>
+
+
+
+           <div class="control-group">
+            <label class="control-label">Role</label>
+            <div class="controls">
+                <select class="span7" name="role">
+                  <option value="doctor">doctor</option>
+                  <option value="admin">Admin</option>
+                  <option value="superadmin"> Super Admin</option>
+                </select>
+            </div>
+          </div>
+
+
+
+
+           <div class="control-group">
+            <div class="controls">
+          <button class="btn btn-primary">Edit Stuff User Details</button>
+          <input class="btn" type="reset" value="Reset">
+          </div>
+          </div>
+
+        </form>
+      </div><!--/.module-body-->
+    </section>
+
+
+<!-- Form Validation -->
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.form-validation.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#editadminuserform").validate({
+
+  
+
+    });
+    });
+
+</script>
+
+{% endblock %}
+
+

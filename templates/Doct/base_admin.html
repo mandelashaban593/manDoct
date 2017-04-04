@@ -1,0 +1,336 @@
+
+{% load url from future %}
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <title>{{APP_NAME}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="{{STATIC_URL}}images/favicon.ico" type="image/x-icon" >
+    {% block extrastyle %}{% endblock %}
+
+ 
+        <!-- BOOTSTRAPS -->
+<link type="text/css" href="{{STATIC_URL}}/css/bootstrap.min.css" rel="stylesheet">
+    <!-- THEMES -->
+<link type="text/css" href="{{STATIC_URL}}/css/theme.css" rel="stylesheet">
+    <!--ICONS-->
+<link type="text/css" href="{{STATIC_URL}}css/font-awesome.css" rel="stylesheet">
+
+<!--JAVASCRIPTS-->
+
+    <script src="{{STATIC_URL}}/js/jquery-1.9.1.min.js"></script>
+    <script src="{{STATIC_URL}}/js/bootstrap.min.js"></script>
+
+
+
+    {% block extrahead %}{% endblock %}
+
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+    <script type="text/javascript">
+jQuery.browser = {};
+(function () {
+    jQuery.browser.msie = false;
+    jQuery.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+    }
+})();
+
+//<![CDATA[
+            (function($) {
+                $(document).ready(function() {
+                    $('input[type="submit"]').addClass('btn');
+                    $('[title]').tooltip();
+                });
+            }(jQuery));
+    //]]>
+
+    </script>
+
+
+
+
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
+
+
+
+    <div class="frame">
+
+{% if  staf or super_admin %}
+
+    <div class="sidebar">
+<div class="wrapper">
+
+    <a href="#" class="profile">
+        <img src="{{STATIC_URL}}admin/img/user.jpg" class="avatar pull-left" width="30" style="margin-right: 15px; border-radius: 4px">
+        {{ user.username}}
+    </a>
+    <ul class="nav nav-list">
+
+
+
+
+             {% if super_admin %}
+                         <li>
+            <a href="/Doct/dashboard2/"><i class="icon-dashboard"></i>Dashboard</a>
+            </li>
+
+            <li id="link-title">
+                <a>Manage Users</a>
+            </li>
+
+
+            <li>
+                <a href="/Doct/addadmin/"><i class=""></i>Change Telephone
+                </a>
+            </li>
+
+            <li>
+            <a href="/Doct/editpass/"><i class=""></i>Change Password
+            </a>
+            </li>
+
+           
+
+
+             <li id="link-title">
+                <a>Stuff Users</a>
+            </li>
+
+
+            <li>
+                <a href="/Doct/addstuff/"><i class=""></i>Register Stuff Users
+                </a>
+            </li>
+
+            <li>
+            <a href="/Doct/users/stuffs/"><i class=""></i>View Stuff Users
+            </a>
+            </li>
+
+
+
+             <li id="link-title">
+                <a>Patient Users</a>
+            </li>
+
+
+            <li>
+                <a href="/Doct/users/patients/"><i class=""></i>Patient Users
+                </a>
+            </li>
+
+            <li>
+            <a href="/Doct/users/stuffs/"><i class=""></i>Stuff Users
+            </a>
+            </li>
+
+            {% else %}
+
+                        <li>
+            <a href="/Doct/dashboard/"><i class="icon-dashboard"></i>Dashboard</a>
+            </li>
+            
+
+
+
+            {% endif %}
+
+
+
+
+
+              {% if staf %}
+
+          
+
+            <li>
+                <a href="/Doct/ind_illness/">Individual  Sickness Detail</a>
+                </a>
+            </li>
+
+            <li>
+            <a href="/Doct/view_illness2/">View illness Details
+            </a>
+            </li>
+            
+
+            <li>
+              <form action="/Doct/doctConv/" style=" height:35px;border: 0px; " id="changesicknessform_form" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="dusername" value="{{username}}" style="width: 200px; border: 0px; " id="dname"/>
+
+            <tr><td style="width: 4px; padding-bottom: 10px"><input type="submit" name="submit" value="Converse"   /></td></tr>
+
+            </form>
+            </li>
+
+            
+
+           
+
+    
+        
+            {% endif %}
+
+
+
+
+
+            {% if profile.is_customer_care %}
+
+
+            <li class="">
+            <a href="{% url 'admin:cc_transaction_search' %}"><i class="icon-search"></i>Search Transactions
+            </a>
+            </li>
+
+            {% else %}
+
+
+           
+
+            {%if permissions.view_audit_trail or request.user.is_superuser %}
+
+
+              <li>
+            <a href="{% url 'admin:audits_trails' %}"><i class="icon-bar-chart"></i>Audits Trails
+            </a>
+            </li>
+
+            {%endif%}
+
+
+
+
+
+
+
+
+            {% if request.user.is_superuser%}
+
+              <li>
+            <a href="{% url 'admin:view_admin_user' %}"><i class="icon-user"></i>Stuff Users
+            </a>
+            </li>
+
+            <li>
+            <a href="{% url 'admin:create_admin_user' %}"><i class="icon-user"></i>Create Admin User
+            </a>
+            </li>
+
+
+            <li>
+            <a href="{% url 'admin:create_customer_care_user' %}"><i class="icon-user"></i>Create Customer Care User
+            </a>
+            </li>
+
+
+            <li>
+            <a href="{% url 'admin:admin_logs' %}"><i class="icon-eye-open"></i>Logs
+            </a>
+            </li>
+
+
+            <li>
+            <a href="{% url 'admin:admin_seo' %}"><i class="icon-eye-open"></i>Edit SEO
+            </a>
+            </li>
+
+
+            <li>
+            <a href="{% url 'admin:export_data' %}"><i class="icon-eye-open"></i>Export Data
+            </a>
+            </li>
+
+
+
+
+            {%endif%}
+
+
+
+
+
+        {% endif %}
+
+
+        <li class="">
+            <a href="/Doct/logout/"><i class="icon-signout"></i>Logout
+            </a>
+            </li>
+
+        </ul>
+
+        {% block sidebar %}{% endblock %}
+        </div>
+        </div>
+
+{% endif %}
+
+<div class="content">
+
+{% if user.is_active and user.is_staff %}
+    <div class="navbar navbar-static-tops">
+
+
+
+          {% block navbar %}
+
+                <div class="navbar-inner">
+                <a href="javascript:void(0);" class="btn pull-left toggle-sidebar hidden-desktop"><i class="icon-reorder"></i></a>
+                    <a class="brand" href="#">{% block pretitle %}{% endblock %}</a>
+                    {% block object-tools %}{% endblock %}
+                </div>
+        {% endblock navbar %}
+
+
+
+</div><!--/.navbar -->
+
+        <div class="content-head">
+
+            {% if not is_popup %}
+            {% block breadcrumbs %}
+            {% endblock %}
+            {% endif %}
+
+        <div class="muted">
+
+        {% include "Doct/notifications.html" %}
+
+        </div>
+
+
+        {% block headcontent %} {% endblock headcontent %}
+
+
+    </div>
+
+{% endif %}
+
+
+    <div class="content-body" id="content">
+        {% block content %}{{ content }}{% endblock %}
+    </div>
+
+    </div>
+
+
+
+
+
+<script src="{{STATIC_URL}}/js/theme.js"></script>
+
+
+</body>
+</html>

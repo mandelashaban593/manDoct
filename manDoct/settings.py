@@ -46,6 +46,9 @@ PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 
+TEMPLATE_DOCT_PATH = os.path.join(PROJECT_PATH, 'doct_admin/templates/')
+TEMPLATE_DOCT_ADMIN_PATH = os.path.join(PROJECT_PATH, 'doct_admin/templates/admin/')
+
 STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 
 DATABASE_PATH = os.path.join(PROJECT_PATH, 'Doct.db')
@@ -149,6 +152,7 @@ SECRET_KEY = 'jah)pvlys_%r_($1!9j&f8ris0g!ow*_k4sesbaqy33!^i@+rx'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -173,6 +177,8 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     TEMPLATE_PATH,
+    TEMPLATE_DOCT_PATH,
+    TEMPLATE_DOCT_ADMIN_PATH
 )
 
 INSTALLED_APPS = (
@@ -187,6 +193,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'Doct',
+    'doct_admin',
+    'djangoChat',
+
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -232,8 +241,8 @@ APP_EMAILS = {
 DISABLE_COMMS = False
 
 
-
-
+PAGNATION_LIMIT = 10
+PAGNATION_LIMIT2 = 100
 
 
 
@@ -243,6 +252,9 @@ STATIC_ROOT = BASE_DIR + 'static'
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = BASE_URL + 'static/'
 
+LOCALHOST = False
+
+AJAX_TEMPLATE_DIR = BASE_DIR + 'templates/Doct/'
 
 try:
     from local_settings import *

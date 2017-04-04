@@ -1,0 +1,25 @@
+{% load i18n %}
+
+
+<div class="pagination">
+<ul>
+  {% if pages.has_previous %}
+    <li><a href="?{{queries.urlencode}}&amp;page={{ pages.previous_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{%endif%}" class="btn"><i class="icon-chevron-left"></i></a></li>
+  {% endif %}
+
+  {% for num in pages.paginator.page_range %}
+    {% ifequal num pages.number %}
+      <li class="active"><a href="#" class="btn">{{ num }}</a></li>
+    {% else %}
+      <li><a href="?{{queries.urlencode}}&amp;page={{ num }}{% if request.GET.q %}&q={{request.GET.q}}{%endif%}" class="btn">{{ num }}</a></li>
+    {% endifequal %}
+  {% endfor %}
+
+  {% if pages.has_next %}
+    <li><a href="?{{queries.urlencode}}&amp;page={{ pages.next_page_number }}{% if request.GET.q %}&q={{request.GET.q}}{%endif%}" class="btn"><i class="icon-chevron-right"></i></a></li>
+  {% endif %}
+</ul>
+
+</div>
+
+

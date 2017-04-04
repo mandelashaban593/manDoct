@@ -1,0 +1,139 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+
+
+
+<section class="module rates">
+			<div class="module-head">
+				<ul class="module-control pull-left">
+					<li class="active"><a href="element-form.html#tab-1" data-toggle="tab">Rates & Limits</a></li>
+					
+					<!--
+					<li><a href="element-form.html#tab-2" data-toggle="tab">Tiered pricing</a></li>
+					-->
+
+				</ul>
+			</div><!--/.module-head-->
+			<div class="module-body">
+				<div class="tab">
+					<div class="tab-content">
+						<div class="tab-pane fade active in" id="tab-1">
+							<div class="form-horizontal">
+								{% csrf_token %}
+							<input type="hidden" name="update_rates" value="True">
+								<div class="control-group">
+									<label class="control-label" for="basicinput">USD TO UGX</label>
+									<div class="controls">
+										<input type="text" disabled="disabled"   name="usd_to_ugx" value="{{rate.usd_to_ugx}}" class="span7" required="required">
+									</div>
+								</div>
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">Transfer Maximum ( USD )</label>
+								<div class="controls">
+										<input type="text" disabled="disabled" name="transfer_limit_usd" value="{{rate.transfer_limit_usd}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">Our Percentage</label>
+								<div class="controls">
+										<input type="text" disabled="disabled" name="our_percentage" value="{{rate.our_percentage}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+
+								<div class="control-group">
+								<label class="control-label" for="basicinput">Transfer Minimum ( USD )</label>
+								<div class="controls">
+										<input type="text" disabled="disabled" name="transfer_minimum_usd" value="{{rate.transfer_minimum_usd}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">USD TO KES</label>
+									<div class="controls">
+										<input type="text" disabled="disabled" name="usd_to_kes" value="{{rate.usd_to_kes}}" class="span7" required="required">
+									</div>
+								</div>
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">USD TO TZS</label>
+									<div class="controls">
+										<input type="text" disabled="disabled" name="usd_to_tzs" value="{{rate.usd_to_tzs}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">GBP TO UGX</label>
+									<div class="controls">
+										<input type="text" disabled="disabled" name="gbp_to_ugx" value="{{rate.gbp_to_ugx}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">GBP TO KES</label>
+									<div class="controls">
+										<input type="text" disabled="disabled" name="gpb_to_kes" value="{{rate.gpb_to_kes}}" class="span7" required="required">
+									</div>
+								</div>
+
+									<div class="control-group">
+									<label class="control-label" for="basicinput">GBP TO TZS</label>
+									<div class="controls">
+										<input type="text" disabled="disabled" name="gpb_to_tzs" value="{{rate.gpb_to_tzs}}" class="span7" required="required">
+									</div>
+								</div>
+
+
+
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div><!--/.module-body-->
+
+
+		
+
+
+		</section>
+
+
+
+{% endblock %}

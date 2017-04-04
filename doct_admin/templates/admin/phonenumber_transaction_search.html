@@ -1,0 +1,261 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags %}
+{% load custom_filters %}
+
+{% load url from future %}
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<span class="divider"><i class="icon-angle-right"></i></span>
+</li>
+<li>{{ page_title |capfirst }}</li>
+</ul>
+{% endblock %}
+
+
+{% block pretitle %}
+{{pretitle |capfirst  }}
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<section class="row-fluid">
+      <div class="span12">
+        <div class="module no-head message">
+          <div class="module-body no-padding">
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8">
+                  
+                  {% include 'form-error.html' %}
+
+                  <form class="form-absolute" method="GETT" name="" id="search_form">
+                    <button class="btn btn-icon go-right" type="submit"><i class="icon-search"></i></button>
+                    <input type="text"  name="phonenumber" class="input-block-level" placeholder="Search by phonenumber without the leading 0 e.g 077 becames 77 or TransactionId ..." autocomplete="on">
+
+
+<!--
+                    <div class="span2" style="float:right;">
+            <div class="controls">
+              <div class="input-append date">
+              <button class="btn btn-primary" type="submit">Search Transactions</button>
+              </div>
+            </div>
+          </div>
+          -->
+                  </form>
+                
+                </div>
+                
+
+                
+
+
+              </div>
+            </div>
+
+            {% if transactions %}
+
+            <table class="table table-utilities vertical-top">
+              <tbody>
+
+
+
+
+              {% for t in transactions %}
+
+                <tr>
+                  <td class="cell-detail">
+                    
+                    
+
+                  <div class="span8">
+                    <div class="people-brief">
+                      
+                      <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th># <a href="{% url 'admin:admin_transaction' t.get_invoice %}"> {{t.get_invoice}} </a></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          
+          <tr>
+            <td>Sender</td>
+            <td><a href="{% url 'admin:admin_user' t.get_sender_profile.uid %}">{{t.get_sender_profile.get_names}}</a></td>
+          </tr>
+
+          <tr>
+            <td>Recipient</td>
+            <td>{{t.recipient_number}} {{t.recipient_names}}</td>
+          </tr>
+          
+          <tr>
+            <td>Amount Sent</td>
+            <td>{{ t.amount_sent | exchange }}</td>
+          </tr>
+          
+          <tr>
+            <td>Date Initiated</td>
+            <td>{{ t.actual_initiation_date  }}</td>
+          </tr>
+
+          {% if t.is_pending %}
+
+            <tr>
+            <td>Amount to be Received</td>
+            <td>{{ t.actual_amount_received | currency }}</td>
+          </tr>
+
+           {% endif %}
+          
+          {% if type == 'successful' %}
+
+          <tr>
+            <td>Amount Received</td>
+            <td>{{ t.actual_amount_received | currency }}</td>
+          </tr>
+        
+          
+
+            <tr>
+            <td>Date Delivered</td>
+            <td>{{ t.actual_delivery_date }}</td>
+          </tr>
+
+
+          <tr>
+            <td>Processed By</td>
+            <td><a href="{{ t.processed_by_profile.admin_url }}">{{t.processed_by_profile.get_names}}</a></td>
+          </tr>
+
+
+        
+          {%  endif  %}
+
+
+
+
+          <tr>
+            <td>Credit Card Response Code</td>
+            <td><pre>{{ t.visa_response_data }}</pre></td>
+          </tr>
+
+          <tr>
+            <td>Mobile Response Code</td>
+            <td><pre>{{ t.mobile_response_data }}</pre></td>
+          </tr>
+
+
+
+          </tbody>
+        </table>
+
+
+                    </div>
+                    </div>
+
+
+                 
+                  
+                
+
+     
+                  
+
+
+                  </td>
+                </tr>
+
+                {% endfor %}
+
+               
+              </tbody>
+            </table>
+
+
+
+            {% else %}
+
+            {% if request.GET.phonenumber %}
+
+            <div class="noresult">
+
+<div class="docs-example">
+<p>Your query <b>{{request.GET.phonenumber }}</b> did not return any results </p>
+<pre class="pre">
+  <span>No Results were found</span>
+</pre>
+</div>
+
+</div>
+
+            {% endif %}
+
+
+            {% endif %}
+
+            <div class="module-option">
+              <div class="row-fluid">
+                <div class="span8 hidden-phone">
+                  <!--
+                  <div style="line-height: 30px">
+                    Displaying <b> {{ user.number }} </b> of {{admin_data.user_count}} transactions
+                  </div>
+                  -->
+
+       
+
+                </div>
+                <div class="span11 message-navigation align-right">
+                  <div class="btn-toolbar">
+                    <div class=" btn-group">
+                    <!--
+                      <button class="btn"><i class="icon-chevron-left"></i></button>
+                      <button class="btn"><i class="icon-chevron-right"></i></button>
+                    -->
+ 
+
+{% with transactions as pages %}   
+{% include 'pagination.html'%}
+{% endwith %}
+
+              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!--/.module-body-->
+        </div><!--/.module.message-->
+      </div><!--/.span12-->
+    </section>
+
+{% load validation_tags %}
+
+
+<!-- Form Validation -->
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.form-validation.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $("#search_form").validate({
+
+    rules:{% validation_rules  form %} ,
+    messages: {% validation_messages form %} ,
+
+    });
+    });
+
+  </script>
+
+
+
+{% endblock %}
+
+
